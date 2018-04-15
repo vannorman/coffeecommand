@@ -6,7 +6,8 @@ using UnityEngine.UI;
 using UnityEngine.XR.iOS;
 using System.Runtime.InteropServices;
 using System.IO;
-
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 
 [System.Serializable]
@@ -286,7 +287,42 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 		mSession.RunWithConfig (config);
 	}
 
-
+//	public void OnSaveMapClick ()
+//	{
+//		if (!LibPlacenote.Instance.Initialized()) {
+//			Debug.Log ("SDK not yet initialized");
+//			ToastManager.ShowToast ("SDK not yet initialized", 2f);
+//			return;
+//		}
+//
+//		bool useLocation = Input.location.status == LocationServiceStatus.Running;
+//		LocationInfo locationInfo = Input.location.lastData;
+//
+//		mLabelText.text = "Saving...";
+//		LibPlacenote.Instance.SaveMap (
+//			(mapId) => {
+//				LibPlacenote.Instance.StopSession ();
+//				mLabelText.text = "Saved Map ID: " + mapId;
+//				mInitButtonPanel.SetActive (true);
+//				mMappingButtonPanel.SetActive (false);
+//
+//
+//				JObject metadata = new JObject ();
+////
+////				JObject shapeList = Shapes2JSON();
+////				metadata["shapeList"] = shapeList;
+//
+//				if (useLocation) {
+//					metadata["location"] = new JObject ();
+//					metadata["location"]["latitude"] = locationInfo.latitude;
+//					metadata["location"]["longitude"] = locationInfo.longitude;
+//					metadata["location"]["altitude"] = locationInfo.altitude;
+//				}
+//				LibPlacenote.Instance.SetMetadata (mapId, metadata);
+//			},
+//			(completed, faulted, percentage) => {}
+//		);
+//	}
 	public void OnSaveMapClick ()
 	{
 		if (!LibPlacenote.Instance.Initialized()) {

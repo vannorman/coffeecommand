@@ -9,6 +9,10 @@ public class CC : MonoBehaviour {
 	public GameObject planePrefab;
 	public static DebugText debugText;
 	public DebugText debugTextRef;
+	public Crosshair crosshairRef;
+	public static Crosshair crosshair;
+	public FeaturesVisualizer featuresVisualizerRef;
+	public static FeaturesVisualizer featuresVisualizer;
 
 	public static ShipWeapons shipWeapons;
 	public ShipWeapons shipWeaponsRef;
@@ -17,6 +21,8 @@ public class CC : MonoBehaviour {
 		planeAnchorManager = planeAnchorManagerRef;
 		debugText = debugTextRef;
 		shipWeapons = shipWeaponsRef;
+		crosshair = crosshairRef;
+		featuresVisualizer = featuresVisualizerRef;
 		UnityEngine.XR.iOS.UnityARUtility.InitializePlanePrefab (planePrefab);
 	}
 	

@@ -6,18 +6,22 @@ public class DamageGiver : MonoBehaviour {
 
 	public int damageAmount = 1;
 	void OnCollisionEnter(Collision hit){
-		DamageReceiver dr = hit.collider.GetComponent<DamageReceiver> ();
-		if (dr)
-			GiveDamage (dr);
+		TryGiveDamage (hit.collider.GetComponent<DamageReceiver> ());
+//		DamageReceiver dr = hit.collider.GetComponent<DamageReceiver> ();
+//		if (dr)
+//			GiveDamage (dr);
 	}
 
 	void OnTriggerEnter(Collider collider){
-		DamageReceiver dr = collider.GetComponent<DamageReceiver> ();
-		if (dr)
-			GiveDamage (dr);
+		TryGiveDamage (collider.GetComponent<DamageReceiver> ());
+//		DamageReceiver dr = collider.GetComponent<DamageReceiver> ();
+//		if (dr)
+//			GiveDamage (dr);
 	}
 
-	void GiveDamage(DamageReceiver dr){
-		dr.TakeDamage(damageAmount);
+	void TryGiveDamage(DamageReceiver dr){
+		if (dr == null)
+			return;
+		dr.TryTakeDamage(this);
 	}
 }

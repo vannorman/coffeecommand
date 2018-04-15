@@ -1,11 +1,11 @@
 iOS
 SceneListBegin?
-Assets/Placenote/Scenes/Onion Demo.unity
+Assets/_scenes/Coffee Command main scene.unity
 SceneListEnd?
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MainThreadTaskQueue
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:UnityEngine.XR.iOS.UnityARKitControl
 12096ddf91bc99172a48b0419861fd00 Assembly-CSharp.dll:.PointCloudParticleExample
-111d5e1a54acc9021a1a290f69a9099d Assembly-CSharp.dll:.CC
+c6c29f0ae989d2b205e6aceeb64af7fa Assembly-CSharp.dll:.CC
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 dbc29a6f2739d277c10da432d73adb6d UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
 8144169769d51429c4aedc8b0f92d47b UnityEngine.Timeline.dll:UnityEngine.Timeline.AnimationPlayableAsset
@@ -21,6 +21,7 @@ df374c01140c2d578bf70cbd60073d1d UnityEngine.Timeline.dll:UnityEngine.Timeline.T
 42af63f195776340a3817bc0c23c2cdb Assembly-CSharp.dll:.RotateInterval
 672c7ec9a1afb24a8c52bed490318aa3 Assembly-CSharp.dll:.FeaturesVisualizer
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PlaneAnchorManager
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CCGameManager
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 49cd62a578efc0a599b810a2b66cd49c UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -54,6 +55,7 @@ f61c0793411f10cf5fbfa1473fef5ef2 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 86d36c43c53541d667100dc90b89cfba UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 1b8c02d0aa82fbf036a2b9b2d713eec3 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
 715a3a5e1e928ce77514d4e84e265356 Assembly-CSharp.dll:UnityEngine.XR.iOS.UnityARHitTestExample
+4bcfdf5701fff25ff79477e29e5f9a9d Assembly-CSharp.dll:.FX
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 49cd62a578efc0a599b810a2b66cd49c UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -86,8 +88,10 @@ c63db43c730fa2cbb8ca07de15898cb6 UnityEngine.UI.dll:UnityEngine.UI.Toggle
 f61c0793411f10cf5fbfa1473fef5ef2 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 86d36c43c53541d667100dc90b89cfba UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 1b8c02d0aa82fbf036a2b9b2d713eec3 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
+df98a608af983c04c8aa5672afc284db Assembly-CSharp.dll:.DeadReplacement
 058f583ac03ca538fc928ba68f6bd2b7 Assembly-CSharp.dll:.DamageGiver
 e3614d77c024e8379444f971096aaac4 Assembly-CSharp.dll:.UnityARCameraManager
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.BounceProjectile
 beeb03873def08a8ea5572e3ab11d0a8 Assembly-CSharp.dll:.DebugText
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 dbc29a6f2739d277c10da432d73adb6d UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
@@ -118,6 +122,8 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 ff32d7930e63bc1a497b08532d306e6d Assembly-CSharp.dll:.PhoneUI
 63811fbf131a6d81b076f8571f735143 Assembly-CSharp.dll:.ParticlePainter
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
+43b30c650c2039cd6ded7783d5cc87d7 Assembly-CSharp.dll:.DestroyOnImpact
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Cheats
 322cb40e1e282f28af980cbef7922a90 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
 5ec148bb8fca10d6d382b6dd2df28f36 Assembly-CSharp.dll:.ShipDamageReceiver
@@ -168,17 +174,17 @@ e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEng
 7cc932962d25de7fe60cf5c0ea930c8f Assembly-CSharp.dll:.ToastManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ButtonListener
 04d8f29baa8db2da913784599d964b46 Assembly-CSharp.dll:.ScrollTexture
-c4a431c86c923bab1e4445e34bce2d50 Assembly-CSharp.dll:.MetalOnion
+c2970f5b75a28781a7a4feb48b0ce343 Assembly-CSharp.dll:.MetalOnion
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
-88880b2656867d63b710a85f19006dc4 Assembly-CSharp.dll:.PlaneInfo
+2aa43b96c4f38a1ae9a5608baa99c4a9 Assembly-CSharp.dll:.PlaneInfo
 69a2d65664e6854f27f67ddc8327bc0d Assembly-CSharp.dll:.ObjectDetector
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:UnityEngine.XR.iOS.UnityARUserAnchorComponent
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
-88a4c0730802f05597ce230332f7ca6d Assembly-CSharp.dll:.DamageReceiver
+96efa88d70b233e3f15936a32d917f9e Assembly-CSharp.dll:.DamageReceiver
 ad1ab3288e483a86629794ba673c9a54 Assembly-CSharp.dll:.SinHover
 33963aa75ec4a7c6335809a059df1238 Assembly-CSharp.dll:.PlacenoteSampleView
 f771b549b9c5495c813fab919a6684aa Assembly-CSharp.dll:.GrowOverTime
@@ -192,9 +198,9 @@ e059e84d441884affff77b3f5de26568 Assembly-CSharp.dll:.ShipWeapons
 391d84b859f3b155fe38f54bfce79162 Assembly-CSharp.dll:.UnityPointCloudExample
 97f3f2eee235771b3d0dd28fcccb62f7 Assembly-CSharp.dll:Battlehub.MeshTools.Pivot
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UnityARCameraNearFar
-43b30c650c2039cd6ded7783d5cc87d7 Assembly-CSharp.dll:.DestroyOnImpact
-4bcfdf5701fff25ff79477e29e5f9a9d Assembly-CSharp.dll:.FX
-df98a608af983c04c8aa5672afc284db Assembly-CSharp.dll:.DeadReplacement
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.GameManager
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Cheats
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.BounceProjectile
+05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
+05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
+ee3fbbd6a5ca22984a03af6b0bef4c1e Assembly-CSharp.dll:.DishGroup
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DogShip
+5817f71d4ca171b00410955fc5f70bc4 Assembly-CSharp.dll:.Crosshair
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.AlwaysFaceCameraY

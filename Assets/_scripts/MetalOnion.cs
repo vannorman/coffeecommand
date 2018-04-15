@@ -24,7 +24,10 @@ public class MetalOnion : MonoBehaviour {
 	public GameObject oilDerrick;
 	public GameObject onionGraphics;
 
-	public Transform dishGroup;
+
+
+	public DishGroup dishGroup;
+
 	public State state;
 
 
@@ -39,7 +42,7 @@ public class MetalOnion : MonoBehaviour {
 	void Start(){
 		unwrapIndicator.fillAmount = 0;
 		oilDerrick.SetActive (false);
-		dishGroup.gameObject.SetActive(false);
+//		dishGroup.gameObject.SetActive(false);
 
 		DebugText.SetOnionCount(FindObjectsOfType<MetalOnion>().Length.ToString());
 		tendrils.AddRange(GetComponentsInChildren<Tendril> ());
@@ -73,11 +76,11 @@ public class MetalOnion : MonoBehaviour {
 	Quaternion targetRot;
 
 
-	public void OnTurretDestroyed(){
-		if (dishGroup.childCount == 0) {
-			dishGroup.gameObject.SetActive (false);
-			SetState (State.Unwrapped);
-		}
+	public void OnDishGroupDestroyed(){
+		
+		dishGroup.gameObject.SetActive (false);
+		SetState (State.Unwrapped);
+
 	}
 
 	// Update is called once per frame

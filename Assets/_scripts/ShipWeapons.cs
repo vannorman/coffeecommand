@@ -43,6 +43,7 @@ public class ShipWeapons : MonoBehaviour {
 				fireTime = fireInterval;
 				foreach(Transform t in new Transform[]{ leftCannon, rightCannon }){
 					GameObject bullet = (GameObject)Instantiate (bulletPrefab, t.position, t.rotation);
+					bullet.transform.Rotate (new Vector3 (90, 0, 0), Space.Self);
 					bullet.GetComponent<Rigidbody> ().AddForce (t.forward * bulletForce);
 					float rotationForce = Random.Range (-50, 50);
 					bullet.GetComponent<Rigidbody> ().AddTorque (t.right * rotationForce);

@@ -10,7 +10,7 @@ public class FeaturesVisualizer : MonoBehaviour, PlacenoteListener
 {
 	private static FeaturesVisualizer sInstance;
 	[SerializeField] Material mPtCloudMat;
-	[SerializeField] GameObject mMap;
+	[SerializeField] public GameObject mMap;
 
 	void Awake ()
 	{
