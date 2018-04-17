@@ -33,15 +33,6 @@ public class PlacenoteCameraManager : MonoBehaviour, PlacenoteListener
 
 		// Compute the transform of the camera parent so that camera pose ends up at outputPose
 		Matrix4x4 camParentPose = outputPose * arkitPose.inverse;
-
-		// Introduce a temporary object to calculate how far the camera will be teleported in game space
-//		// So that anything smooth following the camera (e.g. the ship) will not suddenly jump relative to new camera position
-//		GameObject temp = new GameObject ();
-//		temp.transform.position = PNUtility.MatrixOps.GetPosition (camParentPose);
-//		temp.transform.rotation = PNUtility.MatrixOps.GetRotation (camParentPose);
-
-
-
 		cameraParent.transform.position = PNUtility.MatrixOps.GetPosition (camParentPose);
 		cameraParent.transform.rotation = PNUtility.MatrixOps.GetRotation (camParentPose);
 	}

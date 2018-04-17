@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{B06CE692-FC5B-5D99-96FA-AE611DE0A9E7}</ProjectGuid>
+    <ProjectGuid>{57DD8B00-15A4-7174-A323-74929F9E0AF3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -81,6 +81,7 @@
      <Compile Include="Assets\_scripts\ShipWeapons.cs" />
      <Compile Include="Assets\_scripts\SmoothFollowTarget.cs" />
      <Compile Include="Assets\_scripts\Tendril.cs" />
+     <Compile Include="Assets\CCFeaturesManager.cs" />
      <Compile Include="Assets\Crosshair.cs" />
      <Compile Include="Assets\DogShip.cs" />
      <Compile Include="Assets\Placenote\Examples\MapInfoElement.cs" />
@@ -92,6 +93,7 @@
      <Compile Include="Assets\Placenote\LibPlacenote\PlacenoteCameraManager.cs" />
      <Compile Include="Assets\Placenote\LibPlacenote\PlacenoteListener.cs" />
      <Compile Include="Assets\Placenote\LibPlacenote\PNUtility.cs" />
+     <Compile Include="Assets\stringtester.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\Integration\IntegrationCommon.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\Integration\MeshCombinerIntegration.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\Integration\MeshDeformerIntegration.cs" />
@@ -155,6 +157,18 @@
      <Compile Include="Assets\UnityARKitPlugin\Plugins\iOS\UnityARKit\NativeInterface\ARUserAnchor.cs" />
      <Compile Include="Assets\UnityARKitPlugin\Plugins\iOS\UnityARKit\NativeInterface\UnityARSessionNativeInterface.cs" />
      <Compile Include="Assets\UnityARKitPlugin\UnityARKitPluginSettings.cs" />
+     <Compile Include="Assets\WanzyeeStudio\Scripts\Basic\Json\BoundsConverter.cs" />
+     <Compile Include="Assets\WanzyeeStudio\Scripts\Basic\Json\ColorConverter.cs" />
+     <Compile Include="Assets\WanzyeeStudio\Scripts\Basic\Json\DictionaryConverter.cs" />
+     <Compile Include="Assets\WanzyeeStudio\Scripts\Basic\Json\Matrix4x4Converter.cs" />
+     <Compile Include="Assets\WanzyeeStudio\Scripts\Basic\Json\PartialConverter.cs" />
+     <Compile Include="Assets\WanzyeeStudio\Scripts\Basic\Json\QuaternionConverter.cs" />
+     <Compile Include="Assets\WanzyeeStudio\Scripts\Basic\Json\RectConverter.cs" />
+     <Compile Include="Assets\WanzyeeStudio\Scripts\Basic\Json\RectOffsetConverter.cs" />
+     <Compile Include="Assets\WanzyeeStudio\Scripts\Basic\Json\Vector2Converter.cs" />
+     <Compile Include="Assets\WanzyeeStudio\Scripts\Basic\Json\Vector3Converter.cs" />
+     <Compile Include="Assets\WanzyeeStudio\Scripts\Basic\Json\Vector4Converter.cs" />
+     <Compile Include="Assets\WanzyeeStudio\Scripts\Basic\Utility\JsonNetUtility.cs" />
      <None Include="Assets\Unity Utilities\Shaders\Toony-Basic.shader" />
      <None Include="Assets\Unity Utilities\SaladLab\Json.Net.Unity3D\link.xml" />
      <None Include="Assets\Unity Utilities\Shaders\Toony-LightedOutlineScroll.shader" />
@@ -246,6 +260,9 @@
  <Reference Include="UnityEditor.OSXStandalone.Extensions">
  <HintPath>/Applications/Unity/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
  </Reference>
+ <Reference Include="Newtonsoft.Json">
+ <HintPath>/Users/zannorman/Desktop/Work/Vertical/CoffeeCommand/Assets/Unity Utilities/SaladLab/Json.Net.Unity3D/Plugins/Newtonsoft.Json.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>/Users/zannorman/Library/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
  </Reference>
@@ -266,9 +283,6 @@
  </Reference>
  <Reference Include="UnityEngine.StandardEvents">
  <HintPath>/Users/zannorman/Library/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
- </Reference>
- <Reference Include="Newtonsoft.Json">
- <HintPath>/Users/zannorman/Desktop/Work/Vertical/CoffeeCommand Unity Project/Assets/Unity Utilities/SaladLab/Json.Net.Unity3D/Plugins/Newtonsoft.Json.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

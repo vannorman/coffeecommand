@@ -29,7 +29,6 @@ namespace UnityEngine.XR.iOS
 			arpag.planeAnchor = arPlaneAnchor;
 			arpag.gameObject = go;
 			planeAnchorMap.Add (arPlaneAnchor.identifier, arpag);
-			DebugText.SetPlanes (planeAnchorMap.Count);
 		}
 
 		public void RemoveAnchor(ARPlaneAnchor arPlaneAnchor)

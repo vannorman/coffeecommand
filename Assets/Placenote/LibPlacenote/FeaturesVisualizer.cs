@@ -10,7 +10,7 @@ public class FeaturesVisualizer : MonoBehaviour, PlacenoteListener
 {
 	private static FeaturesVisualizer sInstance;
 	[SerializeField] Material mPtCloudMat;
-	[SerializeField] public GameObject mMap;
+	[SerializeField] GameObject mMap;
 
 	void Awake ()
 	{
@@ -51,7 +51,6 @@ public class FeaturesVisualizer : MonoBehaviour, PlacenoteListener
 
 	public void OnPose (Matrix4x4 outputPose, Matrix4x4 arkitPose)
 	{
-		
 	}
 
 	public void OnStatusChange (LibPlacenote.MappingStatus prevStatus, LibPlacenote.MappingStatus currStatus)
@@ -76,40 +75,21 @@ public class FeaturesVisualizer : MonoBehaviour, PlacenoteListener
 
 		Vector3[] points = new Vector3[map.Length];
 		Color[] colors = new Color[map.Length];
-		int numBrownDotsVisible = 0;
-		int numGreenDotsVisible = 0;
 		for (int i = 0; i < map.Length; ++i) {
 
 			points [i].x = map [i].point.x;
 			points [i].y = map [i].point.y;
 			points [i].z = -map [i].point.z;
 			colors [i].r = 1 - map [i].measCount / 10f;
-			colors [i].g = map [i].measCount / 10f;
 			colors [i].b = 0;
-
-			if (Utils2.PointVisibleToCamera(points[i],Camera.main)){
-				// green
-				if (map [i].measCount > 6) {
-					numGreenDotsVisible++;
-				} else {
-					numBrownDotsVisible++;
-				}
-			}
+			colors [i].g = map [i].measCount / 10f;
 
 			if (map [i].measCount < 4) {
-				colors [i] = Color.black;
-				colors [i].a = 0.2f;
+				colors [i].a = 0;
 			} else {
 				colors [i].a = 0.2f + 0.8f * (map [i].measCount / 10f);
 			}
 		}
-
-
-		DebugText.SetBrownDots (numBrownDotsVisible.ToString ());
-		DebugText.SetGreenDots (numGreenDotsVisible.ToString ());
-
-		FindObjectOfType<BatteryUpload> ().SetFillAmount ((float)numGreenDotsVisible / 50f);
-//		DebugText.Overflow ("fill:" + FindObjectOfType<BatteryUpload> ().GetComponent<UnityEngine.UI.Image> ().fillAmount);
 
 		// Need to update indicies too!
 		int[] indices = new int[map.Length];

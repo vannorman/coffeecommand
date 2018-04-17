@@ -56,7 +56,6 @@ namespace UnityEngine.XR.iOS
 
 		}
 
-
 		void OnGUI()
 		{
 			
@@ -138,7 +137,6 @@ namespace UnityEngine.XR.iOS
 
 			ARPlaneAnchor arPlaneAnchor = serPlaneAnchor;
 			UnityARSessionNativeInterface.RunAddAnchorCallbacks (arPlaneAnchor);
-
 		}
 
 		void UpdatePlaneAnchor(MessageEventArgs mea)

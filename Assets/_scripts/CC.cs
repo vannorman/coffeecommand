@@ -13,6 +13,8 @@ public class CC : MonoBehaviour {
 	public static Crosshair crosshair;
 	public FeaturesVisualizer featuresVisualizerRef;
 	public static FeaturesVisualizer featuresVisualizer;
+	public CCFeaturesManager featuresManagerRef;
+	public static CCFeaturesManager featuresManager;
 
 	public static ShipWeapons shipWeapons;
 	public ShipWeapons shipWeaponsRef;
@@ -23,6 +25,7 @@ public class CC : MonoBehaviour {
 		shipWeapons = shipWeaponsRef;
 		crosshair = crosshairRef;
 		featuresVisualizer = featuresVisualizerRef;
+		featuresManager = featuresManagerRef;
 		UnityEngine.XR.iOS.UnityARUtility.InitializePlanePrefab (planePrefab);
 	}
 	

@@ -1,12 +1,18 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/DestroyOnImpact.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Placenote/Examples/PlacenoteSampleView.cs">
     <Files>
-      <File FileName="Assets/Placenote/LibPlacenote/FeaturesVisualizer.cs" Line="111" Column="60" />
-      <File FileName="Assets/Cheats.cs" Line="14" Column="19" />
-      <File FileName="Assets/FX.cs" Line="8" Column="3" />
-      <File FileName="Assets/DestroyOnImpact.cs" Line="15" Column="48" />
-      <File FileName="Assets/BounceProjectile.cs" Line="7" Column="2" />
+      <File FileName="Assets/_scripts/PlaneInfo.cs" Line="22" Column="55" />
+      <File FileName="Assets/Placenote/LibPlacenote/LibPlacenote.cs" Line="252" Column="20" />
+      <File FileName="Assets/_scripts/CC.cs" Line="28" Column="40" />
+      <File FileName="Assets/Placenote/LibPlacenote/FeaturesVisualizer.cs" Line="22" Column="15" />
+      <File FileName="Assets/CCFeaturesManager.cs" Line="48" Column="10" />
+      <File FileName="Assets/Unity Utilities/EditorTools.cs" Line="312" Column="31" />
+      <File FileName="Assets/_scripts/DamageReceiver.cs" Line="26" Column="3" />
+      <File FileName="Assets/_scripts/BounceProjectile.cs" Line="10" Column="17" />
+      <File FileName="Assets/_scripts/OnionDetector.cs" Line="35" Column="49" />
+      <File FileName="Assets/Crosshair.cs" Line="80" Column="3" />
+      <File FileName="Assets/Placenote/Examples/PlacenoteSampleView.cs" Line="285" Column="48" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -9,7 +9,6 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 
-
 [System.Serializable]
 public class ShapeInfo
 {
@@ -30,6 +29,10 @@ public class ShapeList
 	public ShapeInfo[] shapes;
 }
 
+public class StringTest
+{
+	public string[] stringtests;
+}
 
 public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 {
@@ -51,8 +54,13 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 	private bool mARKitInit = false;
 	private List<ShapeInfo> shapeInfoList = new List<ShapeInfo> ();
 	private List<GameObject> shapeObjList = new List<GameObject> ();
-	private List<GameObject> onionList = new List<GameObject> ();
-	private string mSelectedMapId;
+
+	private LibPlacenote.MapInfo mSelectedMapInfo;
+	private string mSelectedMapId {
+		get {
+			return mSelectedMapInfo != null ? mSelectedMapInfo.placeId : null;
+		}
+	}
 
 	private BoxCollider mBoxColliderDummy;
 	private SphereCollider mSphereColliderDummy;
@@ -62,6 +70,8 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 	// Use this for initialization
 	void Start ()
 	{
+		Input.location.Start ();
+
 		mMapListPanel.SetActive (false);
 
 		mSession = UnityARSessionNativeInterface.GetARSessionNativeInterface ();
@@ -123,38 +133,7 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 			Quaternion arkitQuat = PNUtility.MatrixOps.GetRotation (matrix);
 
 			LibPlacenote.Instance.SendARFrame (mImage, arkitPosition, arkitQuat, mARCamera.videoParams.screenOrientation);
-
 		}
-//		UpdateOnions ();
-
-
-	}
-
-	float onionUpdateTimer = 0f;
-	void UpdateOnions(){
-		onionUpdateTimer -= Time.deltaTime;
-		if (onionUpdateTimer < 0) {
-			onionUpdateTimer = 2f;
-			if (onionList.Count < 10) {
-				PlaceRandomOnion ();
-			}
-		}
-
-//			// are there enough onions near the camera?
-//			int desiredOnions = 5;
-//			int detectedOnions = 0;
-//			float careRadius = 15f;
-//			foreach (GameObject o in onionList) {
-//				float d = (Camera.main.transform.position - o.transform.position).magnitude;
-//				if (d < careRadius) {
-//					detectedOnions++;
-//				}
-//			}
-//			for (int i = 0; i < desiredOnions - detectedOnions; i++) {
-////				DebugText.
-//				PlaceRandomOnion ();
-//			}
-//		}			
 	}
 
 
@@ -175,6 +154,10 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 		LibPlacenote.Instance.ListMaps ((mapList) => {
 			// render the map list!
 			foreach (LibPlacenote.MapInfo mapId in mapList) {
+				if (mapId.userData != null) {
+					Debug.LogError (mapId.userData.ToString (Formatting.None));
+				} else {
+				}
 				AddMapToList (mapId);
 			}
 		});
@@ -202,14 +185,14 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 		GameObject newElement = Instantiate (mListElement) as GameObject;
 		MapInfoElement listElement = newElement.GetComponent<MapInfoElement> ();
 		listElement.Initialize (mapInfo, mToggleGroup, mListContentParent, (value) => {
-			OnMapSelected (mapInfo.placeId);
+			OnMapSelected (mapInfo);
 		});
 	}
 
 
-	void OnMapSelected (string selectedMapId)
+	void OnMapSelected (LibPlacenote.MapInfo mapInfo)
 	{
-		mSelectedMapId = selectedMapId;
+		mSelectedMapInfo = mapInfo;
 		mMapSelectedPanel.SetActive (true);
 	}
 
@@ -287,42 +270,7 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 		mSession.RunWithConfig (config);
 	}
 
-//	public void OnSaveMapClick ()
-//	{
-//		if (!LibPlacenote.Instance.Initialized()) {
-//			Debug.Log ("SDK not yet initialized");
-//			ToastManager.ShowToast ("SDK not yet initialized", 2f);
-//			return;
-//		}
-//
-//		bool useLocation = Input.location.status == LocationServiceStatus.Running;
-//		LocationInfo locationInfo = Input.location.lastData;
-//
-//		mLabelText.text = "Saving...";
-//		LibPlacenote.Instance.SaveMap (
-//			(mapId) => {
-//				LibPlacenote.Instance.StopSession ();
-//				mLabelText.text = "Saved Map ID: " + mapId;
-//				mInitButtonPanel.SetActive (true);
-//				mMappingButtonPanel.SetActive (false);
-//
-//
-//				JObject metadata = new JObject ();
-////
-////				JObject shapeList = Shapes2JSON();
-////				metadata["shapeList"] = shapeList;
-//
-//				if (useLocation) {
-//					metadata["location"] = new JObject ();
-//					metadata["location"]["latitude"] = locationInfo.latitude;
-//					metadata["location"]["longitude"] = locationInfo.longitude;
-//					metadata["location"]["altitude"] = locationInfo.altitude;
-//				}
-//				LibPlacenote.Instance.SetMetadata (mapId, metadata);
-//			},
-//			(completed, faulted, percentage) => {}
-//		);
-//	}
+
 	public void OnSaveMapClick ()
 	{
 		if (!LibPlacenote.Instance.Initialized()) {
@@ -330,6 +278,9 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 			ToastManager.ShowToast ("SDK not yet initialized", 2f);
 			return;
 		}
+
+		bool useLocation = Input.location.status == LocationServiceStatus.Running;
+		LocationInfo locationInfo = Input.location.lastData;
 
 		mLabelText.text = "Saving...";
 		LibPlacenote.Instance.SaveMap (
@@ -339,8 +290,25 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 				mInitButtonPanel.SetActive (true);
 				mMappingButtonPanel.SetActive (false);
 
-				string jsonPath = Path.Combine(Application.persistentDataPath, mapId + ".json");
-				SaveShapes2JSON(jsonPath);
+
+				JObject metadata = new JObject ();
+
+				JObject shapeList = Shapes2JSON();
+				metadata["shapeList"] = shapeList;
+
+				StringTest testData = new StringTest();
+				testData.stringtests = new string[2];
+				testData.stringtests[0] = "test1";
+				testData.stringtests[1] = "test2";
+				metadata["test"] = JObject.FromObject (testData);
+
+				if (useLocation) {
+					metadata["location"] = new JObject ();
+					metadata["location"]["latitude"] = locationInfo.latitude;
+					metadata["location"]["longitude"] = locationInfo.longitude;
+					metadata["location"]["altitude"] = locationInfo.altitude;
+				}
+				LibPlacenote.Instance.SetMetadata (mapId, metadata);
 			},
 			(completed, faulted, percentage) => {}
 		);
@@ -371,22 +339,6 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 	}
 
 
-	public GameObject onionPrefab;
-	public void PlaceRandomOnion() { 
-		float radius = 5f;
-		Vector3 randPos = Utils2.FlattenVector(UnityEngine.Random.onUnitSphere) * radius + (Vector3.up * UnityEngine.Random.Range(-3,3f));
-		randPos = Camera.main.transform.forward * 2;
-		GameObject onion = (GameObject)Instantiate(onionPrefab,Camera.main.transform.position + randPos, Quaternion.identity);
-		onionList.Add (onion);
-//		DebugText.place
-	}
-
-	public void ClearOnions(){
-		foreach (MetalOnion mo in FindObjectsOfType<MetalOnion>()) {
-			Destroy (mo.gameObject);
-		}
-	}
-
 	private GameObject ShapeFromInfo(ShapeInfo info)
 	{
 		GameObject shape = GameObject.CreatePrimitive ((PrimitiveType)info.shapeType);
@@ -407,35 +359,24 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 		shapeInfoList.Clear ();
 	}
 
-	private void SaveShapes2JSON (String filePath)
+	private JObject Shapes2JSON ()
 	{
-		Debug.Log ("Saving to " + filePath);
 		ShapeList shapeList = new ShapeList ();
 		shapeList.shapes = new ShapeInfo[shapeInfoList.Count];
 		for (int i = 0; i < shapeInfoList.Count; i++) {
 			shapeList.shapes [i] = shapeInfoList [i];
 		}
 
-		String shapeListJson = JsonUtility.ToJson (shapeList);
-		Debug.Log ("Shape JSON:\n" + shapeListJson);
-
-		using (StreamWriter outputFile = new StreamWriter (filePath)) {
-			outputFile.Write (shapeListJson);
-			ClearShapes ();
-		}
+		return JObject.FromObject (shapeList);
 	}
 
 
-	private void LoadShapesJSON (string filePath)
+	private void LoadShapesJSON (JToken mapMetadata)
 	{
-		Debug.Log ("Loading from " + filePath);
 		ClearShapes ();
 
-		using (StreamReader inputFile = new StreamReader (filePath)) {
-			string shapeListJson = inputFile.ReadToEnd ();
-			Debug.Log ("Shape JSON:\n" + shapeListJson);
-
-			ShapeList shapeList = JsonUtility.FromJson<ShapeList> (shapeListJson);
+		if (mapMetadata is JObject && mapMetadata ["shapeList"] is JObject) {
+			ShapeList shapeList = mapMetadata ["shapeList"].ToObject<ShapeList> ();
 			if (shapeList.shapes == null) {
 				Debug.Log ("no shapes dropped");
 				return;
@@ -458,11 +399,12 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 		Debug.Log ("prevStatus: " + prevStatus.ToString() + " currStatus: " + currStatus.ToString());
 		if (currStatus == LibPlacenote.MappingStatus.RUNNING && prevStatus == LibPlacenote.MappingStatus.LOST) {
 			mLabelText.text = "Localized";
-			string jsonPath = Path.Combine (Application.persistentDataPath, mSelectedMapId + ".json");
+			LoadShapesJSON (mSelectedMapInfo.userData);
+			StringTest tests = mSelectedMapInfo.userData ["test"].ToObject<StringTest> ();
+			DebugText.Overflow (tests.stringtests[0] + "," + tests.stringtests[1]);
+//			if (mapMetadata is JObject && mapMetadata ["shapeList"] is JObject) {
+//				ShapeList shapeList = mapMetadata ["shapeList"].ToObject<ShapeList> ();
 
-			if (File.Exists (jsonPath) && shapeObjList.Count == 0) {
-				LoadShapesJSON (jsonPath);
-			}
 		} else if (currStatus == LibPlacenote.MappingStatus.RUNNING && prevStatus == LibPlacenote.MappingStatus.WAITING) {
 			mLabelText.text = "Mapping";
 		} else if (currStatus == LibPlacenote.MappingStatus.LOST) {
@@ -473,6 +415,4 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 			}
 		}
 	}
-
-
 }

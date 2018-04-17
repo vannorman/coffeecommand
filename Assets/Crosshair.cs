@@ -77,7 +77,7 @@ public class Crosshair : MonoBehaviour {
 		if (messageTimer < 0) {
 			messageTimer = .05f;
 			messageLetterCount = Mathf.Min(message.Length, messageLetterCount +1);
-			Debug.Log ("message letter count:" + messageLetterCount);
+//			Debug.Log ("message letter count:" + messageLetterCount);
 		}
 			
 		messageText.text = message.Substring (0, messageLetterCount);

@@ -14,7 +14,7 @@ public class OnionDetector : MonoBehaviour {
 		RaycastHit hit = new RaycastHit ();
 
 		if (Physics.Raycast (Camera.main.ViewportPointToRay (new Vector3 (0.5f, 0.5f, 0f)), out hit)) {
-			Debug.Log ("hit:" + hit.collider.name);
+//			Debug.Log ("hit:" + hit.collider.name);
 			MetalOnion mo = hit.collider.gameObject.GetComponent<MetalOnion> ();
 			if (mo) {
 				mo.CameraHovering ();

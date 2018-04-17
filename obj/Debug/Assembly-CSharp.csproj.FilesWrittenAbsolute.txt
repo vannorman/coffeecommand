@@ -48,3 +48,4 @@
 /Users/zannorman/Desktop/Work/Vertical/CoffeeCommand Unity Project/Temp/bin/Debug/UnityEditor.iOS.Extensions.Xcode.xml
 /Users/zannorman/Desktop/Work/Vertical/CoffeeCommand Unity Project/Temp/bin/Debug/UnityEditor.iOS.Extensions.Common.dll
 /Users/zannorman/Desktop/Work/Vertical/CoffeeCommand Unity Project/Temp/bin/Debug/UnityEditor.iOS.Extensions.Common.dll.mdb
+/Users/zannorman/Desktop/Work/Vertical/CoffeeCommand Unity Project/Temp/bin/Debug/Newtonsoft.Json.dll
