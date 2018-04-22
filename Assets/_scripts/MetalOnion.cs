@@ -13,7 +13,7 @@ public class MetalOnion : MonoBehaviour {
 	// hatpics doot doot as you drag
 	// After a sweep is completed, some success sounds, particles, another tendril pops out, maybe 3 total will pop
 	// after 3rd tendril drag is completed, the onion plants!
-
+	public TextMesh debugText ;
 	public enum State {
 		Floating,
 		Ready,
@@ -83,6 +83,84 @@ public class MetalOnion : MonoBehaviour {
 
 	}
 
+	Vector3 targetPos;
+
+	enum MovementState {
+		Brownian,
+		SeekPoints,
+		AwaitingDestruction,
+		DestroyedAndFalling,
+		Stationary
+	}
+	float movementTime = 0f;
+	MovementState movementState = MovementState.Brownian;
+
+
+	void SeekPointClusters() {
+		if (CC.onionLocationHelper.FoundTargetNearOnion (this)) {
+			targetPos = CC.onionLocationHelper.TargetFeatureCluster ();
+			debugText.text = "t:" + targetPos;
+			float moveSpeed = 1.5f;
+			MoveTowardsTarget ();
+		} else {
+			debugText.text = "t: random";
+
+			MoveRandomly ();
+		}
+	}
+
+	void MoveTowardsTarget(float moveSpeed = 1f){
+		Vector3 dirToTarget = (targetPos - transform.position).normalized;
+		movementDir = Vector3.Lerp (movementDir, dirToTarget, Time.deltaTime);
+		transform.position += movementDir * Time.deltaTime;
+//		transform.position = Vector3.MoveTowards (transform.position, targetPos, Time.deltaTime * moveSpeed);
+	}
+
+	public Transform panelsParent;
+	bool AllPanelsDestroyed {
+		get {
+			if (panelsParent.childCount < 35) {
+				foreach (Transform t in panelsParent.transform) {
+					Destroy (t.gameObject);
+				}
+			}
+			return panelsParent.childCount == 0;
+		}
+	}
+
+
+	public GameObject smokeTrail;
+	void SetMovementState(MovementState newState){
+		Debug.Log ("<color=red><b> move state;</b></color>" + newState);
+		movementState = newState;
+		switch (newState) {
+		case MovementState.DestroyedAndFalling:
+			
+			smokeTrail.SetActive (true);
+
+			break;
+		case MovementState.Stationary:
+			smokeTrail.SetActive (false);
+			break;
+	
+			
+		}
+
+	}
+
+
+	float timeToMoveBrownian = 2f;
+	float timeToSeekPoints = 2f;
+
+
+
+	bool NearToTarget {
+		
+		get {
+			return (transform.position - targetPos).magnitude < .05f;
+		}
+	}
+
 	// Update is called once per frame
 	void Update () {
 
@@ -104,27 +182,59 @@ public class MetalOnion : MonoBehaviour {
 //		if (cameraHovering) DebugText.SetCamHoverObj ("onion:" + this.name + " at:" + Time.time);
 
 
-		switch (state) {
+		switch(state){
 		case State.Floating:
 			if (cameraHovering) {
-				if (PlaneInRange ()) {
-					TryMoveToNearestPlane ();
-				} else {
+				movementTime += Time.deltaTime;
+				switch (movementState) {
+				
+				case MovementState.Brownian:
 					MoveRandomly ();
+					if (movementTime > timeToMoveBrownian) {
+						SetMovementState (MovementState.SeekPoints);
+						movementTime = 0;	
+					}
+					break;
+				case MovementState.SeekPoints:
+					SeekPointClusters ();
+					if (movementTime > timeToSeekPoints) {
+						SetMovementState (MovementState.AwaitingDestruction);
+						movementTime = 0;
+					}
+					break;
+				case MovementState.AwaitingDestruction:
+					Debug.Log ("await dest");
+					if (AllPanelsDestroyed) {
+						SetMovementState (MovementState.DestroyedAndFalling);
+					} else {
+						MoveRandomly (0.1f);
+					}
+					break;
+				case MovementState.DestroyedAndFalling:
+					
+					
+					SetNearestPlaneAsTarget ();
+					MoveTowardsTarget ();
+					if (NearToTarget) {
+						SetMovementState (MovementState.Stationary);
+					}
+					break;
+				case MovementState.Stationary:
+					SetState (State.Ready);
+					break;
+				default:
+					break;
 				}
+				
 			}
-			if (CloseEnoughToPlaneToPlant ()) {
-				SetState (State.Ready);
-			}
-
-			// need to plant to a plane before continuing.
+			
 			break;
 		case State.Ready:
 			if (cameraHovering) {
 				camHoverCountdown -= Time.deltaTime;
 				//				Debug.Log ("camhover count:" + camHoverCountdown);
 				if (camHoverCountdown < 0) {
-					nearest.GetComponent<PlaneInfo> ().plantedOnion = this;
+//					nearest.GetComponent<PlaneInfo> ().plantedOnion = this;
 					SetState (State.Unwrapping);
 				}
 
@@ -180,53 +290,44 @@ public class MetalOnion : MonoBehaviour {
 
 	}
 
-	void StoppedUnwrapping(){
-		// user failed to complete an unwrap
-		cameraHovering = false;
-		targetFillAmount = 0;
-		camHoverCountdown = cameraHoverThreshhold;
-		targetRot = Quaternion.Euler (Random.onUnitSphere);
-		SetState (State.Ready);
-
+	void SetNearestPlaneAsTarget(){
+	
+		GameObject nearest = CC.onionLocationHelper.GetNearestPlane (this.transform, 1.5f);
+		if (nearest)
+			targetPos = nearest.transform.position;
 	}
 
-	GameObject 	nearest;
-	bool CloseEnoughToPlaneToPlant(){
-		if (nearest == null) {
-			DebugText.CloseToPlane ("no nearest plane");
-			return false;
-		}
-		float d = (transform.position - nearest.transform.position).magnitude;
-		DebugText.CloseToPlane ("dist:" + d);
-		return d < .05f;
-	}
+//	void Move(float moveSpeed = 1f){
+//		if (nearest) {
+//			transform.position = Vector3.MoveTowards (transform.position, nearest.transform.position, Time.deltaTime * moveSpeed);
+//		}
+//
+//	}
+//
+//	void StoppedUnwrapping(){
+//		// user failed to complete an unwrap
+//		cameraHovering = false;
+//		targetFillAmount = 0;
+//		camHoverCountdown = cameraHoverThreshhold;
+//		targetRot = Quaternion.Euler (Random.onUnitSphere);
+//		SetState (State.Ready);
+//
+//	}
 
-
-	bool PlaneInRange(){
-		nearest = CC.planeAnchorManager.GetNearestPlane(transform,15.5f);
-		return nearest != null;
-	}
-
-	void TryMoveToNearestPlane () {
-		
-//		ARKit
-		DebugText.SetPlaneInfo ("moving towards nearest..");
-		float floatToPlanSpeed = 0.5f;
-		transform.position = Vector3.MoveTowards (transform.position, nearest.transform.position, Time.deltaTime * floatToPlanSpeed);
-			
-	}
 
 	float lastRandomDirectionTime = 0;
 	Vector3 randomDir = Vector3.right;
-	void MoveRandomly(){
+	Vector3 movementDir = Vector3.zero;
+	void MoveRandomly(float randomMovementSpeed = 1f){
 		float randomDirectionInterval = 3f;
-		float randomMovementSpeed = 1;
+
 		if (Time.time - lastRandomDirectionTime > randomDirectionInterval) {
 			lastRandomDirectionTime = Time.time;
 			randomDir = new Vector3 (Random.Range (-1, 1f), Random.Range (-1, 1f),Random.Range (-1, 1f));
-
 		}
-		transform.position += randomDir * Time.deltaTime * randomMovementSpeed;
+		movementDir = Vector3.Lerp (movementDir, randomDir, Time.deltaTime * 1f); //smooth
+//		Debug.Log ("rand:" + randomDir.magnitude + ", movedir;" + movementDir.magnitude);
+		transform.position += movementDir * Time.deltaTime * randomMovementSpeed;
 	}
 
 }

@@ -19,16 +19,16 @@ public class PlaneInfo : MonoBehaviour {
 			dotsCheckTimer = Random.Range (0.4f, 0.6f);
 			int insideRad1 = 0;
 			int insideRad2 = 0;
-			foreach (Vector3 wp in CC.featuresManager.MapPoints) {
-//				Vector3 wp = CC.featuresVisualizer.mMap.transform.TransformPoint (p);
-				if (Vector3.Magnitude (transform.position - wp) < radius) {
-					insideRad1++;
-				}
-				if (Vector3.Magnitude (transform.position - wp) < radius2) {
-					insideRad2++;
-				}
-
-			}
+//			foreach (Vector3 wp in CC.featuresManager.MapPoints) {
+////				Vector3 wp = CC.featuresVisualizer.mMap.transform.TransformPoint (p);
+//				if (Vector3.Magnitude (transform.position - wp) < radius) {
+//					insideRad1++;
+//				}
+//				if (Vector3.Magnitude (transform.position - wp) < radius2) {
+//					insideRad2++;
+//				}
+//
+//			}
 			text.text = "Rad 1:" + insideRad1.ToString () + ", rad2:" + insideRad2.ToString ();
 		}
 	}

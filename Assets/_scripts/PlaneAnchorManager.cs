@@ -31,37 +31,5 @@ public class PlaneAnchorManager : MonoBehaviour {
 //		shownPlanes.Clear ();
 //	}
 //
-	float planeSeekTimer = 0f;
-	float nearestPlaneSeekInterval = 2;
-	Dictionary<Transform,GameObject> cachedPlanes = new Dictionary<Transform, GameObject>();
-	public GameObject GetNearestPlane(Transform nearObj, float r){
-		if (!cachedPlanes.ContainsKey (nearObj)) {
-			cachedPlanes.Add (nearObj,null);
-		}
-		planeSeekTimer -= Time.deltaTime;
-		if (planeSeekTimer < 0) {
 
-			GameObject nearest = null;
-			planeSeekTimer = nearestPlaneSeekInterval;
-			float nearDist = Mathf.Infinity;
-			int i = 0;
-			foreach (PlaneInfo pi in FindObjectsOfType<PlaneInfo>()) {
-				float curDist = Vector3.Magnitude (pi.gameObject.transform.position - nearObj.position);
-
-				if (curDist < nearDist && curDist < r && pi.plantedOnion == null) {
-					curDist = nearDist;
-					nearest = pi.gameObject;
-
-
-				}
-				i++;
-			}
-			cachedPlanes[nearObj] = nearest;
-
-			return nearest;
-		} else {
-
-			return cachedPlanes[nearObj];
-		}
-	}
 }

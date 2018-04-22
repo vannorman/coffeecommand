@@ -34,10 +34,11 @@ public class DamageReceiver : MonoBehaviour {
 	}
 
 	void Die() {
-//		Destroy (this.gameObject);
-		Destroy(objToDie);
+		if (objToDie != null) Destroy(objToDie);
+		Destroy (this.gameObject);
 	}
 	void OnDestroy(){
+		
 	
 //		objToSendMessage.SendMessage(messageToSend);
 	}

@@ -11,10 +11,10 @@ public class CC : MonoBehaviour {
 	public DebugText debugTextRef;
 	public Crosshair crosshairRef;
 	public static Crosshair crosshair;
-	public FeaturesVisualizer featuresVisualizerRef;
-	public static FeaturesVisualizer featuresVisualizer;
-	public CCFeaturesManager featuresManagerRef;
-	public static CCFeaturesManager featuresManager;
+	public CoffeeCommandFeaturesVisualizer featuresVisualizerRef;
+	public static CoffeeCommandFeaturesVisualizer featuresVisualizer;
+	public OnionLocationHelper onionLocationHelperRef;
+	public static OnionLocationHelper onionLocationHelper;
 
 	public static ShipWeapons shipWeapons;
 	public ShipWeapons shipWeaponsRef;
@@ -25,7 +25,8 @@ public class CC : MonoBehaviour {
 		shipWeapons = shipWeaponsRef;
 		crosshair = crosshairRef;
 		featuresVisualizer = featuresVisualizerRef;
-		featuresManager = featuresManagerRef;
+		onionLocationHelper = onionLocationHelperRef;
+	
 		UnityEngine.XR.iOS.UnityARUtility.InitializePlanePrefab (planePrefab);
 	}
 	

@@ -17,7 +17,7 @@ public class stringtester : MonoBehaviour {
 
 		StringTest tests = metadata ["test"].ToObject<StringTest> ();
 		DebugText.Overflow (tests.stringtests[0] + "," + tests.stringtests[1]);
-		Debug.Log ("OK?"+tests.stringtests [0] + "," + tests.stringtests [1]);
+//		Debug.Log ("OK?"+tests.stringtests [0] + "," + tests.stringtests [1]);
 
 	}
 	
