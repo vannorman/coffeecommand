@@ -72,7 +72,9 @@ public class Crosshair : MonoBehaviour {
 		float growSpeed = 3f;
 //		Debug.Log ("target size;" + targetSize + ", targ color:" + targetColor);
 		transform.localScale = Vector3.Lerp (transform.localScale, targetSize, Time.deltaTime * growSpeed);
-		im.color = Color.Lerp (im.color, targetColor, Time.deltaTime * growSpeed);
+		im.color = Color.Lerp (im.color, targetColor, Time.deltaTime * growSpeed * 2f);
+//		Debug.Log ("im col:" + im.color + ", targ:" + targetColor);
+		messageText.color = im.color;
 		messageTimer -= Time.deltaTime;
 		if (messageTimer < 0) {
 			messageTimer = .05f;

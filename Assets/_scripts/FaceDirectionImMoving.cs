@@ -18,7 +18,9 @@ public class FaceDirectionImMoving : MonoBehaviour {
 		if (moveDir.sqrMagnitude > 0) {
 			lastMoveDir = moveDir;
 		}
-		transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation (lastMoveDir), Time.deltaTime * swingSpeed);
+		if (lastMoveDir != Vector3.zero) {
+			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation (lastMoveDir), Time.deltaTime * swingSpeed);
+		}
 //		transform.forward = Vector3.Lerp (transform.forward, rp.nowPosition - rp.lastPosition, Time.deltaTime * swingSpeed);
 	}
 }

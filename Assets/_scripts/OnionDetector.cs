@@ -13,7 +13,7 @@ public class OnionDetector : MonoBehaviour {
 	void Update () {
 		RaycastHit hit = new RaycastHit ();
 
-		if (Physics.Raycast (Camera.main.ViewportPointToRay (new Vector3 (0.5f, 0.5f, 0f)), out hit)) {
+		if (Physics.SphereCast (Camera.main.ViewportPointToRay (new Vector3 (0.5f, 0.5f, 0f)), 0.05f, out hit)) {
 //			Debug.Log ("hit:" + hit.collider.name);
 			MetalOnion mo = hit.collider.gameObject.GetComponent<MetalOnion> ();
 			if (mo) {
@@ -23,7 +23,7 @@ public class OnionDetector : MonoBehaviour {
 			}
 
 			DamageReceiver dr = hit.collider.gameObject.GetComponent<DamageReceiver> ();
-			if (dr) {
+			if (dr || mo) {
 				CC.crosshair.SetState (Crosshair.State.Destructible);
 
 			} else {

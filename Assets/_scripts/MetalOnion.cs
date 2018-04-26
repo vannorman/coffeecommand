@@ -23,7 +23,7 @@ public class MetalOnion : MonoBehaviour {
 
 	public GameObject oilDerrick;
 	public GameObject onionGraphics;
-
+	public GameObject face;
 
 
 	public DishGroup dishGroup;
@@ -37,9 +37,10 @@ public class MetalOnion : MonoBehaviour {
 
 //	public Tendril tendril; // the initial tendril is "deactivated" and will serve as a prefab for additional tendrils
 	List<Tendril> tendrils = new List<Tendril>();
-
+	Vector3 startPos;
 
 	void Start(){
+		startPos = transform.position;
 		unwrapIndicator.fillAmount = 0;
 		oilDerrick.SetActive (false);
 //		dishGroup.gameObject.SetActive(false);
@@ -51,9 +52,20 @@ public class MetalOnion : MonoBehaviour {
 	public void SetState(State newState){
 		state = newState;
 		DebugText.SetOnionState (state.ToString());
+		face.SetActive (false);
+		onionGraphics.SetActive (false);
+		oilDerrick.SetActive (false);
+		dishGroup.gameObject.SetActive(false);
 		switch (state) {
+		case State.Floating:
+			face.SetActive (true);
+			onionGraphics.SetActive (true);
+			break;
+		case State.Unwrapping:
+			onionGraphics.SetActive (true);
+			dishGroup.gameObject.SetActive (true);
+			break;
 		case State.Unwrapped: 
-			onionGraphics.SetActive (false);
 			oilDerrick.SetActive (true);
 			transform.rotation = Quaternion.identity;
 			break;
@@ -111,7 +123,7 @@ public class MetalOnion : MonoBehaviour {
 
 	void MoveTowardsTarget(float moveSpeed = 1f){
 		Vector3 dirToTarget = (targetPos - transform.position).normalized;
-		movementDir = Vector3.Lerp (movementDir, dirToTarget, Time.deltaTime);
+		movementDir = Vector3.Lerp (movementDir, dirToTarget, Time.deltaTime); // smoothing
 		transform.position += movementDir * Time.deltaTime;
 //		transform.position = Vector3.MoveTowards (transform.position, targetPos, Time.deltaTime * moveSpeed);
 	}
@@ -149,8 +161,8 @@ public class MetalOnion : MonoBehaviour {
 	}
 
 
-	float timeToMoveBrownian = 2f;
-	float timeToSeekPoints = 2f;
+	float timeToMoveBrownian = 10f;
+	float timeToSeekPoints = 10f;
 
 
 
@@ -160,6 +172,8 @@ public class MetalOnion : MonoBehaviour {
 			return (transform.position - targetPos).magnitude < .05f;
 		}
 	}
+
+	float autoDestructTimer = 4f; // finished mapping but player didn't destroy it!! so auto destroy after time.
 
 	// Update is called once per frame
 	void Update () {
@@ -186,47 +200,50 @@ public class MetalOnion : MonoBehaviour {
 		case State.Floating:
 			if (cameraHovering) {
 				movementTime += Time.deltaTime;
-				switch (movementState) {
-				
-				case MovementState.Brownian:
-					MoveRandomly ();
-					if (movementTime > timeToMoveBrownian) {
-						SetMovementState (MovementState.SeekPoints);
-						movementTime = 0;	
-					}
-					break;
-				case MovementState.SeekPoints:
-					SeekPointClusters ();
-					if (movementTime > timeToSeekPoints) {
-						SetMovementState (MovementState.AwaitingDestruction);
-						movementTime = 0;
-					}
-					break;
-				case MovementState.AwaitingDestruction:
-					Debug.Log ("await dest");
-					if (AllPanelsDestroyed) {
-						SetMovementState (MovementState.DestroyedAndFalling);
-					} else {
-						MoveRandomly (0.1f);
-					}
-					break;
-				case MovementState.DestroyedAndFalling:
-					
-					
-					SetNearestPlaneAsTarget ();
-					MoveTowardsTarget ();
-					if (NearToTarget) {
-						SetMovementState (MovementState.Stationary);
-					}
-					break;
-				case MovementState.Stationary:
-					SetState (State.Ready);
-					break;
-				default:
-					break;
-				}
-				
 			}
+			switch (movementState) {
+			
+			case MovementState.Brownian:
+				if (cameraHovering) MoveRandomly ();
+				if (movementTime > timeToMoveBrownian) {
+					SetMovementState (MovementState.SeekPoints);
+					movementTime = 0;	
+				}
+				break;
+			case MovementState.SeekPoints:
+				if (cameraHovering) SeekPointClusters ();
+				if (movementTime > timeToSeekPoints) {
+					SetMovementState (MovementState.AwaitingDestruction);
+					movementTime = 0;
+				}
+				break;
+			case MovementState.AwaitingDestruction:
+//				Debug.Log ("await dest");
+				if (AllPanelsDestroyed) {
+					SetMovementState (MovementState.DestroyedAndFalling);
+				} else {
+					MoveRandomly (0.1f);
+					autoDestructTimer -= Time.deltaTime;
+					if (autoDestructTimer < 0) {
+						SetMovementState (MovementState.DestroyedAndFalling);
+					}
+				}
+				break;
+			case MovementState.DestroyedAndFalling:
+				SetNearestPlaneAsTarget ();
+				MoveTowardsTarget ();
+				if (NearToTarget) {
+					SetMovementState (MovementState.Stationary);
+				}
+				break;
+			case MovementState.Stationary:
+				SetState (State.Ready);
+				break;
+			default:
+				break;
+			}
+			
+		
 			
 			break;
 		case State.Ready:
@@ -255,7 +272,6 @@ public class MetalOnion : MonoBehaviour {
 		case State.Unwrapping:
 
 			// new, turret pop and turn randomly
-			dishGroup.gameObject.SetActive(true);
 
 			// old, easy unwrapping
 //			if (cameraHovering) {
@@ -318,16 +334,26 @@ public class MetalOnion : MonoBehaviour {
 	float lastRandomDirectionTime = 0;
 	Vector3 randomDir = Vector3.right;
 	Vector3 movementDir = Vector3.zero;
+	Vector3 randomPos = Vector3.zero;
 	void MoveRandomly(float randomMovementSpeed = 1f){
+		float randomRadius = 1.2f;
 		float randomDirectionInterval = 3f;
-
 		if (Time.time - lastRandomDirectionTime > randomDirectionInterval) {
 			lastRandomDirectionTime = Time.time;
-			randomDir = new Vector3 (Random.Range (-1, 1f), Random.Range (-1, 1f),Random.Range (-1, 1f));
+			randomPos = startPos + Random.insideUnitSphere * randomRadius;
 		}
-		movementDir = Vector3.Lerp (movementDir, randomDir, Time.deltaTime * 1f); //smooth
-//		Debug.Log ("rand:" + randomDir.magnitude + ", movedir;" + movementDir.magnitude);
-		transform.position += movementDir * Time.deltaTime * randomMovementSpeed;
+		targetPos = startPos + randomPos;
+		MoveTowardsTarget ();
+
+
+//		float randomDirectionInterval = 3f;
+//		if (Time.time - lastRandomDirectionTime > randomDirectionInterval) {
+//			lastRandomDirectionTime = Time.time;
+//			randomDir = new Vector3 (Random.Range (-1, 1f), Random.Range (-0.4f, 0.4f),Random.Range (-1, 1f));
+//		}
+//		movementDir = Vector3.Lerp (movementDir, randomDir, Time.deltaTime * 1f); //smooth
+////		Debug.Log ("rand:" + randomDir.magnitude + ", movedir;" + movementDir.magnitude);
+//		transform.position += movementDir * Time.deltaTime * randomMovementSpeed;
 	}
 
 }

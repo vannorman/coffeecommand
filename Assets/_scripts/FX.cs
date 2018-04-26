@@ -25,6 +25,9 @@ public class FX : MonoBehaviour {
 		inst = this;
 		foreach (Effect e in effects) {
 			e.ps = (ParticleSystem)Instantiate (e.particleSystem).GetComponent<ParticleSystem> ();
+			TimedObjectDestructor tod = e.ps.gameObject.GetComponent<TimedObjectDestructor> ();
+			if (tod)
+				Destroy (tod); // awkward but these have TODs for when they're instantiated by other behaviors
 			effectsList.Add (e.name, e);
 			e.ps.transform.position = Vector3.zero;
 		}

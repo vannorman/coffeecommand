@@ -203,7 +203,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4877236720489982}
   - component: {fileID: 33418089568537238}
-  - component: {fileID: 65694449470434296}
   - component: {fileID: 23358819688247350}
   m_Layer: 0
   m_Name: Cube
@@ -1447,7 +1446,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4952481012355300}
   - component: {fileID: 33728656619590036}
-  - component: {fileID: 135046236094969494}
   - component: {fileID: 23783514131259814}
   m_Layer: 0
   m_Name: Sphere
@@ -1892,7 +1890,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4862496872802932}
   - component: {fileID: 33571718536457852}
-  - component: {fileID: 135344598431200088}
   - component: {fileID: 23809724272761860}
   m_Layer: 0
   m_Name: Sphere (2)
@@ -2110,7 +2107,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4979626300263078}
   - component: {fileID: 33666660510604254}
-  - component: {fileID: 65819489666692020}
   - component: {fileID: 23296374864433264}
   m_Layer: 0
   m_Name: Cube (1)
@@ -2603,7 +2599,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4190790278381516}
   - component: {fileID: 33500089430480444}
-  - component: {fileID: 135924817229163020}
   - component: {fileID: 23329771724590694}
   m_Layer: 0
   m_Name: Sphere (3)
@@ -3057,7 +3052,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1702811247946076
 GameObject:
   m_ObjectHideFlags: 1
@@ -3593,7 +3588,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4325058766304516}
   - component: {fileID: 33869138068113688}
-  - component: {fileID: 135339802767065168}
   - component: {fileID: 23408790735156894}
   m_Layer: 0
   m_Name: Sphere (1)
@@ -17360,18 +17354,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65694449470434296
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1028618545209182}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65734298703406594
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -17402,18 +17384,6 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1731284421360776}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65819489666692020
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1454568460974756}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -17940,6 +17910,7 @@ MonoBehaviour:
   debugText: {fileID: 102857648793734064}
   oilDerrick: {fileID: 1857844168044578}
   onionGraphics: {fileID: 1427478912628760}
+  face: {fileID: 1885633819533972}
   dishGroup: {fileID: 114404737403453764}
   state: 0
   unwrapIndicator: {fileID: 114824157578321382}
@@ -20367,42 +20338,6 @@ MonoBehaviour:
   angleToTakeDamage: 120
   localDir: {x: 0, y: 1, z: 0}
   objToDie: {fileID: 0}
---- !u!135 &135046236094969494
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1302874342542740}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &135339802767065168
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1830211326835446}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &135344598431200088
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1407775511249698}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135839325709465470
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -20413,19 +20348,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &135924817229163020
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1593829200242086}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.41
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136310485611228428
 CapsuleCollider:

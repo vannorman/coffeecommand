@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4201979972793604}
   - component: {fileID: 198813400114220352}
   - component: {fileID: 199593000756400694}
+  - component: {fileID: 114193372713764982}
   m_Layer: 0
   m_Name: simple dead explosion
   m_TagString: Untagged
@@ -41,6 +42,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114193372713764982
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1999981328235328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f27124bef1fc1443a9a7f7c241377059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoDestruct: 1
+  autoDestructInSeconds: 3
 --- !u!198 &198813400114220352
 ParticleSystem:
   m_ObjectHideFlags: 1

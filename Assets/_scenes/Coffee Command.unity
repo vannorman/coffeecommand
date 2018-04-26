@@ -9705,7 +9705,7 @@ MonoBehaviour:
   rightCannon: {fileID: 608071595}
   bulletPrefab: {fileID: 1275776364923824, guid: c4004192f46b74608b9023a53ce1c3ef,
     type: 2}
-  bulletForce: 300
+  bulletForce: 550
 --- !u!4 &1196845914
 Transform:
   m_ObjectHideFlags: 0

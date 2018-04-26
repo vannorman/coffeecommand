@@ -139,6 +139,19 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 	// Update is called once per frame
 	void Update ()
 	{
+		#if UNITY_EDITOR
+		if (Input.GetKeyDown(KeyCode.S)){
+			TestSaveFunction();
+		}
+		if (Input.GetKeyDown(KeyCode.L)){
+			TestLoadFunction();
+		}
+		if (Input.GetKeyDown(KeyCode.C)){
+			ClearOnions();
+		}
+		#endif
+
+
 		if (mFrameUpdated) {
 			mFrameUpdated = false;
 			if (mImage == null) {
@@ -230,6 +243,7 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 			ToastManager.ShowToast ("SDK not yet initialized", 2f);
 			return;
 		}
+		ClearOnions ();
 
 		mLabelText.text = "Loading Map ID: " + mSelectedMapId;
 		LibPlacenote.Instance.LoadMap (mSelectedMapId,
@@ -343,6 +357,19 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 			(completed, faulted, percentage) => {}
 		);
 	}
+
+	JObject testMet;
+	public void TestSaveFunction(){
+
+		testMet = new JObject ();
+		JObject onionList = Onions2JSON();
+		testMet["onionList"] = onionList;
+//		Debug.Log("saved! meta:"+testMet.ToString());
+	}
+
+	public void TestLoadFunction(){
+		LoadOnionsJSON (testMet);
+	}
 		
 
 	public void OnDropShapeClick ()
@@ -407,14 +434,17 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 
 		List<MetalOnion> mos = new List<MetalOnion> ();
 		foreach (MetalOnion m in FindObjectsOfType<MetalOnion>()) {
-			if (m.state == MetalOnion.State.Unwrapped) {
-				mos.Add (m);
-			}
+//			Debug.Log ("added m!");
+			mos.Add (m);
+
 		}
 
 
 		onionList.onions = new OnionInfo[mos.Count];
 		for (int i = 0; i < onionList.onions.Length; i++) {
+			onionList.onions [i] = new OnionInfo ();
+			onionList.onions [i].onionState = mos [i].state;
+
 			onionList.onions[i].px = mos [i].transform.position.x;
 			onionList.onions[i].py = mos [i].transform.position.y;
 			onionList.onions[i].pz = mos [i].transform.position.z;
@@ -430,23 +460,29 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 
 	private void LoadOnionsJSON (JToken mapMetadata)
 	{
-		ClearOnions ();
+		string d = "";
+		d += mapMetadata.ToString ();
+		
 
 		if (mapMetadata is JObject && mapMetadata ["onionList"] is JObject) {
 			OnionList onionList = mapMetadata ["onionList"].ToObject<OnionList> ();
+			d += " .. onionlist exist";
 
 			if (onionList.onions == null) {
+				d += " .. onions was null";
 				Debug.Log ("no onions dropped");
 				ToastManager.ShowToast ("no oniones!",1f);
 				return;
 			}
+			d += " .. onions Not null! ..";
 
 			foreach (var onionInfo in onionList.onions) {
-				
+				d += " .. Placing an onion!";
 				GameObject onion = (GameObject)Instantiate (onionPrefab, onionInfo.position, onionInfo.rotation);
 				onion.GetComponent<MetalOnion> ().SetState (onionInfo.onionState);
 			}
 		}
+//		Debug.Log (d);
 	}
 
 
@@ -481,8 +517,8 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 			mLabelText.text = "Localized";
 			LoadShapesJSON (mSelectedMapInfo.userData);
 			LoadOnionsJSON (mSelectedMapInfo.userData);
-			StringTest tests = mSelectedMapInfo.userData ["test"].ToObject<StringTest> ();
-			DebugText.Overflow (tests.stringtests[0] + "," + tests.stringtests[1]);
+//			StringTest tests = mSelectedMapInfo.userData ["test"].ToObject<StringTest> ();
+//			DebugText.Overflow (tests.stringtests[0] + "," + tests.stringtests[1]);
 //			if (mapMetadata is JObject && mapMetadata ["shapeList"] is JObject) {
 //				ShapeList shapeList = mapMetadata ["shapeList"].ToObject<ShapeList> ();
 
