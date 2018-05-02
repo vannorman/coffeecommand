@@ -41,6 +41,7 @@ public class MetalOnion : MonoBehaviour {
 
 	void Start(){
 		startPos = transform.position;
+		InitBrownianPoints ();
 		unwrapIndicator.fillAmount = 0;
 		oilDerrick.SetActive (false);
 //		dishGroup.gameObject.SetActive(false);
@@ -80,7 +81,7 @@ public class MetalOnion : MonoBehaviour {
 	bool cameraHovering = true; // for initializeation of camhovercountdown in update if camhovering false
 	public void CameraHovering(){
 //		Debug.Log ("camhov:" + cameraHoverTimer);
-		cameraHoverTimer = 0.2f;
+		cameraHoverTimer = 1.2f;
 	}
 
 
@@ -162,7 +163,23 @@ public class MetalOnion : MonoBehaviour {
 
 
 	float timeToMoveBrownian = 10f;
+	float brownianRadius = .3f;
 	float timeToSeekPoints = 10f;
+	int brownianIndex = 0;
+	List<Vector3> brownianPoints = new List<Vector3>();
+	void InitBrownianPoints(){
+		brownianPoints.Add (startPos + Vector3.right * brownianRadius);
+		brownianPoints.Add (startPos - Vector3.right * brownianRadius);
+		brownianPoints.Add (startPos + Vector3.forward * brownianRadius);
+		brownianPoints.Add (startPos - Vector3.forward * brownianRadius);
+		string s = "";
+		foreach (Vector3 p in brownianPoints) {
+			s += p + ", ";
+		}
+		Debug.Log ("p:" + s);
+//		for(int i
+
+	}
 
 
 
@@ -174,6 +191,20 @@ public class MetalOnion : MonoBehaviour {
 	}
 
 	float autoDestructTimer = 4f; // finished mapping but player didn't destroy it!! so auto destroy after time.
+
+
+	bool BrownianComplete = false;
+	void MoveBrownian(){
+		SetTarget (brownianPoints [brownianIndex]);
+		MoveTowardsTarget ();
+		if (Vector3.Magnitude (transform.position - brownianPoints [brownianIndex]) < 0.1f){
+			if (brownianIndex < brownianPoints.Count - 1) {
+				brownianIndex++;
+			} else {
+				BrownianComplete = true;
+			}
+		}
+	}
 
 	// Update is called once per frame
 	void Update () {
@@ -204,8 +235,13 @@ public class MetalOnion : MonoBehaviour {
 			switch (movementState) {
 			
 			case MovementState.Brownian:
-				if (cameraHovering) MoveRandomly ();
-				if (movementTime > timeToMoveBrownian) {
+				
+				if (cameraHovering) {
+					MoveBrownian ();
+
+//					MoveRandomly ();
+				}
+				if (BrownianComplete) {
 					SetMovementState (MovementState.SeekPoints);
 					movementTime = 0;	
 				}
@@ -230,7 +266,7 @@ public class MetalOnion : MonoBehaviour {
 				}
 				break;
 			case MovementState.DestroyedAndFalling:
-				SetNearestPlaneAsTarget ();
+				GetPlaneWithHighestPointScore ();
 				MoveTowardsTarget ();
 				if (NearToTarget) {
 					SetMovementState (MovementState.Stationary);
@@ -306,7 +342,7 @@ public class MetalOnion : MonoBehaviour {
 
 	}
 
-	void SetNearestPlaneAsTarget(){
+	void GetPlaneWithHighestPointScore(){
 	
 		GameObject nearest = CC.onionLocationHelper.GetNearestPlane (this.transform, 1.5f);
 		if (nearest)
@@ -331,18 +367,34 @@ public class MetalOnion : MonoBehaviour {
 //	}
 
 
+	Vector3 GetRandomPos {
+
+		get {
+			float randomRadius = 1.2f;
+			Vector3 rp = Vector3.zero;
+			for (int i = 0; i < 20; i++) {
+				rp = startPos + Random.insideUnitSphere * randomRadius;
+				if (Vector3.Magnitude (startPos - Camera.main.transform.position) > .35f) {
+					return rp;
+				}
+			}
+			return rp;
+		}
+	}
+
 	float lastRandomDirectionTime = 0;
 	Vector3 randomDir = Vector3.right;
 	Vector3 movementDir = Vector3.zero;
 	Vector3 randomPos = Vector3.zero;
 	void MoveRandomly(float randomMovementSpeed = 1f){
-		float randomRadius = 1.2f;
 		float randomDirectionInterval = 3f;
 		if (Time.time - lastRandomDirectionTime > randomDirectionInterval) {
 			lastRandomDirectionTime = Time.time;
-			randomPos = startPos + Random.insideUnitSphere * randomRadius;
+			randomPos = GetRandomPos; 
 		}
-		targetPos = startPos + randomPos;
+		SetTarget (startPos + randomPos);
+
+//		targetPos = startPos + randomPos;
 		MoveTowardsTarget ();
 
 
@@ -356,4 +408,7 @@ public class MetalOnion : MonoBehaviour {
 //		transform.position += movementDir * Time.deltaTime * randomMovementSpeed;
 	}
 
+	void SetTarget(Vector3 p){
+		targetPos = p;
+	}
 }

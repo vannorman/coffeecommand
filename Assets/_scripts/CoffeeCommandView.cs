@@ -140,15 +140,15 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 	void Update ()
 	{
 		#if UNITY_EDITOR
-		if (Input.GetKeyDown(KeyCode.S)){
-			TestSaveFunction();
-		}
-		if (Input.GetKeyDown(KeyCode.L)){
-			TestLoadFunction();
-		}
-		if (Input.GetKeyDown(KeyCode.C)){
-			ClearOnions();
-		}
+//		if (Input.GetKeyDown(KeyCode.S)){
+//			TestSaveFunction();
+//		}
+//////		if (Input.GetKeyDown(KeyCode.L)){
+////			TestLoadFunction();
+////		}
+//		if (Input.GetKeyDown(KeyCode.C)){
+//			ClearOnions();
+//		}
 		#endif
 
 

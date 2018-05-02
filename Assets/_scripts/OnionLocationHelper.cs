@@ -12,6 +12,15 @@ public class OnionLocationHelper : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		targetFeatureClusterTimer -= Time.deltaTime;
+		if (Input.GetKey (KeyCode.C)) {
+			for (int i = 0; i < 100; i++) {
+			
+				GameObject o = GameObject.Find ("debSphere");
+				if (o) {
+					Destroy (o);
+				}
+			}
+		}
 	}
 
 
@@ -44,13 +53,13 @@ public class OnionLocationHelper : MonoBehaviour {
 	public Vector3 TargetFeatureCluster (){
 		return cachedTarget;
 	}
-	public float searchRadius = 2f;
+	public float searchRadius = 4f;
 	MetalOnion lastOnionWhoRequested;
 	public bool FoundTargetNearOnion(MetalOnion mo) {
 		if (targetFeatureClusterTimer < 0) {
 			foundAnyQuadrant = false;
 			if (lastOnionWhoRequested != mo) {
-				searchRadius = 2f;
+				searchRadius = 4f;
 			}
 			lastOnionWhoRequested = mo;
 			targetFeatureClusterTimer = targetFeatureClusterInterval;
@@ -84,6 +93,16 @@ public class OnionLocationHelper : MonoBehaviour {
 					}
 				}
 			}
+
+			foreach (Vector3 k in QuadrantScores.Keys) {
+				GameObject d = GameObject.CreatePrimitive (PrimitiveType.Sphere);
+				d.transform.position = k;
+				d.transform.localScale = .002f * QuadrantScores [k] * Vector3.one;
+				d.transform.position = mo.transform.position + k * searchRadius;
+				d.name = "debSphere";
+//				d.GetComponent<Renderer>().material.color = new Color(
+			}
+
 			
 			float max = 0;
 			Vector3 bestQuadrant = Vector3.zero;
@@ -103,11 +122,13 @@ public class OnionLocationHelper : MonoBehaviour {
 				// If the best quadrant is zero, shrink the radius
 				if (bestQuadrant == Vector3.zero) {
 					searchRadius /= 2f;
+					Debug.Log("<color=blue>Decerease /2:"+searchRadius+"</color>");
 				}
 
 			} else {
 				Debug.Log ("Found no quads");
 			}
+//			Debug.Log("<color=blue>Cached :"+cachedTarget+"</color>");
 			
 		}
 		return foundAnyQuadrant;

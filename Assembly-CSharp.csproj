@@ -111,6 +111,7 @@
      <Compile Include="Assets\Unity Utilities\MathUtils.cs" />
      <Compile Include="Assets\Unity Utilities\MeshCombiner.cs" />
      <Compile Include="Assets\Unity Utilities\MouseLook.cs" />
+     <Compile Include="Assets\Unity Utilities\SceneToolHacker.cs" />
      <Compile Include="Assets\Unity Utilities\ScrollTexture.cs" />
      <Compile Include="Assets\Unity Utilities\SinHover.cs" />
      <Compile Include="Assets\Unity Utilities\TimedObjectDestructor.cs" />

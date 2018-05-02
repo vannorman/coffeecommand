@@ -1,15 +1,17 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_scripts/CoffeeCommandView.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_scripts/MetalOnion.cs">
     <Files>
-      <File FileName="Assets/_scripts/MetalOnion.cs" Line="124" Column="29" />
+      <File FileName="Assets/_scripts/MetalOnion.cs" Line="345" Column="14" />
+      <File FileName="Assets/_scripts/Crosshair.cs" Line="1" Column="1" />
       <File FileName="Assets/_scripts/CC.cs" Line="1" Column="1" />
       <File FileName="Assets/_scripts/PlaneInfo.cs" Line="1" Column="1" />
       <File FileName="Assets/_scripts/FaceDirectionImMoving.cs" Line="1" Column="1" />
       <File FileName="Assets/_scripts/DamageReceiver.cs" Line="1" Column="1" />
       <File FileName="Assets/stringtester.cs" Line="1" Column="1" />
-      <File FileName="Assets/_scripts/CoffeeCommandView.cs" Line="481" Column="23" />
-      <File FileName="Assets/_scripts/Crosshair.cs" Line="46" Column="7" />
+      <File FileName="Assets/_scripts/CoffeeCommandView.cs" Line="1" Column="1" />
+      <File FileName="Assets/_scripts/OnionDetector.cs" Line="1" Column="1" />
+      <File FileName="Assets/_scripts/FX.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

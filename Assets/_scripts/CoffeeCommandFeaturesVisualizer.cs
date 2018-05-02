@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 
 /// <summary>
@@ -27,16 +28,18 @@ public class CoffeeCommandFeaturesVisualizer : MonoBehaviour, PlacenoteListener
 
 	Vector3[] FakeGreenPoints {
 		get {
-			if (fakeGreenPoints.Length == 0) {
+			if (fakeGreenPointT == null || fakeGreenPointT.Count == 0) {
 				InitFakeGreenPoints ();
 			}
-			return fakeGreenPoints;
+			return fakeGreenPointT.Select(t => t.position).ToArray();
 		}
 	}
+	List<Transform> fakeGreenPointT;
 
-	Vector3[] fakeGreenPoints = new Vector3[0];
+
+
 	void InitFakeGreenPoints(){
-		fakeGreenPoints = new Vector3[100];
+		fakeGreenPointT = new List<Transform> ();
 		Vector3 p0 = FindObjectOfType<MetalOnion> ().transform.position;
 		for (int i=0;i<50;i++){
 			GameObject gp = GameObject.CreatePrimitive (PrimitiveType.Cube);
@@ -44,7 +47,7 @@ public class CoffeeCommandFeaturesVisualizer : MonoBehaviour, PlacenoteListener
 			gp.transform.position = p;
 			gp.GetComponent<MeshRenderer> ().material.color = Color.green;
 			gp.transform.localScale *= .05f;
-			fakeGreenPoints [i] = p;
+			fakeGreenPointT.Add (gp.transform);
 			gp.transform.SetParent (transform);
 			gp.name = "GreenPoint " + i;
 		}
@@ -54,7 +57,19 @@ public class CoffeeCommandFeaturesVisualizer : MonoBehaviour, PlacenoteListener
 			gp.transform.position = p;
 			gp.GetComponent<MeshRenderer> ().material.color = Color.green;
 			gp.transform.localScale *= .05f;
-			fakeGreenPoints [i] = p;
+			fakeGreenPointT.Add (gp.transform);
+			gp.transform.SetParent (transform);
+			gp.name = "GreenPoint " + i;
+		}
+		for (int i = 100; i < 250; i++) {
+			GameObject gp = GameObject.CreatePrimitive (PrimitiveType.Cube);
+			Vector3 v = Random.insideUnitSphere;
+			v = new Vector3 (v.x, v.y / 5f, v.z);
+			Vector3 p =  p0 + Camera.main.transform.forward * 2.5f + v * 2f;
+			gp.transform.position = p;
+			gp.GetComponent<MeshRenderer> ().material.color = Color.green;
+			gp.transform.localScale *= .05f;
+			fakeGreenPointT.Add (gp.transform);
 			gp.transform.SetParent (transform);
 			gp.name = "GreenPoint " + i;
 		}
@@ -80,7 +95,7 @@ public class CoffeeCommandFeaturesVisualizer : MonoBehaviour, PlacenoteListener
 	{
 		if (sInstance.mMap == null) {
 			Debug.LogWarning (
-				"Map game object reference is null, please initialize in editor.Skipping pointcloud visualization"
+				"Map game object reference is null, please initialize in editor. Skipping pointcloud visualization"
 			);
 			return;
 		}
