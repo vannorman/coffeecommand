@@ -1,3 +1,8 @@
 *.meta
 *.sh
+*.o
+Library/PlayerDataCache/
+Library/*cache/
+Library/*cache*/
+Library/cache*/
 Temp/
