@@ -25,8 +25,10 @@ public class OnionDetector : MonoBehaviour {
 			}
 			
 			DamageReceiver dr = hit.collider.gameObject.GetComponent<DamageReceiver> ();
-			if (dr || mo) {
+			if (dr || (mo && (mo.state != MetalOnion.State.Unwrapped)) ) {
+				
 				CC.crosshair.SetState (Crosshair.State.Destructible);
+			
 				
 			} else {
 				CC.crosshair.SetState(Crosshair.State.Nominal);

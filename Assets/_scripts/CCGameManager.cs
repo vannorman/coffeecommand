@@ -30,13 +30,22 @@ public class CCGameManager : MonoBehaviour {
 //		Application.LoadLevel(Application.loadedLevel);
 //	}
 
+	public void LoadUserTestScene(){
+		// main game
+		UnityEngine.SceneManagement.SceneManager.LoadScene (1);
+	}
+
+	public void LoadDeveloperScene(){
+		UnityEngine.SceneManagement.SceneManager.LoadScene (2);	
+	}
+
 	public void LoadFirstScene(){
 		LibPlacenote.Instance.StopSession ();
-		UnityEngine.SceneManagement.SceneManager.LoadScene (0);
+		UnityEngine.SceneManagement.SceneManager.LoadScene (1);
 	}
 
 	public void LoadDummyScene(){
 		LibPlacenote.Instance.StopSession ();
-		UnityEngine.SceneManagement.SceneManager.LoadScene (1);
+		UnityEngine.SceneManagement.SceneManager.LoadScene (2);
 	}
 }

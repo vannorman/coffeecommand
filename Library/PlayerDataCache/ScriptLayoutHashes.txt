@@ -1,7 +1,8 @@
 iOS
 SceneListBegin?
+Assets/_scenes/splash start scene.unity
 Assets/_scenes/Coffee Command Real Game.unity
-Assets/_scenes/Coffee Command dummy scene.unity
+Assets/_scenes/Coffee Command Developer mode v1.unity
 SceneListEnd?
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MainThreadTaskQueue
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:UnityEngine.XR.iOS.UnityARKitControl
@@ -172,7 +173,6 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 3f32f08a64daf40b09ed864d96fe3840 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransform
 73843688b51256aed059f049c540bca8 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.stringtester
 672c7ec9a1afb24a8c52bed490318aa3 Assembly-CSharp.dll:.CoffeeCommandFeaturesVisualizer
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PhoneOrientation
 507673dfe690aad97d3cfe9cdf66004b Assembly-CSharp.dll:.SmoothFollowTarget
@@ -182,11 +182,11 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 64eb32cc721b1cc68a91ed57461e188c UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.RemoteTestResultSender
 e7fcf7b90f47d05b0aafa98e81d856d8 Assembly-CSharp.dll:UnityEngine.XR.iOS.ARKitRemoteConnection
 e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DogShip
+13c437b0012a760be7e73b79dff57987 Assembly-CSharp.dll:.DogShip
 e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 7cc932962d25de7fe60cf5c0ea930c8f Assembly-CSharp.dll:.ToastManager
 04d8f29baa8db2da913784599d964b46 Assembly-CSharp.dll:.ScrollTexture
-cbc323a818a2c89e50a7b69d02695eae Assembly-CSharp.dll:.MetalOnion
+cbd59419654f912b14166a7e89966c8f Assembly-CSharp.dll:.MetalOnion
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
@@ -211,3 +211,5 @@ e059e84d441884affff77b3f5de26568 Assembly-CSharp.dll:.ShipWeapons
 391d84b859f3b155fe38f54bfce79162 Assembly-CSharp.dll:.UnityPointCloudExample
 97f3f2eee235771b3d0dd28fcccb62f7 Assembly-CSharp.dll:Battlehub.MeshTools.Pivot
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UnityARCameraNearFar
+d164dd9a3fc459c468578de547f1a101 Assembly-CSharp.dll:.Dogs
+e2320c9dc1c48ed92ab6997123a272bb Assembly-CSharp.dll:.Coins

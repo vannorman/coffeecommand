@@ -36,23 +36,28 @@ public class MetalOnion : MonoBehaviour {
 
 
 //	public Tendril tendril; // the initial tendril is "deactivated" and will serve as a prefab for additional tendrils
-	List<Tendril> tendrils = new List<Tendril>();
+//	List<Tendril> tendrils = new List<Tendril>();
 	Vector3 startPos;
-
+	public bool stateOnStart = false;
 	void Start(){
+		
 		startPos = transform.position;
 		InitBrownianPoints ();
 		unwrapIndicator.fillAmount = 0;
-		oilDerrick.SetActive (false);
+//		oilDerrick.SetActive (false);
 //		dishGroup.gameObject.SetActive(false);
 
+//		tendrils.AddRange(GetComponentsInChildren<Tendril> ());
+		if (stateOnStart) {
+			SetState (state);
+		}
 		DebugText.SetOnionCount(FindObjectsOfType<MetalOnion>().Length.ToString());
-		tendrils.AddRange(GetComponentsInChildren<Tendril> ());
 	}
 
 	public void SetState(State newState){
+//		Debug.Log ("state:" + newState);
 		state = newState;
-		DebugText.SetOnionState (state.ToString());
+//		DebugText.SetOnionState (state.ToString());
 		face.SetActive (false);
 		onionGraphics.SetActive (false);
 		oilDerrick.SetActive (false);
@@ -67,6 +72,7 @@ public class MetalOnion : MonoBehaviour {
 			dishGroup.gameObject.SetActive (true);
 			break;
 		case State.Unwrapped: 
+			Debug.Log ("oil true?");
 			oilDerrick.SetActive (true);
 			transform.rotation = Quaternion.identity;
 			break;
@@ -216,12 +222,18 @@ public class MetalOnion : MonoBehaviour {
 		}
 	}
 
+
+
 	// Update is called once per frame
 	void Update () {
+		
 
 		#if UNITY_EDITOR
 		if (Input.GetKey (KeyCode.L)) {
 			CameraHovering ();
+		}
+		if (Input.GetKeyDown(KeyCode.S)){
+			SetState(State.Unwrapped);
 		}
 		#endif
 
@@ -303,10 +315,10 @@ public class MetalOnion : MonoBehaviour {
 
 
 			} else {
-				foreach (Tendril t in tendrils) {
-					//				Debug.Log ("popin");
-					t.PopIn (); //SetState (Tendril.State.Out);
-				}
+//				foreach (Tendril t in tendrils) {
+//					//				Debug.Log ("popin");
+//					t.PopIn (); //SetState (Tendril.State.Out);
+//				}
 				targetFillAmount = 0;
 			}
 
@@ -343,6 +355,12 @@ public class MetalOnion : MonoBehaviour {
 //			}
 			break;
 		case State.Unwrapped:
+			mineTimer -= Time.deltaTime;
+			if (mineTimer < 0) {
+				mineTimer = 1;
+				FindObjectOfType<Coins> ().EarnCoin (1);
+				CoinFx ();
+			}
 			break;
 		default:
 			break;
@@ -351,6 +369,13 @@ public class MetalOnion : MonoBehaviour {
 
 
 	}
+
+	public ParticleSystem coins;
+	void CoinFx(){
+		coins.Emit (1);
+	}
+	float mineTimer = 0f;
+
 
 	void GetPlaneWithHighestPointScore(){
 	

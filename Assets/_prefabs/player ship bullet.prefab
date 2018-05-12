@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114378997904699360}
   - component: {fileID: 114509830086931396}
   - component: {fileID: 114883310081216004}
+  - component: {fileID: 114600043712178026}
   m_Layer: 0
   m_Name: player ship bullet
   m_TagString: Untagged
@@ -127,6 +128,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 1
+--- !u!114 &114600043712178026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1275776364923824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1f94184c76f0409db9767fff55c06b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastPosition: {x: 0, y: 0, z: 0}
+  nowPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114883310081216004
 MonoBehaviour:
   m_ObjectHideFlags: 1

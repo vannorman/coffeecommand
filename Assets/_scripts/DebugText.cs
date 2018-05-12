@@ -9,8 +9,8 @@ public class DebugText : MonoBehaviour {
 	public static DebugText inst;
 	void Start(){
 		t = GetComponent<Text> ();
-		inst = this;
-//		Debug.Log ("inst set.");
+		//inst = this;
+//		Debug.Log ("//inst set.");
 	}
 
 	public Text greenDotsT;
@@ -50,45 +50,45 @@ public class DebugText : MonoBehaviour {
 
 		
 	public static void SetBrownDots(string s){
-		inst.brownDotsT.text = s;
+		//inst.brownDotsT.text = s;
 
 	}
 
 	public static void SetGreenDots(string s){
-		inst.greenDotsT.text = s;
+		//inst.greenDotsT.text = s;
 	}
 
 	public static void SetCamHoverObj(string s){
-		inst.camHoverObj = s;
+		//inst.camHoverObj = s;
 	}
 
 	public static void SetOnionCount(string s){
-		inst.onionCount = s;
+		//inst.onionCount = s;
 	}
 
 	public static void SetPlanes(int a){
 		Debug.Log ("A:" + a);
-		inst.planesCount = a.ToString ();
+		//inst.planesCount = a.ToString ();
 	}
 
 	public static void SetPlaneInfo(string s){
-		inst.planeInfo = s;
+		//inst.planeInfo = s;
 	}
 
 	public static void SetOnionState(string s){
-		inst.onionState = s;
+		//inst.onionState = s;
 	}
 
 	public static void CloseToPlane(string s){
-		inst.closeToPlane = s;
+		//inst.closeToPlane = s;
 	}
 
 	public static void Overflow(string s){
-		inst.overflow += s + "; ";
+		//inst.overflow += s + "; ";
 	}
 
 	public static void SeekPlanes(string s){
-		inst.seekPlanes = s;
+		//inst.seekPlanes = s;
 	}
 
 

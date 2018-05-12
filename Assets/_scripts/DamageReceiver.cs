@@ -12,22 +12,40 @@ public class DamageReceiver : MonoBehaviour {
 	public GameObject objToDie;
 //	public GameObject objToSendMessage;
 //	public string messageToSend;
+
+	public bool DirectionValid(Vector3 dir){
+		float angle =  Vector3.Angle (dir, transform.TransformVector (localDir));
+//		Debug.Log ("direction valid?" + dir+", angle:"+angle);
+		if (angle < angleToTakeDamage) {
+			//				Debug.Log ("Bad angle, no dam");
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public void TryTakeDamage(DamageGiver dg){
 //		Debug.Log ("dg.rig:" + dg.GetComponent<Rigidbody> ().velocity);
 		if (directional) {
 //			Vector3 dirToDamageGiver = (dg.transform.position - this.transform.position).normalized;
 //			Vector3 dirToDamageGiver = dg.GetComponent<Rigidbody>().velocity;
 			Vector3 dirToDamageGiver = Camera.main.transform.position - transform.position;
-			float angle =  Vector3.Angle (dirToDamageGiver, transform.TransformVector (localDir));
-			if (angle > angleToTakeDamage) {
-//				Debug.Log ("Bad angle, no dam");
+			if (!DirectionValid (dirToDamageGiver)) {
 				return;
-			} else {
-//				Debug.Log ("good angle:"+angle);
 			}
 		}
-		hitPoints -= dg.damageAmount;
+		TakeDamage (dg.damageAmount);
+		DamageFx (dg);
+	}
+
+	public void DamageFx(DamageGiver dg){
+		
 		FX.inst.SmallExplosionDamageEffect (dg.transform.position);
+	}
+	public void TakeDamage(int dam){
+	
+	
+		hitPoints -= dam;
 		if (hitPoints < 1) {
 			Die ();
 		}

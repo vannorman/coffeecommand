@@ -105,18 +105,9 @@ public class OnionLocationHelper : MonoBehaviour {
 //			}
 
 			
-			float max = 0;
-			Vector3 bestQuadrant = Vector3.zero;
-			foreach (KeyValuePair<Vector3,float> kvp in QuadrantScores) {
-				// Determine the highest scored quadrant
-				if (kvp.Value > max) {
-//					Debug.Log ("val of " + kvp.Key + ":" + kvp.Value+" vs <color=red>max:</color>"+max);
-					max = kvp.Value;
-					bestQuadrant = kvp.Key;
-					foundAnyQuadrant = true;
+//			float max = 0;
+			Vector3 bestQuadrant = GetBestQuadrant ();
 
-				}	
-			}
 			if (foundAnyQuadrant) {
 //				Debug.Log ("set cached target;" + mo.transform.position + " plus <color=green>" + bestQuadrant + "</color>");
 				cachedTarget = mo.transform.position + bestQuadrant;
@@ -137,6 +128,21 @@ public class OnionLocationHelper : MonoBehaviour {
 
 	}
 
+
+	Vector3 GetBestQuadrant(){
+		float max = 0;
+		Vector3 bestQuadrant = Vector3.zero;
+		foreach (KeyValuePair<Vector3,float> kvp in QuadrantScores) {
+			// Determine the highest scored quadrant
+			if (kvp.Value > max) {
+				//					Debug.Log ("val of " + kvp.Key + ":" + kvp.Value+" vs <color=red>max:</color>"+max);
+				max = kvp.Value;
+				bestQuadrant = kvp.Key;
+				foundAnyQuadrant = true;
+			}	
+		}
+		return bestQuadrant;
+	}
 
 
 
@@ -162,8 +168,15 @@ public class OnionLocationHelper : MonoBehaviour {
 
 		PlaneInfo max = (from x in scoredPlanes where x.Value == scoredPlanes.Max(v => v.Value) select x.Key).ToArray()[0];
 
+		if (max == null) {
+			// in case no planes are found, just return the center of the previously discovered "best" quadrant.
+			GameObject fake = new GameObject ();
+			fake.transform.position = cachedTarget; // nearObj.transform.position + GetBestQuadrant ();
+			return fake;
+		} else {
+			return max.gameObject;
+		}
 
-		return max.gameObject;
 //
 //		planeSeekTimer -= Time.deltaTime;
 //		if (planeSeekTimer < 0) {

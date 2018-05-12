@@ -151,17 +151,29 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 		mSession.SetCapturePixelData (true, mImage.y.data, mImage.vu.data);
 	}
 
-	
+
+	JObject ons = new JObject();
+
 	// Update is called once per frame
 	void Update ()
 	{
+
+
+
 		#if UNITY_EDITOR
-//		if (Input.GetKeyDown(KeyCode.S)){
-//			TestSaveFunction();
-//		}
-//////		if (Input.GetKeyDown(KeyCode.L)){
-////			TestLoadFunction();
-////		}
+	
+//		if (Inpu
+//		Onions2JSON
+
+		if (Input.GetKeyDown(KeyCode.S)){
+			ons = Onions2JSON();
+			Debug.Log("ons:"+ons.ToString());
+		}
+		if (Input.GetKeyDown(KeyCode.L)){
+//			LoadOnionsJSON(ons);
+//			Debug.Log("lowd:"+ons.ToString());
+//			LoadMapNow("6f817ec9-12b2-4191-b49f-6bb7abe176c7");
+		}
 //		if (Input.GetKeyDown(KeyCode.C)){
 //			ClearOnions();
 //		}
@@ -265,14 +277,22 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 		ClearOnions ();
 
 		mLabelText.text = "Loading Map ID: " + mSelectedMapId;
-		LibPlacenote.Instance.LoadMap (mSelectedMapId,
+		LoadMapNow (mSelectedMapId);
+
+
+
+	}
+
+	public void LoadMapNow(string id) {
+		LibPlacenote.Instance.LoadMap (id,
 			(completed, faulted, percentage) => {
 				if (completed) {
+					Debug.Log("loaded:"+"");
 					mMapSelectedPanel.SetActive (false);
 					mMapListPanel.SetActive (false);
 					mInitButtonPanel.SetActive (false);
 					mExitButton.SetActive (true);
-
+					FindObjectOfType<Dogs> ().SpawnDogs();
 					LibPlacenote.Instance.StartSession ();
 					mLabelText.text = "Loaded ID: " + mSelectedMapId;
 				} else if (faulted) {
@@ -281,6 +301,7 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 			}
 		);
 	}
+
 
 	public void OnDeleteMapClicked ()
 	{
@@ -315,8 +336,12 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 
 		LibPlacenote.Instance.StartSession ();
 		Invoke ("PlaceOneOnion", 2f);
+		Invoke ("SpawnDogs", 2f);
 	}
 
+	void SpawnDogs(){
+		FindObjectOfType<Dogs> ().SpawnDogs();
+	}
 
 	private void StartARKit ()
 	{

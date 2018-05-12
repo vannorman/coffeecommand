@@ -166,7 +166,7 @@ public class CoffeeCommandFeaturesVisualizer : MonoBehaviour, PlacenoteListener
 
 		DebugText.SetGreenDots (totGreen.ToString ());
 		DebugText.SetBrownDots (totBrown.ToString ());
-
+		FindObjectOfType<BatteryUpload> ().SetFillAmount ((float)totGreen / 50f);
 		// Need to update indicies too!
 		int[] indices = new int[map.Length];
 		for (int i = 0; i < map.Length; ++i) {

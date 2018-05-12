@@ -60,6 +60,7 @@
      <Compile Include="Assets\_scripts\Cheats.cs" />
      <Compile Include="Assets\_scripts\CoffeeCommandFeaturesVisualizer.cs" />
      <Compile Include="Assets\_scripts\CoffeeCommandView.cs" />
+     <Compile Include="Assets\_scripts\Coins.cs" />
      <Compile Include="Assets\_scripts\Crosshair.cs" />
      <Compile Include="Assets\_scripts\DamageGiver.cs" />
      <Compile Include="Assets\_scripts\DamageReceiver.cs" />
@@ -67,6 +68,7 @@
      <Compile Include="Assets\_scripts\DebugText.cs" />
      <Compile Include="Assets\_scripts\DestroyOnImpact.cs" />
      <Compile Include="Assets\_scripts\DishGroup.cs" />
+     <Compile Include="Assets\_scripts\Dogs.cs" />
      <Compile Include="Assets\_scripts\DogShip.cs" />
      <Compile Include="Assets\_scripts\FaceDirectionImMoving.cs" />
      <Compile Include="Assets\_scripts\FireInterval.cs" />
@@ -97,7 +99,6 @@
      <Compile Include="Assets\Placenote\LibPlacenote\PlacenoteCameraManager.cs" />
      <Compile Include="Assets\Placenote\LibPlacenote\PlacenoteListener.cs" />
      <Compile Include="Assets\Placenote\LibPlacenote\PNUtility.cs" />
-     <Compile Include="Assets\stringtester.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\Integration\IntegrationCommon.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\Integration\MeshCombinerIntegration.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\Integration\MeshDeformerIntegration.cs" />
