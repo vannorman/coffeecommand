@@ -83,6 +83,11 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 
 
 	#region testing / not user accessible
+	public void PlaceOneOnion(){
+		ClearOnions ();
+		PlaceOnion ();
+	}
+
 	public void PlaceOnion(){
 		GameObject onion = (GameObject)Instantiate (onionPrefab, Camera.main.transform.position + Camera.main.transform.forward * 2f, Quaternion.identity);
 	}
@@ -105,7 +110,18 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 		StartARKit ();
 		CoffeeCommandFeaturesVisualizer.EnablePointcloud ();
 		LibPlacenote.Instance.RegisterListener (this);
+//		LibPlacenote.Instance.onInitializedDelegate += OnInitialized ;
 	}
+
+//	bool initialized=  false;
+//	void OnInitialized(){
+//		if (initialized)
+//			return;
+//		initialized = true;
+//		Invoke ("OnNewMapClick", 2);
+//		LibPlacenote.Instance.onInitializedDelegate -= OnInitialized;
+//	}
+
 
 
 	private void ARFrameUpdated (UnityARCamera camera)
@@ -171,11 +187,14 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 			Vector3 arkitPosition = PNUtility.MatrixOps.GetPosition (matrix);
 			Quaternion arkitQuat = PNUtility.MatrixOps.GetRotation (matrix);
 
-			LibPlacenote.Instance.SendARFrame (mImage, arkitPosition, arkitQuat, mARCamera.videoParams.screenOrientation);
+			if (!localized) {
+				// PJ said to stop sending it frames once you localize.
+				LibPlacenote.Instance.SendARFrame (mImage, arkitPosition, arkitQuat, mARCamera.videoParams.screenOrientation);
+			}
 		}
 	}
 
-
+	bool localized = false; // only set true if you load a map.
 	public void OnListMapClick ()
 	{
 		if (!LibPlacenote.Instance.Initialized()) {
@@ -295,6 +314,7 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 		mMappingButtonPanel.SetActive (true);
 
 		LibPlacenote.Instance.StartSession ();
+		Invoke ("PlaceOneOnion", 2f);
 	}
 
 
@@ -515,6 +535,7 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 		Debug.Log ("prevStatus: " + prevStatus.ToString() + " currStatus: " + currStatus.ToString());
 		if (currStatus == LibPlacenote.MappingStatus.RUNNING && prevStatus == LibPlacenote.MappingStatus.LOST) {
 			mLabelText.text = "Localized";
+			localized = true;
 			LoadShapesJSON (mSelectedMapInfo.userData);
 			LoadOnionsJSON (mSelectedMapInfo.userData);
 //			StringTest tests = mSelectedMapInfo.userData ["test"].ToObject<StringTest> ();

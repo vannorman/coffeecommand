@@ -1,6 +1,7 @@
 iOS
 SceneListBegin?
-Assets/_scenes/Coffee Command.unity
+Assets/_scenes/Coffee Command Real Game.unity
+Assets/_scenes/Coffee Command dummy scene.unity
 SceneListEnd?
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MainThreadTaskQueue
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:UnityEngine.XR.iOS.UnityARKitControl
@@ -21,7 +22,7 @@ df374c01140c2d578bf70cbd60073d1d UnityEngine.Timeline.dll:UnityEngine.Timeline.T
 42af63f195776340a3817bc0c23c2cdb Assembly-CSharp.dll:.RotateInterval
 672c7ec9a1afb24a8c52bed490318aa3 Assembly-CSharp.dll:.FeaturesVisualizer
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PlaneAnchorManager
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CCGameManager
+09e2bf94dd838844f34b6dcc13a956a4 Assembly-CSharp.dll:.CCGameManager
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 49cd62a578efc0a599b810a2b66cd49c UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -137,7 +138,7 @@ bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Battlehub.MeshTools.PivotDesignTime
-2da050b72eadecdc964daabb62549a2e Assembly-CSharp.dll:.BatteryUpload
+f79c6f7e407988e1d159e44809928ec3 Assembly-CSharp.dll:.BatteryUpload
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:UnityEngine.XR.iOS.ConnectToEditor
 c6f60b2cb40fb044afcd7c43cdf165e7 Assembly-CSharp.dll:.Tendril
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.AlwaysFaceCameraY

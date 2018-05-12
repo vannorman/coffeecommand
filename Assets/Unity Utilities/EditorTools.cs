@@ -24,22 +24,22 @@ public class EditorTools : Editor {
 //			o.GetComponent<CombineChildren>().
 //		}
 //	}
-	[MenuItem("Hack/Scene Tool/Set/Translate")]
-	public static void SetSceneToolTranslate()
-	{
-		SceneToolHacker.CurrentTool = SceneToolHacker.Tool.Translate;
-	}
-	[MenuItem("Hack/Scene Tool/Set/Rotate")]
-	public static void SetSceneToolRotate()
-	{
-		SceneToolHacker.CurrentTool = SceneToolHacker.Tool.Rotate;
-	}
-	[MenuItem("Hack/Scene Tool/Set/Scale _r")]
-	public static void SetSceneToolScale()
-	{
-		SceneToolHacker.CurrentTool = SceneToolHacker.Tool.Scale;
-	}
-
+//	[MenuItem("Hack/Scene Tool/Set/Translate")]
+//	public static void SetSceneToolTranslate()
+//	{
+//		SceneToolHacker.CurrentTool = SceneToolHacker.Tool.Translate;
+//	}
+//	[MenuItem("Hack/Scene Tool/Set/Rotate")]
+//	public static void SetSceneToolRotate()
+//	{
+//		SceneToolHacker.CurrentTool = SceneToolHacker.Tool.Rotate;
+//	}
+//	[MenuItem("Hack/Scene Tool/Set/Scale _r")]
+//	public static void SetSceneToolScale()
+//	{
+//		SceneToolHacker.CurrentTool = SceneToolHacker.Tool.Scale;
+//	}
+//
 
 	[MenuItem("Edit/Editor Tools/Combine Meshes")]
 	public static void CombineMeshes(){

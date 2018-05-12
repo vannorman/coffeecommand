@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class OnionLocationHelper : MonoBehaviour {
 
@@ -53,13 +54,13 @@ public class OnionLocationHelper : MonoBehaviour {
 	public Vector3 TargetFeatureCluster (){
 		return cachedTarget;
 	}
-	public float searchRadius = 4f;
+	public float searchRadius = 8f;
 	MetalOnion lastOnionWhoRequested;
 	public bool FoundTargetNearOnion(MetalOnion mo) {
 		if (targetFeatureClusterTimer < 0) {
 			foundAnyQuadrant = false;
 			if (lastOnionWhoRequested != mo) {
-				searchRadius = 4f;
+				searchRadius = 8f;
 			}
 			lastOnionWhoRequested = mo;
 			targetFeatureClusterTimer = targetFeatureClusterInterval;
@@ -93,15 +94,15 @@ public class OnionLocationHelper : MonoBehaviour {
 					}
 				}
 			}
-
-			foreach (Vector3 k in QuadrantScores.Keys) {
-				GameObject d = GameObject.CreatePrimitive (PrimitiveType.Sphere);
-				d.transform.position = k;
-				d.transform.localScale = .002f * QuadrantScores [k] * Vector3.one;
-				d.transform.position = mo.transform.position + k * searchRadius;
-				d.name = "debSphere";
-//				d.GetComponent<Renderer>().material.color = new Color(
-			}
+//
+//			foreach (Vector3 k in QuadrantScores.Keys) {
+//				GameObject d = GameObject.CreatePrimitive (PrimitiveType.Sphere);
+//				d.transform.position = k;
+//				d.transform.localScale = .002f * QuadrantScores [k] * Vector3.one;
+//				d.transform.position = mo.transform.position + k * searchRadius;
+//				d.name = "debSphere";
+////				d.GetComponent<Renderer>().material.color = new Color(
+//			}
 
 			
 			float max = 0;
@@ -122,7 +123,7 @@ public class OnionLocationHelper : MonoBehaviour {
 				// If the best quadrant is zero, shrink the radius
 				if (bestQuadrant == Vector3.zero) {
 					searchRadius /= 2f;
-					Debug.Log("<color=blue>Decerease /2:"+searchRadius+"</color>");
+//					Debug.Log("<color=blue>Decereased by half. New radius:"+searchRadius+"</color>");
 				}
 
 			} else {
@@ -140,37 +141,55 @@ public class OnionLocationHelper : MonoBehaviour {
 
 
 	float planeSeekTimer = 0f;
-	float nearestPlaneSeekInterval = 2;
-	Dictionary<Transform,GameObject> cachedPlanes = new Dictionary<Transform, GameObject>();
+	float nearestPlaneSeekInterval = 0.3f;
+//	Dictionary<Transform,GameObject> cachedPlanes = new Dictionary<Transform, GameObject>();
 	public GameObject GetNearestPlane(Transform nearObj, float r){
-		if (!cachedPlanes.ContainsKey (nearObj)) {
-			cachedPlanes.Add (nearObj,null);
-		}
-		planeSeekTimer -= Time.deltaTime;
-		if (planeSeekTimer < 0) {
+//		if (!cachedPlanes.ContainsKey (nearObj)) {
+//			cachedPlanes.Add (nearObj,null);
+//		}
 
-			GameObject nearest = null;
-			planeSeekTimer = nearestPlaneSeekInterval;
-			float nearDist = Mathf.Infinity;
-			int i = 0;
-			foreach (PlaneInfo pi in FindObjectsOfType<PlaneInfo>()) {
-				float curDist = Vector3.Magnitude (pi.gameObject.transform.position - nearObj.position);
-
-				if (curDist < nearDist && curDist < r && pi.plantedOnion == null) {
-					curDist = nearDist;
-					nearest = pi.gameObject;
-
-
-				}
-				i++;
+		PlaneInfo[] planes = FindObjectsOfType<PlaneInfo> ();
+		Dictionary<PlaneInfo,float> scoredPlanes = new Dictionary<PlaneInfo, float> ();
+		for (int i = 0; i < planes.Length; i++) {
+			float score = 0;
+			Vector3[] pts = CC.featuresVisualizer.CurrentGreenPoints;
+			for (int j = 0; j < pts.Length; j++) {
+				score += Mathf.Min (1, 1 / (pts [j] - planes [i].transform.position).magnitude);
 			}
-			cachedPlanes[nearObj] = nearest;
-
-			return nearest;
-		} else {
-
-			return cachedPlanes[nearObj];
+			scoredPlanes.Add (planes [i], score);
 		}
+
+
+		PlaneInfo max = (from x in scoredPlanes where x.Value == scoredPlanes.Max(v => v.Value) select x.Key).ToArray()[0];
+
+
+		return max.gameObject;
+//
+//		planeSeekTimer -= Time.deltaTime;
+//		if (planeSeekTimer < 0) {
+//
+//			GameObject nearest = null;
+//			planeSeekTimer = nearestPlaneSeekInterval;
+//			float nearDist = Mathf.Infinity;
+//			int i = 0;
+//			foreach (PlaneInfo pi in FindObjectsOfType<PlaneInfo>()) {
+//				float curDist = Vector3.Magnitude (pi.gameObject.transform.position - nearObj.position);
+//
+//				if (curDist < nearDist && curDist < r && pi.plantedOnion == null) {
+//					curDist = nearDist;
+//					nearest = pi.gameObject;
+//
+//
+//				}
+//				i++;
+//			}
+////			cachedPlanes[nearObj] = nearest;
+//
+//			return nearest;
+//		} else {
+//
+////			return cachedPlanes[nearObj];
+//		}
 	}
 
 

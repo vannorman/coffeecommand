@@ -109,9 +109,19 @@ public class MetalOnion : MonoBehaviour {
 	MovementState movementState = MovementState.Brownian;
 
 
+	void SetTarget(Vector3 t){
+		// don't let target be near to camera.
+		Vector3 dirToCam = Camera.main.transform.position - t;
+		if (dirToCam.magnitude < .5f) {
+			targetPos = t - dirToCam * (dirToCam.magnitude - 0.5f);
+		} else {
+			targetPos = t;
+		}
+	}
+
 	void SeekPointClusters() {
 		if (CC.onionLocationHelper.FoundTargetNearOnion (this)) {
-			targetPos = CC.onionLocationHelper.TargetFeatureCluster ();
+			SetTarget(CC.onionLocationHelper.TargetFeatureCluster ());
 			debugText.text = "t:" + targetPos;
 			float moveSpeed = 1.5f;
 			MoveTowardsTarget ();
@@ -162,8 +172,8 @@ public class MetalOnion : MonoBehaviour {
 	}
 
 
-	float timeToMoveBrownian = 10f;
-	float brownianRadius = .3f;
+//	float timeToMoveBrownian = 10f;
+	float brownianRadius = 2.3f;
 	float timeToSeekPoints = 10f;
 	int brownianIndex = 0;
 	List<Vector3> brownianPoints = new List<Vector3>();
@@ -176,7 +186,7 @@ public class MetalOnion : MonoBehaviour {
 		foreach (Vector3 p in brownianPoints) {
 			s += p + ", ";
 		}
-		Debug.Log ("p:" + s);
+//		Debug.Log ("p:" + s);
 //		for(int i
 
 	}
@@ -346,7 +356,10 @@ public class MetalOnion : MonoBehaviour {
 	
 		GameObject nearest = CC.onionLocationHelper.GetNearestPlane (this.transform, 1.5f);
 		if (nearest)
-			targetPos = nearest.transform.position;
+			SetTarget (nearest.transform.position);
+		else {
+			Debug.LogError ("no nearest!");
+		}
 	}
 
 //	void Move(float moveSpeed = 1f){
@@ -394,21 +407,8 @@ public class MetalOnion : MonoBehaviour {
 		}
 		SetTarget (startPos + randomPos);
 
-//		targetPos = startPos + randomPos;
+
 		MoveTowardsTarget ();
-
-
-//		float randomDirectionInterval = 3f;
-//		if (Time.time - lastRandomDirectionTime > randomDirectionInterval) {
-//			lastRandomDirectionTime = Time.time;
-//			randomDir = new Vector3 (Random.Range (-1, 1f), Random.Range (-0.4f, 0.4f),Random.Range (-1, 1f));
-//		}
-//		movementDir = Vector3.Lerp (movementDir, randomDir, Time.deltaTime * 1f); //smooth
-////		Debug.Log ("rand:" + randomDir.magnitude + ", movedir;" + movementDir.magnitude);
-//		transform.position += movementDir * Time.deltaTime * randomMovementSpeed;
 	}
 
-	void SetTarget(Vector3 p){
-		targetPos = p;
-	}
 }

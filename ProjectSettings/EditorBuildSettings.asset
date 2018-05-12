@@ -4,4 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_scenes/Coffee Command Real Game.unity
+    guid: c3049767ae20d4a0e8fb67d3c5fb5d51
+  - enabled: 1
+    path: Assets/_scenes/Coffee Command dummy scene.unity
+    guid: 450d9bda249c64fa2a845f08d6a65467

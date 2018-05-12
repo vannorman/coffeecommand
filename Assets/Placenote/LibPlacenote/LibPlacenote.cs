@@ -36,6 +36,9 @@ public class UnityARImageFrameData
 
 public class LibPlacenote : MonoBehaviour
 {
+
+	public delegate void OnInitializedDelegate();
+	public OnInitializedDelegate onInitializedDelegate;
 	/// <summary>
 	/// Delegate template for a callback to return results of REST API calls such as PNInitialize
 	/// </summary>
@@ -287,6 +290,9 @@ public class LibPlacenote : MonoBehaviour
 		if (success) {
 			Debug.Log ("Initialized SDK!");
 			Instance.mInitialized = true;
+			if (Instance.onInitializedDelegate != null) {
+				Instance.onInitializedDelegate();
+			}
 		} else {
 			Debug.Log ("Failed to initialize SDK!");
 			Debug.Log ("error message: " + result.msg);
