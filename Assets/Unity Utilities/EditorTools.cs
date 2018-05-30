@@ -41,6 +41,16 @@ public class EditorTools : Editor {
 //	}
 //
 
+	[MenuItem("Edit/Editor Tools/Scene Names")]
+	public static void SceneNames(){
+		
+		foreach (LoadSceneButton lb in FindObjectsOfType<LoadSceneButton>()) {
+			Undo.RecordObject (lb, "button");
+			lb.sceneName = lb.scene.name;
+
+		}
+	}
+
 	[MenuItem("Edit/Editor Tools/Combine Meshes")]
 	public static void CombineMeshes(){
 //		List<Mesh> meshes = new List<Mesh>();

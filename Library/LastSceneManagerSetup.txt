@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/_scenes/Coffee Command Real Game.unity
+- path: Assets/_scenes/CC - Developer Mode.unity
   isLoaded: 1
   isActive: 1

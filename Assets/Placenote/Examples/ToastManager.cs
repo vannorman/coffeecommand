@@ -25,7 +25,7 @@ public class ToastManager : MonoBehaviour {
 		
 	}
 
-	public static void ShowToast(string message, float duration) {
+	public static void ShowToast(string message, float duration = 1) {
 		sInstance.gameObject.SetActive (true);
 		sInstance.toastText.text = message;
 		sInstance.Invoke ("HideToast", duration);

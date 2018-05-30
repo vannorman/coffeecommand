@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR.iOS;
 
 public class CCGameManager : MonoBehaviour {
@@ -47,5 +48,9 @@ public class CCGameManager : MonoBehaviour {
 	public void LoadDummyScene(){
 		LibPlacenote.Instance.StopSession ();
 		UnityEngine.SceneManagement.SceneManager.LoadScene (2);
+	}
+
+	public void LoadScene(Button b){
+		UnityEngine.SceneManagement.SceneManager.LoadScene (b.GetComponent<LoadSceneButton> ().sceneName);// scene.name);
 	}
 }
