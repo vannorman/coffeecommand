@@ -166,15 +166,18 @@ public class OnionLocationHelper : MonoBehaviour {
 		}
 
 
-		PlaneInfo max = (from x in scoredPlanes where x.Value == scoredPlanes.Max(v => v.Value) select x.Key).ToArray()[0];
+//		PlaneInfo max = null;
+		PlaneInfo[] maxArr = (from x in scoredPlanes where x.Value == scoredPlanes.Max(v => v.Value) select x.Key).ToArray();
 
-		if (max == null) {
+
+
+		if (maxArr.Length == 0) {
 			// in case no planes are found, just return the center of the previously discovered "best" quadrant.
 			GameObject fake = new GameObject ();
 			fake.transform.position = cachedTarget; // nearObj.transform.position + GetBestQuadrant ();
 			return fake;
 		} else {
-			return max.gameObject;
+			return maxArr[0].gameObject;
 		}
 
 //

@@ -112,6 +112,7 @@
      <Compile Include="Assets\Unity Utilities\Battlehub\PivotEditor\Scripts\PivotDesignTime.cs" />
      <Compile Include="Assets\Unity Utilities\EditorTools.cs" />
      <Compile Include="Assets\Unity Utilities\Fraction.cs" />
+     <Compile Include="Assets\Unity Utilities\ItemPopup.cs" />
      <Compile Include="Assets\Unity Utilities\MathUtils.cs" />
      <Compile Include="Assets\Unity Utilities\MeshCombiner.cs" />
      <Compile Include="Assets\Unity Utilities\MouseLook.cs" />

@@ -21,6 +21,15 @@ public class OnionDetector : MonoBehaviour {
 				if (mo) {
 					detectedOnion = true;
 					mo.CameraHovering (); // has a timeout, should last 1 second or so
+					switch(mo.state){
+					case MetalOnion.State.Unwrapping:
+//						ItemPopup.inst.Show (hit.point, "Destroy this! " + mo.DishesRemainingInfo[0].ToString() + " of  "+mo.DishesRemainingInfo[1].ToString() +" dishes remaining." );
+						ItemPopup.inst.Show (mo.transform.position, "Destroy this! " + mo.DishesRemainingInfo[0].ToString() + " of  "+mo.DishesRemainingInfo[1].ToString() +" dishes remaining." );
+						break;
+					default:
+						ItemPopup.inst.Hide ();
+						break;
+					}
 //					DebugText.SetCamHoverObj ("cam hit:" + hit.collider.name);
 				}
 				

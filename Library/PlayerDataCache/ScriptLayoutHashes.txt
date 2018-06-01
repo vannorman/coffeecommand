@@ -57,6 +57,7 @@ c63db43c730fa2cbb8ca07de15898cb6 UnityEngine.UI.dll:UnityEngine.UI.Toggle
 f61c0793411f10cf5fbfa1473fef5ef2 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 86d36c43c53541d667100dc90b89cfba UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 1b8c02d0aa82fbf036a2b9b2d713eec3 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
+f9c69778548cce6b5c47394489d4cdee Assembly-CSharp.dll:.FPS
 715a3a5e1e928ce77514d4e84e265356 Assembly-CSharp.dll:UnityEngine.XR.iOS.UnityARHitTestExample
 4bcfdf5701fff25ff79477e29e5f9a9d Assembly-CSharp.dll:.FX
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
@@ -142,6 +143,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Battlehub.MeshTools.PivotDesignTime
 f79c6f7e407988e1d159e44809928ec3 Assembly-CSharp.dll:.BatteryUpload
+2b0b860fa08f576a7a6a1195fe524396 Assembly-CSharp.dll:.LoadSceneButton
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:UnityEngine.XR.iOS.ConnectToEditor
 c6f60b2cb40fb044afcd7c43cdf165e7 Assembly-CSharp.dll:.Tendril
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.AlwaysFaceCameraY
@@ -215,5 +217,4 @@ e059e84d441884affff77b3f5de26568 Assembly-CSharp.dll:.ShipWeapons
 391d84b859f3b155fe38f54bfce79162 Assembly-CSharp.dll:.UnityPointCloudExample
 97f3f2eee235771b3d0dd28fcccb62f7 Assembly-CSharp.dll:Battlehub.MeshTools.Pivot
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UnityARCameraNearFar
-2b0b860fa08f576a7a6a1195fe524396 Assembly-CSharp.dll:.LoadSceneButton
-f9c69778548cce6b5c47394489d4cdee Assembly-CSharp.dll:.FPS
+b7cfebda57cef9ff9f545ff97d741c71 Assembly-CSharp.dll:.ItemPopup

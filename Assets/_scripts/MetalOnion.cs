@@ -42,12 +42,14 @@ public class MetalOnion : MonoBehaviour {
 	void Start(){
 		
 		startPos = transform.position;
-		InitBrownianPoints ();
 		unwrapIndicator.fillAmount = 0;
-//		oilDerrick.SetActive (false);
-//		dishGroup.gameObject.SetActive(false);
+		#if UNITY_EDITOR
+		brownianRadius = 0.03f;
+		timeToSeekPoints = 0.5f;
+		autoDestructTimer = 0.5f;
+		#endif
+		InitBrownianPoints ();
 
-//		tendrils.AddRange(GetComponentsInChildren<Tendril> ());
 		if (stateOnStart) {
 			SetState (state);
 		}
@@ -94,6 +96,12 @@ public class MetalOnion : MonoBehaviour {
 	float camHoverCountdown = 0;
 	Quaternion targetRot;
 
+	int startingDishCount = 6; // should count this at startup in case we change?
+	public int[] DishesRemainingInfo {
+		get { 
+			return new int[]{ dishGroup.dishesParent.childCount, startingDishCount };
+		}
+	}
 
 	public void OnDishGroupDestroyed(){
 		
@@ -295,7 +303,7 @@ public class MetalOnion : MonoBehaviour {
 				}
 				break;
 			case MovementState.Stationary:
-				SetState (State.Ready);
+				SetState (State.Unwrapping);
 				break;
 			default:
 				break;
@@ -304,55 +312,10 @@ public class MetalOnion : MonoBehaviour {
 		
 			
 			break;
-		case State.Ready:
-			if (cameraHovering) {
-				camHoverCountdown -= Time.deltaTime;
-				//				Debug.Log ("camhover count:" + camHoverCountdown);
-				if (camHoverCountdown < 0) {
-//					nearest.GetComponent<PlaneInfo> ().plantedOnion = this;
-					SetState (State.Unwrapping);
-				}
 
-
-			} else {
-//				foreach (Tendril t in tendrils) {
-//					//				Debug.Log ("popin");
-//					t.PopIn (); //SetState (Tendril.State.Out);
-//				}
-				targetFillAmount = 0;
-			}
-
-//			DebugText.Overflow
-			unwrapIndicator.fillAmount = Mathf.MoveTowards (unwrapIndicator.fillAmount, targetFillAmount, Time.deltaTime * fillSpeed);
-			transform.rotation = Quaternion.Slerp (transform.rotation, targetRot, Time.deltaTime * rotSpeed);
-			// we are at a plane and ready for unwrap
-			break;
 		case State.Unwrapping:
 
-			// new, turret pop and turn randomly
 
-			// old, easy unwrapping
-//			if (cameraHovering) {
-//				foreach (Tendril t in tendrils) {
-//					//				Debug.Log ("popin");
-//					t.PopOut (); //SetState (Tendril.State.Out);
-//				}
-//				
-//				targetRot = Quaternion.LookRotation (Camera.main.transform.position - transform.position);
-//				targetFillAmount = 1;
-//				if (unwrapIndicator.fillAmount > 0.99) {
-//					unwrapIndicator.fillAmount = 1;
-//					SetState (State.Unwrapped);
-//					GetComponent<AudioSource> ().Play ();
-//				}
-//
-//				unwrapIndicator.fillAmount = Mathf.MoveTowards (unwrapIndicator.fillAmount, targetFillAmount, Time.deltaTime * fillSpeed);
-//
-//				transform.rotation = Quaternion.Slerp (transform.rotation, targetRot, Time.deltaTime * rotSpeed);
-//
-//			} else {
-//				SetState (State.Ready);
-//			}
 			break;
 		case State.Unwrapped:
 			mineTimer -= Time.deltaTime;
@@ -387,22 +350,7 @@ public class MetalOnion : MonoBehaviour {
 		}
 	}
 
-//	void Move(float moveSpeed = 1f){
-//		if (nearest) {
-//			transform.position = Vector3.MoveTowards (transform.position, nearest.transform.position, Time.deltaTime * moveSpeed);
-//		}
-//
-//	}
-//
-//	void StoppedUnwrapping(){
-//		// user failed to complete an unwrap
-//		cameraHovering = false;
-//		targetFillAmount = 0;
-//		camHoverCountdown = cameraHoverThreshhold;
-//		targetRot = Quaternion.Euler (Random.onUnitSphere);
-//		SetState (State.Ready);
-//
-//	}
+
 
 
 	Vector3 GetRandomPos {
