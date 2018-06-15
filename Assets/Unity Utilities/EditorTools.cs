@@ -40,6 +40,9 @@ public class EditorTools : Editor {
 //		SceneToolHacker.CurrentTool = SceneToolHacker.Tool.Scale;
 //	}
 //
+	//
+
+		
 
 	[MenuItem("Edit/Editor Tools/Scene Names")]
 	public static void SceneNames(){

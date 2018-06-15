@@ -55,6 +55,16 @@
      <Compile Include="Assets\Unity Utilities\Battlehub\PivotEditor\Scripts\Editor\MeshToolsMenu.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\PivotEditor\Scripts\Editor\PivotPointEditor.cs" />
      <Compile Include="Assets\UnityARKitPlugin\Plugins\iOS\UnityARKit\Editor\UnityARBuildPostprocessor.cs" />
+     <Compile Include="Assets\Wrld\Editor\ActiveBuildTargetChangedListener.cs" />
+     <Compile Include="Assets\Wrld\Editor\BuildSucceededListener.cs" />
+     <Compile Include="Assets\Wrld\Editor\CameraJumpEditor.cs" />
+     <Compile Include="Assets\Wrld\Editor\CopyPlatformResources.cs" />
+     <Compile Include="Assets\Wrld\Editor\ExitPlayModeOnScriptCompile.cs" />
+     <Compile Include="Assets\Wrld\Editor\FirstInstallActionsRunner.cs" />
+     <Compile Include="Assets\Wrld\Editor\PlatformHelpers.cs" />
+     <Compile Include="Assets\Wrld\Editor\WillPlayInEditorListener.cs" />
+     <Compile Include="Assets\Wrld\Editor\WrldStartupEditor.cs" />
+     <Compile Include="Assets\Wrld\Editor\XcodeProjectUpdater.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity 2017.3/Unity 2017.3.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
