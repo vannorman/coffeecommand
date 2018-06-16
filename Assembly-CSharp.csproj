@@ -103,6 +103,7 @@
      <Compile Include="Assets\Placenote\LibPlacenote\PlacenoteCameraManager.cs" />
      <Compile Include="Assets\Placenote\LibPlacenote\PlacenoteListener.cs" />
      <Compile Include="Assets\Placenote\LibPlacenote\PNUtility.cs" />
+     <Compile Include="Assets\TapWorldPosition.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\Integration\IntegrationCommon.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\Integration\MeshCombinerIntegration.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\Integration\MeshDeformerIntegration.cs" />
@@ -375,6 +376,7 @@
      <None Include="Assets\Unity Utilities\Shaders\Toony-LightedOutline.shader" />
      <None Include="Assets\Unity Utilities\Shaders\Toony-Lighted.shader" />
      <None Include="Assets\Wrld\3rd Party Licenses\fonts\OpenSans.txt" />
+     <None Include="Assets\Wrld\Plugins\x86_64\StreamAlpha.bundle\Contents\Resources\FrankBold50_A8_icons.fnt" />
      <None Include="Assets\Wrld\Version\v0.7.1019.txt" />
      <None Include="Assets\UnityARKitPlugin\Plugins\iOS\UnityARKit\Shaders\YUVShaderLinear.shader" />
      <None Include="Assets\Wrld\Shaders\StandardWithVertexColor.shader" />

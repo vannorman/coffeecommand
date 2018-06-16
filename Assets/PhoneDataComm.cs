@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Wrld;
+using Wrld.Space;
 
 public class PhoneDataComm : MonoBehaviour {
 
@@ -10,7 +12,11 @@ public class PhoneDataComm : MonoBehaviour {
 	public Transform wrldMapParent;
 	bool waitingForLocation = true;
 	public Text db;
+	public GameObject locationPrefab;
+	Text pnt; 
 	void Start () {
+//		LibPlacenote.in
+		pnt = GameObject.Find("Placenote track").GetComponent<Text>();
 
 		Input.location.Start ();
 	}
@@ -25,6 +31,7 @@ public class PhoneDataComm : MonoBehaviour {
 			lat = 37.7749f;
 			lng = -122.4194f;
 			rot = -45;
+			Debug.Log ("lat lng set to SF.");
 		} else {
 			lat = Input.location.lastData.latitude;
 			lng = Input.location.lastData.longitude;
@@ -39,23 +46,80 @@ public class PhoneDataComm : MonoBehaviour {
 		cam.transform.Rotate (Vector3.up, rot);
 		wrldMapParent.gameObject.SetActive (true);
 
+		if (LibPlacenote.Instance.Initialized ()) {
+			ListNearbyMaps ();
+		} else {
+			LibPlacenote.Instance.onInitializedDelegate += OnPlacenoteSdkInitialized;
+		}
+
+
+	}
+
+
+	void OnPlacenoteSdkInitialized(){
+		LibPlacenote.Instance.onInitializedDelegate -= OnPlacenoteSdkInitialized;
+		ListNearbyMaps ();
+	}
+
+	void ListNearbyMaps(){
+		pnt.text += "Listing nearby maps.\n";
+		if (!LibPlacenote.Instance.Initialized()) {
+			pnt.text += "Oops sdk not ready..\n";
+//			ToastManager.ShowToast ("SDK not yet initialized", 2f);
+			return;
+		}
+			
+		LibPlacenote.Instance.ListMaps ((mapList) => {
+			// render the map list!
+			foreach (LibPlacenote.MapInfo mapId in mapList) {
+				pnt.text += "map! " +mapId.placeId+ " .\n";		
+				if (mapId.userData == null) {
+					pnt.text += "... but null. \n";
+//					Debug.LogError (mapId.userData.ToString (Formatting.None));
+				} else {
+//					Debug.Log("mapid:"+mapId.placeId);
+					pnt.text += "making prefab. \n";
+					float lat = mapId.userData ["location"] ["latitude"].ToObject<float> ();
+					float lng = mapId.userData ["location"] ["longitude"].ToObject<float> ();
+					var distance = MapInfoElement.Calc (Input.location.lastData.latitude, Input.location.lastData.longitude,
+						lat,
+						lng);
+					if (distance < 5){
+						GeographicTransform coordinateFrame = (GeographicTransform)Instantiate(locationPrefab.GetComponent<GeographicTransform>());
+						Api.Instance.GeographicApi.RegisterGeographicTransform(coordinateFrame);
+						LatLong pointA = LatLong.FromDegrees(lat,lng);
+						coordinateFrame.SetPosition(pointA);
+						pnt.text += "prefab placed. \n";
+					} else {
+						pnt.text += "too far: "+distance + "\n";
+					}
+				}
+
+			}
+		});
 	}
 
 
 	
 	// Update is called once per frame
 	void Update () {
-		db.text = "Waiting for location:" + waitingForLocation + "\n" +
-			"Location Service status:" +Input.location.status +"\n" +
-//			"Location Service status failed:" + LocationServiceStatus.Failed.ToString() + "\n" +
-//			"Location Service status stopped:" + LocationServiceStatus.Stopped.ToString() + "\n" +
-//			"Location Service status running:" + LocationServiceStatus.Running.ToString() + "\n" +
-		"";
+		
+//		db.text = "Waiting for location:" + waitingForLocation + "\n" +
+//			"Location Service status:" +Input.location.status +"\n" +
+//			"";
+
+//		pnt.text = LibPlacenote.Instance.Initialized().ToString();
 		if (waitingForLocation) {
 			if (Input.location.status == LocationServiceStatus.Running) {
 				OnLocationRunning ();
 			}
+			#if UNITY_EDITOR
+			if (Input.GetKeyDown(KeyCode.L)){
+				OnLocationRunning();
+			}
+			#endif
 		}
+
 			
 	}
 }
