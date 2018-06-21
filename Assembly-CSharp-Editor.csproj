@@ -51,9 +51,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Placenote\Editor\LibraryCheck.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\MeshCombiner\Scripts\Editor\MeshToolsMenu.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\PivotEditor\Scripts\Editor\MeshToolsMenu.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\PivotEditor\Scripts\Editor\PivotPointEditor.cs" />
+     <Compile Include="Assets\UnityARKitPlugin\Plugins\iOS\UnityARKit\Editor\ARResourcesJSON.cs" />
      <Compile Include="Assets\UnityARKitPlugin\Plugins\iOS\UnityARKit\Editor\UnityARBuildPostprocessor.cs" />
      <Compile Include="Assets\Wrld\Editor\ActiveBuildTargetChangedListener.cs" />
      <Compile Include="Assets\Wrld\Editor\BuildSucceededListener.cs" />

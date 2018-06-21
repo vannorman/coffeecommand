@@ -224,8 +224,8 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 		LibPlacenote.Instance.ListMaps ((mapList) => {
 			// render the map list!
 			foreach (LibPlacenote.MapInfo mapId in mapList) {
-				if (mapId.userData != null) {
-					Debug.LogError (mapId.userData.ToString (Formatting.None));
+				if (mapId.metadata != null) {
+					Debug.LogError (mapId.metadata.ToString());
 				} else {
 				}
 				AddMapToList (mapId);
@@ -295,6 +295,10 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 					FindObjectOfType<Dogs> ().SpawnDogs();
 					LibPlacenote.Instance.StartSession ();
 					mLabelText.text = "Loaded ID: " + mSelectedMapId;
+
+
+
+
 				} else if (faulted) {
 					mLabelText.text = "Failed to load ID: " + mSelectedMapId;
 				}
@@ -382,11 +386,12 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 				JObject shapeList = Shapes2JSON();
 				metadata["shapeList"] = shapeList;
 
-				StringTest testData = new StringTest();
-				testData.stringtests = new string[2];
-				testData.stringtests[0] = "test1";
-				testData.stringtests[1] = "test2";
-				metadata["test"] = JObject.FromObject (testData);
+//				metadata["coffeecommand"] = UserInfoJson.LocalData; // CoffeeCommandObject(UserInfoJson.UserID);
+//				StringTest testData = new StringTest();
+//				testData.stringtests = new string[2];
+//				testData.stringtests[0] = "test1";
+//				testData.stringtests[1] = "test2";
+//				metadata["test"] = JObject.FromObject (testData);
 
 
 				JObject onionList = Onions2JSON();
@@ -398,7 +403,7 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 					metadata["location"]["longitude"] = locationInfo.longitude;
 					metadata["location"]["altitude"] = locationInfo.altitude;
 				}
-				LibPlacenote.Instance.SetMetadata (mapId, metadata);
+				LibPlacenoteHelper.SetMetadata (mapId, metadata);
 			},
 			(completed, faulted, percentage) => {}
 		);
@@ -564,9 +569,14 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 		if (currStatus == LibPlacenote.MappingStatus.RUNNING && prevStatus == LibPlacenote.MappingStatus.LOST) {
 			mLabelText.text = "Localized";
 			localized = true;
-			currentMapData = mSelectedMapInfo.userData;
-			LoadShapesJSON (mSelectedMapInfo.userData);
-			LoadOnionsJSON (mSelectedMapInfo.userData);
+			currentMapData = mSelectedMapInfo.metadata.userdata;
+			LoadShapesJSON (mSelectedMapInfo.metadata.userdata);
+			LoadOnionsJSON (mSelectedMapInfo.metadata.userdata);
+
+			// Should already be an object loaded ..
+//			UserInfoJson.LocalData = mSelectedMapInfo.metadata.userdata ["CoffeeCommandData"].ToObject<JObject>();
+
+
 //			StringTest tests = mSelectedMapInfo.userData ["test"].ToObject<StringTest> ();
 //			DebugText.Overflow (tests.stringtests[0] + "," + tests.stringtests[1]);
 //			if (mapMetadata is JObject && mapMetadata ["shapeList"] is JObject) {

@@ -33,10 +33,8 @@ public class PlacenoteCameraManager : MonoBehaviour, PlacenoteListener
 
 		// Compute the transform of the camera parent so that camera pose ends up at outputPose
 		Matrix4x4 camParentPose = outputPose * arkitPose.inverse;
-		float lerpSpeed = 4f;
-		cameraParent.transform.position = Vector3.Lerp(cameraParent.transform.position, PNUtility.MatrixOps.GetPosition (camParentPose), Time.deltaTime * lerpSpeed)	;
-		float rotSpeed = 3f;
-		cameraParent.transform.rotation = Quaternion.Lerp(cameraParent.transform.rotation, PNUtility.MatrixOps.GetRotation (camParentPose), Time.deltaTime * rotSpeed) ;
+		cameraParent.transform.position = PNUtility.MatrixOps.GetPosition (camParentPose);
+		cameraParent.transform.rotation = PNUtility.MatrixOps.GetRotation (camParentPose);
 	}
 
 	public void OnStatusChange (LibPlacenote.MappingStatus prevStatus, LibPlacenote.MappingStatus currStatus)

@@ -29,10 +29,6 @@ public class ShapeList
 	public ShapeInfo[] shapes;
 }
 
-public class StringTest
-{
-	public string[] stringtests;
-}
 
 public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 {
@@ -44,8 +40,10 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 	[SerializeField] GameObject mListElement;
 	[SerializeField] RectTransform mListContentParent;
 	[SerializeField] ToggleGroup mToggleGroup;
+	[SerializeField] GameObject mPlaneDetectionToggle;
 	[SerializeField] Text mLabelText;
 	[SerializeField] Material mShapeMaterial;
+	[SerializeField] PlacenoteARGeneratePlane mPNPlaneManager;
 
 	private UnityARSessionNativeInterface mSession;
 	private bool mFrameUpdated = false;
@@ -109,7 +107,7 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 		mSession.SetCapturePixelData (true, mImage.y.data, mImage.vu.data);
 	}
 
-	
+
 	// Update is called once per frame
 	void Update ()
 	{
@@ -154,9 +152,8 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 		LibPlacenote.Instance.ListMaps ((mapList) => {
 			// render the map list!
 			foreach (LibPlacenote.MapInfo mapId in mapList) {
-				if (mapId.userData != null) {
-					Debug.LogError (mapId.userData.ToString (Formatting.None));
-				} else {
+				if (mapId.metadata.userdata != null) {
+					Debug.Log(mapId.metadata.userdata.ToString ());
 				}
 				AddMapToList (mapId);
 			}
@@ -176,6 +173,12 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 	{
 		mInitButtonPanel.SetActive (true);
 		mExitButton.SetActive (false);
+		mPlaneDetectionToggle.SetActive (false);
+
+		//clear all existing planes
+		mPNPlaneManager.ClearPlanes ();
+		mPlaneDetectionToggle.GetComponent<Toggle>().isOn = false;
+
 		LibPlacenote.Instance.StopSession ();
 	}
 
@@ -199,6 +202,8 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 
 	public void OnLoadMapClicked ()
 	{
+		ConfigureSession (false);
+
 		if (!LibPlacenote.Instance.Initialized()) {
 			Debug.Log ("SDK not yet initialized");
 			ToastManager.ShowToast ("SDK not yet initialized", 2f);
@@ -213,6 +218,7 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 					mMapListPanel.SetActive (false);
 					mInitButtonPanel.SetActive (false);
 					mExitButton.SetActive (true);
+					mPlaneDetectionToggle.SetActive(true);
 
 					LibPlacenote.Instance.StartSession ();
 					mLabelText.text = "Loaded ID: " + mSelectedMapId;
@@ -244,8 +250,11 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 	}
 
 
+
 	public void OnNewMapClick ()
 	{
+		ConfigureSession (false);
+
 		if (!LibPlacenote.Instance.Initialized()) {
 			Debug.Log ("SDK not yet initialized");
 			return;
@@ -253,17 +262,40 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 
 		mInitButtonPanel.SetActive (false);
 		mMappingButtonPanel.SetActive (true);
-
+		mPlaneDetectionToggle.SetActive (true);
+		Debug.Log ("Started Session");
 		LibPlacenote.Instance.StartSession ();
 	}
 
+	public void OnTogglePlaneDetection() {
+		ConfigureSession (true);
+	}
 
 	private void StartARKit ()
 	{
 		mLabelText.text = "Initializing ARKit";
 		Application.targetFrameRate = 60;
+		ConfigureSession (false);
+	}
+
+
+	private void ConfigureSession(bool clearPlanes) {
 		ARKitWorldTrackingSessionConfiguration config = new ARKitWorldTrackingSessionConfiguration ();
-		config.planeDetection = UnityARPlaneDetection.Horizontal;
+
+		if (mPlaneDetectionToggle.GetComponent<Toggle>().isOn) {
+			if (UnityARSessionNativeInterface.IsARKit_1_5_Supported ()) {
+				config.planeDetection = UnityARPlaneDetection.HorizontalAndVertical;
+			} else {
+				config.planeDetection = UnityARPlaneDetection.Horizontal;
+			}
+			mPNPlaneManager.StartPlaneDetection ();
+		} else {
+			config.planeDetection = UnityARPlaneDetection.None;
+			if (clearPlanes) {
+				mPNPlaneManager.ClearPlanes ();
+			}
+		}
+
 		config.alignment = UnityARAlignment.UnityARAlignmentGravity;
 		config.getPointCloudData = true;
 		config.enableLightEstimation = true;
@@ -289,6 +321,11 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 				mLabelText.text = "Saved Map ID: " + mapId;
 				mInitButtonPanel.SetActive (true);
 				mMappingButtonPanel.SetActive (false);
+				mPlaneDetectionToggle.SetActive (false);
+
+				//clear all existing planes
+				mPNPlaneManager.ClearPlanes ();
+				mPlaneDetectionToggle.GetComponent<Toggle>().isOn = false;
 
 
 				JObject metadata = new JObject ();
@@ -296,24 +333,18 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 				JObject shapeList = Shapes2JSON();
 				metadata["shapeList"] = shapeList;
 
-				StringTest testData = new StringTest();
-				testData.stringtests = new string[2];
-				testData.stringtests[0] = "test1";
-				testData.stringtests[1] = "test2";
-				metadata["test"] = JObject.FromObject (testData);
-
 				if (useLocation) {
 					metadata["location"] = new JObject ();
 					metadata["location"]["latitude"] = locationInfo.latitude;
 					metadata["location"]["longitude"] = locationInfo.longitude;
 					metadata["location"]["altitude"] = locationInfo.altitude;
 				}
-				LibPlacenote.Instance.SetMetadata (mapId, metadata);
+				LibPlacenoteHelper.SetMetadata (mapId, metadata);
 			},
 			(completed, faulted, percentage) => {}
 		);
 	}
-		
+
 
 	public void OnDropShapeClick ()
 	{
@@ -399,12 +430,7 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 		Debug.Log ("prevStatus: " + prevStatus.ToString() + " currStatus: " + currStatus.ToString());
 		if (currStatus == LibPlacenote.MappingStatus.RUNNING && prevStatus == LibPlacenote.MappingStatus.LOST) {
 			mLabelText.text = "Localized";
-			LoadShapesJSON (mSelectedMapInfo.userData);
-			StringTest tests = mSelectedMapInfo.userData ["test"].ToObject<StringTest> ();
-			DebugText.Overflow (tests.stringtests[0] + "," + tests.stringtests[1]);
-//			if (mapMetadata is JObject && mapMetadata ["shapeList"] is JObject) {
-//				ShapeList shapeList = mapMetadata ["shapeList"].ToObject<ShapeList> ();
-
+			LoadShapesJSON (mSelectedMapInfo.metadata.userdata);
 		} else if (currStatus == LibPlacenote.MappingStatus.RUNNING && prevStatus == LibPlacenote.MappingStatus.WAITING) {
 			mLabelText.text = "Mapping";
 		} else if (currStatus == LibPlacenote.MappingStatus.LOST) {

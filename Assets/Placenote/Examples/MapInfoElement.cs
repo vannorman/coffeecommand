@@ -21,10 +21,10 @@ public class MapInfoElement : MonoBehaviour
 
 		if (Input.location.status != LocationServiceStatus.Running) {
 			mLocationText.text = "Distance Unknown - No user location";
-		} else if (mapInfo.userData is JObject && mapInfo.userData ["location"] is JObject) {
+		} else if (mapInfo.metadata.userdata is JObject && mapInfo.metadata.userdata ["location"] is JObject) {
 			var distance = Calc (Input.location.lastData.latitude, Input.location.lastData.longitude,
-				mapInfo.userData ["location"] ["latitude"].ToObject<float> (),
-				mapInfo.userData ["location"] ["longitude"].ToObject<float> ());
+				mapInfo.metadata.userdata ["location"] ["latitude"].ToObject<float> (),
+				mapInfo.metadata.userdata ["location"] ["longitude"].ToObject<float> ());
 			mLocationText.text = "Distance: " + distance.ToString("F3") + "km";
 		} else {
 			mLocationText.text = "Distance Unknown - Map does not have location";

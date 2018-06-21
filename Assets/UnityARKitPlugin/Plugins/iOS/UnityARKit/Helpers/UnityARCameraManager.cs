@@ -12,9 +12,10 @@ public class UnityARCameraManager : MonoBehaviour {
 	[Header("AR Config Options")]
 	public UnityARAlignment startAlignment = UnityARAlignment.UnityARAlignmentGravity;
 	public UnityARPlaneDetection planeDetection = UnityARPlaneDetection.Horizontal;
+	public ARReferenceImagesSet detectionImages = null;
 	public bool getPointCloud = true;
 	public bool enableLightEstimation = true;
-
+	public bool enableAutoFocus = true;
 	private bool sessionStarted = false;
 
 	// Use this for initialization
@@ -28,6 +29,10 @@ public class UnityARCameraManager : MonoBehaviour {
 		config.alignment = startAlignment;
 		config.getPointCloudData = getPointCloud;
 		config.enableLightEstimation = enableLightEstimation;
+		config.enableAutoFocus = enableAutoFocus;
+		if (detectionImages != null) {
+			config.arResourceGroupName = detectionImages.resourceGroupName;
+		}
 
 		if (config.IsSupported) {
 			m_session.RunWithConfig (config);
@@ -37,9 +42,6 @@ public class UnityARCameraManager : MonoBehaviour {
 		if (m_camera == null) {
 			m_camera = Camera.main;
 		}
-
-		UnityARSessionRunOption options = UnityARSessionRunOption.ARSessionRunOptionRemoveExistingAnchors | UnityARSessionRunOption.ARSessionRunOptionResetTracking;
-		m_session.RunWithConfigAndOptions(config, options);
 	}
 
 	void FirstFrameUpdate(UnityARCamera cam)

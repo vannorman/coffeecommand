@@ -49,15 +49,18 @@ public class PhoneDataComm : MonoBehaviour {
 		if (LibPlacenote.Instance.Initialized ()) {
 			ListNearbyMaps ();
 		} else {
-			LibPlacenote.Instance.onInitializedDelegate += OnPlacenoteSdkInitialized;
+			onInitializedDelegate += OnPlacenoteSdkInitialized;
 		}
 
 
 	}
 
+	public delegate void OnInitializedDelegate();
+	public OnInitializedDelegate onInitializedDelegate;
+	bool initializeFinished = false;
 
 	void OnPlacenoteSdkInitialized(){
-		LibPlacenote.Instance.onInitializedDelegate -= OnPlacenoteSdkInitialized;
+		onInitializedDelegate -= OnPlacenoteSdkInitialized;
 		ListNearbyMaps ();
 	}
 
@@ -69,40 +72,81 @@ public class PhoneDataComm : MonoBehaviour {
 			return;
 		}
 			
-		LibPlacenote.Instance.ListMaps ((mapList) => {
-			// render the map list!
+
+		float radius = 5;
+		LibPlacenote.Instance.SearchMaps (Input.location.lastData.latitude, Input.location.lastData.longitude, radius, (mapList) => {
 			foreach (LibPlacenote.MapInfo mapId in mapList) {
 				pnt.text += "map! " +mapId.placeId+ " .\n";		
-				if (mapId.userData == null) {
+				if (mapId.metadata == null) {
 					pnt.text += "... but null. \n";
-//					Debug.LogError (mapId.userData.ToString (Formatting.None));
+					//					Debug.LogError (mapId.userData.ToString (Formatting.None));
 				} else {
-//					Debug.Log("mapid:"+mapId.placeId);
+					//					Debug.Log("mapid:"+mapId.placeId);
 					pnt.text += "making prefab. \n";
-					float lat = mapId.userData ["location"] ["latitude"].ToObject<float> ();
-					float lng = mapId.userData ["location"] ["longitude"].ToObject<float> ();
-					var distance = MapInfoElement.Calc (Input.location.lastData.latitude, Input.location.lastData.longitude,
-						lat,
-						lng);
-					if (distance < 5){
-						GeographicTransform coordinateFrame = (GeographicTransform)Instantiate(locationPrefab.GetComponent<GeographicTransform>());
-						Api.Instance.GeographicApi.RegisterGeographicTransform(coordinateFrame);
-						LatLong pointA = LatLong.FromDegrees(lat,lng);
-						coordinateFrame.SetPosition(pointA);
-						pnt.text += "prefab placed. \n";
-					} else {
-						pnt.text += "too far: "+distance + "\n";
-					}
-				}
+					float lat = mapId.metadata.userdata ["location"] ["latitude"].ToObject<float> ();
+					float lng = mapId.metadata.userdata ["location"] ["longitude"].ToObject<float> ();
 
+//					var distance = MapInfoElement.Calc (Input.location.lastData.latitude, Input.location.lastData.longitude,
+//						lat,
+//						lng);
+//					if (distance < radius){
+					GeographicTransform coordinateFrame = (GeographicTransform)Instantiate(locationPrefab.GetComponent<GeographicTransform>());
+					Api.Instance.GeographicApi.RegisterGeographicTransform(coordinateFrame);
+					LatLong pointA = LatLong.FromDegrees(lat,lng);
+					coordinateFrame.SetPosition(pointA);
+					pnt.text += "prefab placed. \n";
+//					} else {
+//						pnt.text += "too far: "+distance + "\n";
+//					}
+				}
 			}
+
 		});
+
+//		LibPlacenote.Instance.ListMaps ((mapList) => {
+			// render the map list!
+//			foreach (LibPlacenote.MapInfo mapId in mapList) {
+//				pnt.text += "map! " +mapId.placeId+ " .\n";		
+//				if (mapId.userData == null) {
+//					pnt.text += "... but null. \n";
+////					Debug.LogError (mapId.userData.ToString (Formatting.None));
+//				} else {
+////					Debug.Log("mapid:"+mapId.placeId);
+//					pnt.text += "making prefab. \n";
+//					float lat = mapId.userData ["location"] ["latitude"].ToObject<float> ();
+//					float lng = mapId.userData ["location"] ["longitude"].ToObject<float> ();
+//					var distance = MapInfoElement.Calc (Input.location.lastData.latitude, Input.location.lastData.longitude,
+//						lat,
+//						lng);
+//					if (distance < radius){
+//						GeographicTransform coordinateFrame = (GeographicTransform)Instantiate(locationPrefab.GetComponent<GeographicTransform>());
+//						Api.Instance.GeographicApi.RegisterGeographicTransform(coordinateFrame);
+//						LatLong pointA = LatLong.FromDegrees(lat,lng);
+//						coordinateFrame.SetPosition(pointA);
+//						pnt.text += "prefab placed. \n";
+//					} else {
+//						pnt.text += "too far: "+distance + "\n";
+//					}
+//				}
+
+//			}
+//		});
 	}
 
 
 	
 	// Update is called once per frame
 	void Update () {
+
+		// so awkward. I couldn't figure out how to hook into Placenote's initialized callback.
+		if (!initializeFinished){
+			if (LibPlacenote.Instance.Initialized ()) {
+				initializeFinished = true;
+				if (onInitializedDelegate != null) {
+					onInitializedDelegate();
+				}
+			}
+		}
 		
 //		db.text = "Waiting for location:" + waitingForLocation + "\n" +
 //			"Location Service status:" +Input.location.status +"\n" +
