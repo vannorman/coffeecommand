@@ -298,6 +298,7 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 				} else if (faulted) {
 					mLabelText.text = "Failed to load ID: " + mSelectedMapId;
 				}
+
 			}
 		);
 	}
@@ -555,12 +556,15 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 	public void OnPose (Matrix4x4 outputPose, Matrix4x4 arkitPose) {}
 
 
+	public JToken currentMapData;
+
 	public void OnStatusChange (LibPlacenote.MappingStatus prevStatus, LibPlacenote.MappingStatus currStatus)
 	{
 		Debug.Log ("prevStatus: " + prevStatus.ToString() + " currStatus: " + currStatus.ToString());
 		if (currStatus == LibPlacenote.MappingStatus.RUNNING && prevStatus == LibPlacenote.MappingStatus.LOST) {
 			mLabelText.text = "Localized";
 			localized = true;
+			currentMapData = mSelectedMapInfo.userData;
 			LoadShapesJSON (mSelectedMapInfo.userData);
 			LoadOnionsJSON (mSelectedMapInfo.userData);
 //			StringTest tests = mSelectedMapInfo.userData ["test"].ToObject<StringTest> ();

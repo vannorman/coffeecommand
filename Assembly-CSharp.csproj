@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\_scripts\AlwaysFaceCamera.cs" />
      <Compile Include="Assets\_scripts\AlwaysFaceCameraY.cs" />
      <Compile Include="Assets\_scripts\BatteryUpload.cs" />
      <Compile Include="Assets\_scripts\BounceProjectile.cs" />
@@ -93,6 +94,7 @@
      <Compile Include="Assets\DebugPerformance.cs" />
      <Compile Include="Assets\FPS_Counter.cs" />
      <Compile Include="Assets\LoadSceneButton.cs" />
+     <Compile Include="Assets\MapMarkerInfo.cs" />
      <Compile Include="Assets\PhoneDataComm.cs" />
      <Compile Include="Assets\Placenote\Examples\MapInfoElement.cs" />
      <Compile Include="Assets\Placenote\Examples\PlacenoteSampleView.cs" />
@@ -169,6 +171,7 @@
      <Compile Include="Assets\UnityARKitPlugin\Plugins\iOS\UnityARKit\NativeInterface\ARUserAnchor.cs" />
      <Compile Include="Assets\UnityARKitPlugin\Plugins\iOS\UnityARKit\NativeInterface\UnityARSessionNativeInterface.cs" />
      <Compile Include="Assets\UnityARKitPlugin\UnityARKitPluginSettings.cs" />
+     <Compile Include="Assets\UserInfoJson.cs" />
      <Compile Include="Assets\WanzyeeStudio\Scripts\Basic\Json\BoundsConverter.cs" />
      <Compile Include="Assets\WanzyeeStudio\Scripts\Basic\Json\ColorConverter.cs" />
      <Compile Include="Assets\WanzyeeStudio\Scripts\Basic\Json\DictionaryConverter.cs" />

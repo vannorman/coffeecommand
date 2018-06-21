@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/_scenes/CC - Developer Mode.unity
+- path: Assets/_scenes/CC - Map Mode.unity
   isLoaded: 1
   isActive: 1
