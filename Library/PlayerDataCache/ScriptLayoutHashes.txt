@@ -1,9 +1,6 @@
 iOS
 SceneListBegin?
-Assets/_scenes/0 stage - splash start scene.unity
-Assets/_scenes/CC - Full Game.unity
 Assets/_scenes/CC - Map Mode.unity
-Assets/_scenes/CC - Developer Mode.unity
 SceneListEnd?
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MainThreadTaskQueue
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:UnityEngine.XR.iOS.UnityARKitControl
@@ -102,7 +99,7 @@ f61c0793411f10cf5fbfa1473fef5ef2 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 df98a608af983c04c8aa5672afc284db Assembly-CSharp.dll:.DeadReplacement
 058f583ac03ca538fc928ba68f6bd2b7 Assembly-CSharp.dll:.DamageGiver
 7a569204f9d29c3d307c150aa038ee30 Assembly-CSharp.dll:.UnityARCameraManager
-98f4542379e9da7bd4fcdcaa71733f91 Assembly-CSharp.dll:.CoffeeCommandView
+bde4449faec613c2de2fa5091ce23102 Assembly-CSharp.dll:.CoffeeCommandView
 6cadf2127201033372f50854ef10b678 Assembly-CSharp.dll:.PositionObjectWithPositioner
 3246e4af086807d0bfc6984a8c244168 Assembly-CSharp.dll:Wrld.MapCamera.CameraJumpBehaviour
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.BounceProjectile
@@ -137,7 +134,7 @@ ff32d7930e63bc1a497b08532d306e6d Assembly-CSharp.dll:.PhoneUI
 63811fbf131a6d81b076f8571f735143 Assembly-CSharp.dll:.ParticlePainter
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MovingBetweenFloors
-ab1f2b75ed3c1117d5412ff6d78e60cd Assembly-CSharp.dll:.TapWorldPosition
+ab1f2b75ed3c1117d5412ff6d78e60cd Assembly-CSharp.dll:.MapLocationSelectionManager
 69f3afb2830835c2fce96ccf9ce5c4b6 Assembly-CSharp.dll:.FlyObjectOverMap
 43b30c650c2039cd6ded7783d5cc87d7 Assembly-CSharp.dll:.DestroyOnImpact
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Cheats
@@ -214,7 +211,7 @@ e255cc5d1c8c41af01ab258a4410cf1c Assembly-CSharp.dll:.SimulatorHideARRemote
 672c7ec9a1afb24a8c52bed490318aa3 Assembly-CSharp.dll:.CoffeeCommandFeaturesVisualizer
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PhoneOrientation
 507673dfe690aad97d3cfe9cdf66004b Assembly-CSharp.dll:.SmoothFollowTarget
-067135513fdf7f81f47d6e73729df5fb Assembly-CSharp.dll:.PhoneDataComm
+3adaa0a51e3aae9b51480e98af8b14dc Assembly-CSharp.dll:.PhoneDataComm
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.OnionDamagGiver
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Wrld.Resources.IndoorMaps.InstancedIndoorMapRenderable
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Wrld.Demo.IndoorMaps.IndoorMapWithCustomMaterials
@@ -271,3 +268,5 @@ ceafc58e64c8e6a7998f1890398e40a9 Assembly-CSharp.dll:.Projectile
 391d84b859f3b155fe38f54bfce79162 Assembly-CSharp.dll:.UnityPointCloudExample
 97f3f2eee235771b3d0dd28fcccb62f7 Assembly-CSharp.dll:Battlehub.MeshTools.Pivot
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UnityARCameraNearFar
+9982fac15dcd9d11232d51b39bedaef0 Assembly-CSharp.dll:.LaserBullet
+6bfe543a91625f77c304231f45ff6e71 Assembly-CSharp.dll:.ShipWeaponsLaser

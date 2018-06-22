@@ -1,19 +1,18 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_scripts/CoffeeCommandView.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_scripts/PhoneDataComm.cs">
     <Files>
-      <File FileName="Assets/_scripts/PhoneDataComm.cs" Line="75" Column="10" />
-      <File FileName="Assets/Placenote/LibPlacenote/LibPlacenote.cs" Line="1" Column="1" />
-      <File FileName="Assets/_scripts/CoffeeCommandView.cs" Line="392" Column="22" />
-      <File FileName="Assets/Placenote/Examples/PlacenoteSampleView.cs" Line="58" Column="59" />
-      <File FileName="Assets/_scripts/TapWorldPosition.cs" Line="35" Column="37" />
-      <File FileName="Assets/Placenote/Examples/MapInfoElement.cs" Line="43" Column="60" />
-      <File FileName="Assets/_scripts/JsonTest.cs" Line="12" Column="40" />
-      <File FileName="Assets/UnityARKitPlugin/Plugins/iOS/UnityARKit/Helpers/ARPlaneAnchorGameObject.cs" Line="8" Column="24" />
-      <File FileName="Assets/_scripts/CC.cs" Line="30" Column="3" />
-      <File FileName="Assets/UnityARKitPlugin/Plugins/iOS/UnityARKit/Helpers/UnityARUserAnchorComponent.cs" Line="9" Column="40" />
-      <File FileName="Assets/Placenote/Examples/PlacenoteARAnchorManager.cs" Line="29" Column="26" />
-      <File FileName="Assets/UnityARKitPlugin/Plugins/iOS/UnityARKit/NativeInterface/ARPlaneAnchor.cs" Line="143" Column="15" />
+      <File FileName="Assets/_scripts/PhoneDataComm.cs" Line="94" Column="47" />
+      <File FileName="Assets/Placenote/Examples/PlacenoteSampleView.cs" Line="397" Column="36" />
+      <File FileName="Assets/_scripts/CoffeeCommandView.cs" Line="383" Column="43" />
+      <File FileName="Assets/_scripts/UserDataManager.cs" Line="58" Column="3" />
+      <File FileName="Assets/_scripts/MapLocationSelectionManager.cs" Line="29" Column="54" />
+      <File FileName="Assets/Wrld/Scripts/Camera/CameraInputHandler.cs" Line="248" Column="61" />
+      <File FileName="Assets/_scripts/CoffeeCommandSettings.cs" Line="7" Column="40" />
+      <File FileName="Assets/LaserBullet.cs" Line="36" Column="72" />
+      <File FileName="Assets/_scripts/FX.cs" Line="52" Column="47" />
+      <File FileName="Assets/ShipWeaponsLaser.cs" Line="54" Column="76" />
+      <File FileName="Assets/_scripts/ShipDamageReceiver.cs" Line="50" Column="30" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

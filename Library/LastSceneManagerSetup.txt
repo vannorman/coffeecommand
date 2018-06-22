@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/_scenes/CC - Map Mode.unity
+- path: Assets/_scenes/CC - Full Game.unity
   isLoaded: 1
   isActive: 1

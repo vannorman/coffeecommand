@@ -16,7 +16,7 @@ public class ShipDamageReceiver : MonoBehaviour {
 	float damageDuration = 2;
 	void TakeDamage(){
 		buttonDisabled.gameObject.SetActive (true);
-		CC.shipWeapons.weaponsOnline = false;
+//		CC.shipWeapons.weaponsOnline = false;
 		CC.shipWeapons.FireButtonUp ();
 		damageTimeout = damageDuration;
 		Color c = damageFx.material.color;
@@ -47,7 +47,7 @@ public class ShipDamageReceiver : MonoBehaviour {
 	void DamageOver () {
 		if (buttonDisabled) {
 			buttonDisabled.gameObject.SetActive (false);
-			CC.shipWeapons.weaponsOnline = true;
+//			CC.shipWeapons.weaponsOnline = true;
 		}
 	}
 }

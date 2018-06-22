@@ -7,6 +7,7 @@ public class FX : MonoBehaviour {
 	public enum EffectName {
 		BulletPoof,
 		SmallExplosionDamage,
+		LaserExplosion
 	}
 
 	[System.Serializable]
@@ -43,5 +44,12 @@ public class FX : MonoBehaviour {
 		ParticleSystem.EmitParams emitParams = new ParticleSystem.EmitParams ();
 		emitParams.position = p;
 		effectsList[EffectName.SmallExplosionDamage].ps.Emit(emitParams,1);
+	}
+
+	public void LaserExplosion(Vector3 p){
+		ParticleSystem.EmitParams emitParams = new ParticleSystem.EmitParams ();
+		emitParams.position = p;
+		emitParams.rotation = Random.Range (0, 360);
+		effectsList[EffectName.LaserExplosion].ps.Emit(emitParams,1);
 	}
 }

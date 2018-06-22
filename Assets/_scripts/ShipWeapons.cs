@@ -36,6 +36,17 @@ public class ShipWeapons : MonoBehaviour {
 	float fireTime = 0;
 	float fireInterval =.1f;
 	public float bulletForce = 600;
+
+//	public Material laserMat;
+//	LineRenderer[] lasers = new LineRenderer[2];
+//	void InitLasers(){
+//		for (int i = 0; i < lasers.Length; i++) {
+//			lasers [i] = this.gameObject.AddComponent<LineRenderer> ();
+//			lasers [i].material = laserMat;
+//			lasers [i].SetVertexCount (0);
+//		}
+//	}
+
 	void Update(){
 		if (firing){
 			fireTime -= Time.deltaTime;
@@ -49,8 +60,7 @@ public class ShipWeapons : MonoBehaviour {
 					bullet.GetComponent<Rigidbody> ().AddTorque (t.right * rotationForce);
 				}
 			}
-//			GameObject bullet = (GameObject)Instantiate (bulletPrefab, rightCannon.position, leftCannon.rotation);
-//			bullet.
+
 		}
 	}
 }

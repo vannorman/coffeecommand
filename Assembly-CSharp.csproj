@@ -60,6 +60,7 @@
      <Compile Include="Assets\_scripts\CCGameManager.cs" />
      <Compile Include="Assets\_scripts\Cheats.cs" />
      <Compile Include="Assets\_scripts\CoffeeCommandFeaturesVisualizer.cs" />
+     <Compile Include="Assets\_scripts\CoffeeCommandSettings.cs" />
      <Compile Include="Assets\_scripts\CoffeeCommandView.cs" />
      <Compile Include="Assets\_scripts\Coins.cs" />
      <Compile Include="Assets\_scripts\Crosshair.cs" />
@@ -80,6 +81,7 @@
      <Compile Include="Assets\_scripts\JsonTest.cs" />
      <Compile Include="Assets\_scripts\LibPlacenoteHelper.cs" />
      <Compile Include="Assets\_scripts\LoadSceneButton.cs" />
+     <Compile Include="Assets\_scripts\MapLocationSelectionManager.cs" />
      <Compile Include="Assets\_scripts\MapMarkerInfo.cs" />
      <Compile Include="Assets\_scripts\MetalOnion.cs" />
      <Compile Include="Assets\_scripts\ObjectDetector.cs" />
@@ -99,9 +101,9 @@
      <Compile Include="Assets\_scripts\ShipWeapons.cs" />
      <Compile Include="Assets\_scripts\SimulatorHideARRemote.cs" />
      <Compile Include="Assets\_scripts\SmoothFollowTarget.cs" />
-     <Compile Include="Assets\_scripts\TapWorldPosition.cs" />
      <Compile Include="Assets\_scripts\Tendril.cs" />
-     <Compile Include="Assets\_scripts\UserInfoJson.cs" />
+     <Compile Include="Assets\_scripts\UserDataManager.cs" />
+     <Compile Include="Assets\LaserBullet.cs" />
      <Compile Include="Assets\Placenote\Examples\KeyboardMover.cs" />
      <Compile Include="Assets\Placenote\Examples\MapInfoElement.cs" />
      <Compile Include="Assets\Placenote\Examples\PlacenoteARAnchorManager.cs" />
@@ -119,6 +121,7 @@
      <Compile Include="Assets\Placenote\LibPlacenote\PlacenoteCameraManager.cs" />
      <Compile Include="Assets\Placenote\LibPlacenote\PlacenoteListener.cs" />
      <Compile Include="Assets\Placenote\LibPlacenote\PNUtility.cs" />
+     <Compile Include="Assets\ShipWeaponsLaser.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\Integration\IntegrationCommon.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\Integration\MeshCombinerIntegration.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\Integration\MeshDeformerIntegration.cs" />

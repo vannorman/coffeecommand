@@ -245,16 +245,16 @@ namespace Wrld.MapCamera
         {
             UpdateInputFrame();
 
-            if (HasInputChanged())
+            if (CoffeeCommandSettings.allowWrldMapPanning && HasInputChanged())
             {
                 bool touchHandled = false;
                 if (m_isTouchSupported)
                 {
-//                    touchHandled = HandleTouchInput();
+                    touchHandled = HandleTouchInput();
                 }
                 if(!touchHandled && m_isMouseSupported)
                 {
-//                    HandleMouseInput();
+                    HandleMouseInput();
                 }
             }
 

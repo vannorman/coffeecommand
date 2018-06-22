@@ -9,25 +9,6 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 
-[System.Serializable]
-public class ShapeInfo
-{
-	public float px;
-	public float py;
-	public float pz;
-	public float qx;
-	public float qy;
-	public float qz;
-	public float qw;
-	public int shapeType;
-}
-
-
-[System.Serializable]
-public class ShapeList
-{
-	public ShapeInfo[] shapes;
-}
 
 
 public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener

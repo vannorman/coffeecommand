@@ -42,6 +42,12 @@ public class EditorTools : Editor {
 //
 	//
 
+	[MenuItem("Edit/Editor Tools/Set Mat")]
+	public static void SetMat(){ 
+		var mat = AssetDatabase.GetBuiltinExtraResource<Material>("Default-Diffuse.mat");
+		FindObjectOfType<CoffeeCommandView> ().mShapeMaterial = mat;
+	}
+
 		
 
 	[MenuItem("Edit/Editor Tools/Scene Names")]
