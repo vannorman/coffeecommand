@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Wrld;
 using Wrld.Space;
+using System.Linq;
 
 public class PhoneDataComm : MonoBehaviour {
 
@@ -77,27 +78,25 @@ public class PhoneDataComm : MonoBehaviour {
 		LibPlacenote.Instance.SearchMaps (Input.location.lastData.latitude, Input.location.lastData.longitude, radius, (mapList) => {
 			foreach (LibPlacenote.MapInfo mapId in mapList) {
 				pnt.text += "map! " +mapId.placeId+ " .\n";		
-				if (mapId.metadata == null) {
-					pnt.text += "... but null. \n";
-					//					Debug.LogError (mapId.userData.ToString (Formatting.None));
-				} else {
-					//					Debug.Log("mapid:"+mapId.placeId);
+				if (mapId.metadata.userdata != null) {
+					
 					pnt.text += "making prefab. \n";
 					float lat = mapId.metadata.userdata ["location"] ["latitude"].ToObject<float> ();
 					float lng = mapId.metadata.userdata ["location"] ["longitude"].ToObject<float> ();
 
-//					var distance = MapInfoElement.Calc (Input.location.lastData.latitude, Input.location.lastData.longitude,
-//						lat,
-//						lng);
-//					if (distance < radius){
+
 					GeographicTransform coordinateFrame = (GeographicTransform)Instantiate(locationPrefab.GetComponent<GeographicTransform>());
 					Api.Instance.GeographicApi.RegisterGeographicTransform(coordinateFrame);
 					LatLong pointA = LatLong.FromDegrees(lat,lng);
 					coordinateFrame.SetPosition(pointA);
 					pnt.text += "prefab placed. \n";
-//					} else {
-//						pnt.text += "too far: "+distance + "\n";
-//					}
+					coordinateFrame.GetComponent<MapMarkerInfo>().people.text = Newtonsoft.Json.JsonConvert.DeserializeObject<UserInfoJson.CCO>(Newtonsoft.Json.JsonConvert.SerializeObject(mapId.metadata.userdata["CoffeeCommandObject"])).mine.coins.count.ToString();
+					coordinateFrame.GetComponent<MapMarkerInfo>().coins.text = Newtonsoft.Json.JsonConvert.DeserializeObject<UserInfoJson.CCO>(Newtonsoft.Json.JsonConvert.SerializeObject(mapId.metadata.userdata["CoffeeCommandObject"])).visitors.Select(e => e.user).Distinct().ToList().Count.ToString();
+					coordinateFrame.GetComponent<MapMarkerInfo>().mapInfo = mapId;
+					//var uniqueCerts = cco.visitors.Select(e => e.user).Distinct().ToList(); //  SelectMany(e => e.user).Distinct().ToList();
+				} else {
+
+					pnt.text += "... but null. \n";
 				}
 			}
 

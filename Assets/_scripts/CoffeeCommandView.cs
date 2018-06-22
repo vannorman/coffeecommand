@@ -260,7 +260,7 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 	}
 
 
-	void OnMapSelected (LibPlacenote.MapInfo mapInfo)
+	public void OnMapSelected (LibPlacenote.MapInfo mapInfo)
 	{
 		mSelectedMapInfo = mapInfo;
 		mMapSelectedPanel.SetActive (true);

@@ -113,6 +113,7 @@
      <Compile Include="Assets\Placenote\LibPlacenote\PlacenoteCameraManager.cs" />
      <Compile Include="Assets\Placenote\LibPlacenote\PlacenoteListener.cs" />
      <Compile Include="Assets\Placenote\LibPlacenote\PNUtility.cs" />
+     <Compile Include="Assets\SelectedMarkerFx.cs" />
      <Compile Include="Assets\TapWorldPosition.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\Integration\IntegrationCommon.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\Integration\MeshCombinerIntegration.cs" />

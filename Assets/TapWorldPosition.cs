@@ -5,7 +5,9 @@ using UnityEngine.iOS;
 
 public class TapWorldPosition : MonoBehaviour {
 
+	public CoffeeCommandView coffeeCommandView;
 	UnityEngine.UI.Text db;
+	public GameObject loadButton;
 	// Use this for initialization
 	void Start () {
 		db = GameObject.Find ("DebugText").GetComponent<UnityEngine.UI.Text> ();
@@ -17,6 +19,19 @@ public class TapWorldPosition : MonoBehaviour {
 			Ray ray = Camera.main.ScreenPointToRay (Input.GetTouch(0).position);
 			foreach (RaycastHit hit in Physics.RaycastAll(ray)) {
 				db.text = "hit:" + hit.collider.name + "\n";
+				MapMarkerInfo mmi = hit.collider.GetComponent<MapMarkerInfo> ();
+				if (mmi) {
+					foreach (MapMarkerInfo mmi2 in FindObjectsOfType<MapMarkerInfo>()) {
+						if (mmi != mmi2) {
+							mmi2.fx.SetActive (false);
+						}
+						else {
+							mmi2.fx.SetActive (true);
+						}
+					}
+					loadButton.SetActive (true);
+
+				}
 			}
 
 		}
