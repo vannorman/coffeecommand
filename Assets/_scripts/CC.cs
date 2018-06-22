@@ -27,7 +27,7 @@ public class CC : MonoBehaviour {
 		featuresVisualizer = featuresVisualizerRef;
 		onionLocationHelper = onionLocationHelperRef;
 	
-		UnityEngine.XR.iOS.UnityARUtility.InitializePlanePrefab (planePrefab);
+//		UnityEngine.XR.iOS.ARPlaneAnchor.InitializePlanePrefab (planePrefab);
 	}
 	
 	// Update is called once per frame

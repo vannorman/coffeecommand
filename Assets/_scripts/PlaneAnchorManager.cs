@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlaneAnchorManager : MonoBehaviour {
 
 
-	public  UnityEngine.XR.iOS.UnityARAnchorManager anchorManager;
-	void Start(){
-		anchorManager = new UnityEngine.XR.iOS.UnityARAnchorManager ();
-	}
+//	public  UnityEngine.XR.iOS.UnityARAnchorManager anchorManager;
+//	void Start(){
+//		anchorManager = new UnityEngine.XR.iOS.UnityARAnchorManager ();
+//	}
+
+
 //	List<GameObject> shownPlanes = new List<GameObject>();
 //	public void ShowPlanes(){
 //		HidePlanes ();

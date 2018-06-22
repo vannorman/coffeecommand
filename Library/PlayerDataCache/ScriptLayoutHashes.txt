@@ -1,6 +1,9 @@
 iOS
 SceneListBegin?
+Assets/_scenes/0 stage - splash start scene.unity
+Assets/_scenes/CC - Full Game.unity
 Assets/_scenes/CC - Map Mode.unity
+Assets/_scenes/CC - Developer Mode.unity
 SceneListEnd?
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MainThreadTaskQueue
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:UnityEngine.XR.iOS.UnityARKitControl
@@ -134,7 +137,7 @@ ff32d7930e63bc1a497b08532d306e6d Assembly-CSharp.dll:.PhoneUI
 63811fbf131a6d81b076f8571f735143 Assembly-CSharp.dll:.ParticlePainter
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MovingBetweenFloors
-149ae77977d3bea4afd11012c8b07e59 Assembly-CSharp.dll:.TapWorldPosition
+ab1f2b75ed3c1117d5412ff6d78e60cd Assembly-CSharp.dll:.TapWorldPosition
 69f3afb2830835c2fce96ccf9ce5c4b6 Assembly-CSharp.dll:.FlyObjectOverMap
 43b30c650c2039cd6ded7783d5cc87d7 Assembly-CSharp.dll:.DestroyOnImpact
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Cheats
@@ -164,6 +167,7 @@ c6f60b2cb40fb044afcd7c43cdf165e7 Assembly-CSharp.dll:.Tendril
 7a1ee6c718479f4d3cf744edffe2ae7b Assembly-CSharp.dll:UnityEngine.XR.iOS.UnityRemoteVideo
 63ee4d254596e7e33706786578d0fdfc Assembly-CSharp.dll:.AR3DOFCameraManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MovingWithSlider
+40120554d5aab5d046e212fdd8131c85 Assembly-CSharp.dll:.SimulatorSetSkybox
 4a30dc2a563cb18b61a1cf6a09443c9c Assembly-CSharp.dll:.OnionLocationHelper
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PlacenoteSampleTerrain
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:UnityEngine.XR.iOS.UnityARAmbient
@@ -205,11 +209,12 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 3f32f08a64daf40b09ed864d96fe3840 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransform
 73843688b51256aed059f049c540bca8 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
+e255cc5d1c8c41af01ab258a4410cf1c Assembly-CSharp.dll:.SimulatorHideARRemote
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ClearingBuildingHighlights
 672c7ec9a1afb24a8c52bed490318aa3 Assembly-CSharp.dll:.CoffeeCommandFeaturesVisualizer
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PhoneOrientation
 507673dfe690aad97d3cfe9cdf66004b Assembly-CSharp.dll:.SmoothFollowTarget
-f1cafb8a3ecf2a375be5564c5f6067a1 Assembly-CSharp.dll:.PhoneDataComm
+067135513fdf7f81f47d6e73729df5fb Assembly-CSharp.dll:.PhoneDataComm
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.OnionDamagGiver
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Wrld.Resources.IndoorMaps.InstancedIndoorMapRenderable
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Wrld.Demo.IndoorMaps.IndoorMapWithCustomMaterials
@@ -223,7 +228,7 @@ e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEng
 e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 7cc932962d25de7fe60cf5c0ea930c8f Assembly-CSharp.dll:.ToastManager
 04d8f29baa8db2da913784599d964b46 Assembly-CSharp.dll:.ScrollTexture
-8fad4b3faeaba6ecd758bdc4a26aee10 Assembly-CSharp.dll:.KeyboardMover
+84acdcac0c313101e95b04e0f771b1ee Assembly-CSharp.dll:.KeyboardMover
 cbd59419654f912b14166a7e89966c8f Assembly-CSharp.dll:.MetalOnion
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
@@ -243,13 +248,13 @@ ad1ab3288e483a86629794ba673c9a54 Assembly-CSharp.dll:.SinHover
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PickingIndoors
 e2320c9dc1c48ed92ab6997123a272bb Assembly-CSharp.dll:.Coins
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UpdatingBuildingHighlightColor
-c01e256d288d9411e18494ec877e8dde Assembly-CSharp.dll:.PlacenoteSampleView
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SelectedMarkerFx
+bde4449faec613c2de2fa5091ce23102 Assembly-CSharp.dll:.PlacenoteSampleView
 f771b549b9c5495c813fab919a6684aa Assembly-CSharp.dll:.GrowOverTime
 c826a011dfc20d49c391f33801f3b855 Assembly-CSharp.dll:.MouseLook
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DebugPerformance
 e059e84d441884affff77b3f5de26568 Assembly-CSharp.dll:.ShipWeapons
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Wrld.Resources.IndoorMaps.IndoorMapHighlightRenderable
-2e2a7bd47042749813855cedf111f699 Assembly-CSharp.dll:UnityEngine.XR.iOS.UnityARGeneratePlane
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ConditionallyPreventCameraMovement
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PositionObjectIndoors
 2ba36b6a81a4caef27f07fa7511b83ea Assembly-CSharp.dll:UnityEngine.XR.iOS.ARKitFaceTrackingRemoteConnection
@@ -266,4 +271,3 @@ ceafc58e64c8e6a7998f1890398e40a9 Assembly-CSharp.dll:.Projectile
 391d84b859f3b155fe38f54bfce79162 Assembly-CSharp.dll:.UnityPointCloudExample
 97f3f2eee235771b3d0dd28fcccb62f7 Assembly-CSharp.dll:Battlehub.MeshTools.Pivot
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UnityARCameraNearFar
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SelectedMarkerFx

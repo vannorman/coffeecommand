@@ -492,7 +492,7 @@ public class LibPlacenote : MonoBehaviour
 		initParams.appBasePath = Application.streamingAssetsPath + "/Placenote";
 		initParams.mapPath = Application.persistentDataPath;
 
-		#if !UNITY_EDITOR
+        	#if !UNITY_EDITOR
 		PNInitialize (ref initParams, OnInitialized, IntPtr.Zero);
 		#endif
 	}
@@ -530,9 +530,9 @@ public class LibPlacenote : MonoBehaviour
 			orientRemovalMat.m01 = -1;
 			orientRemovalMat.m10 = 1;
 			break;
-			// landscape
+		// landscape
 		case 3:
-			// do nothing
+		// do nothing
 			orientRemovalMat = Matrix4x4.identity;
 			break;
 		case 4:
@@ -963,7 +963,7 @@ public class LibPlacenote : MonoBehaviour
 		ms.name = name;
 		SearchMaps (ms, listCb);
 	}
-
+		
 	/// <summary>
 	/// Fetch a list of maps in the given location.
 	/// </summary>

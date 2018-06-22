@@ -60,7 +60,7 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 
 	public GameObject onionPrefab;
 
-
+	private LibPlacenote.MapMetadataSettable mCurrMapDetails;
 	private UnityARSessionNativeInterface mSession;
 	private bool mFrameUpdated = false;
 	private UnityARImageFrameData mImage = null;
@@ -372,6 +372,8 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 		bool useLocation = Input.location.status == LocationServiceStatus.Running;
 		LocationInfo locationInfo = Input.location.lastData;
 
+		GameObject.Find ("DebugText").GetComponent<Text> ().text = "loc:" + useLocation + ", locinf:" + locationInfo.latitude;
+
 		mLabelText.text = "Saving...";
 		LibPlacenote.Instance.SaveMap (
 			(mapId) => {
@@ -381,29 +383,31 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 				mMappingButtonPanel.SetActive (false);
 
 
-				JObject metadata = new JObject ();
-
+//				JObject metadata = new JObject ();
+				LibPlacenote.MapMetadataSettable metadata = new LibPlacenote.MapMetadataSettable();
 				JObject shapeList = Shapes2JSON();
-				metadata["shapeList"] = shapeList;
-
-//				metadata["coffeecommand"] = UserInfoJson.LocalData; // CoffeeCommandObject(UserInfoJson.UserID);
-//				StringTest testData = new StringTest();
-//				testData.stringtests = new string[2];
-//				testData.stringtests[0] = "test1";
-//				testData.stringtests[1] = "test2";
-//				metadata["test"] = JObject.FromObject (testData);
-
+				metadata.userdata["shapeList"] = shapeList;
 
 				JObject onionList = Onions2JSON();
-				metadata["onionList"] = onionList;
+				metadata.userdata["onionList"] = onionList;
+
+
+
+
+				JObject userdata = new JObject ();
+				metadata.userdata = userdata;
+
+
+				userdata["shapeList"] = shapeList;
 
 				if (useLocation) {
-					metadata["location"] = new JObject ();
-					metadata["location"]["latitude"] = locationInfo.latitude;
-					metadata["location"]["longitude"] = locationInfo.longitude;
-					metadata["location"]["altitude"] = locationInfo.altitude;
+					metadata.location = new LibPlacenote.MapLocation();
+					metadata.location.latitude = locationInfo.latitude;
+					metadata.location.longitude = locationInfo.longitude;
+					metadata.location.altitude = locationInfo.altitude;
 				}
-				LibPlacenoteHelper.SetMetadata (mapId, metadata);
+				LibPlacenote.Instance.SetMetadata (mapId, metadata);
+				mCurrMapDetails = metadata;
 			},
 			(completed, faulted, percentage) => {}
 		);

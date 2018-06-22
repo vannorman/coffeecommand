@@ -250,11 +250,11 @@ namespace Wrld.MapCamera
                 bool touchHandled = false;
                 if (m_isTouchSupported)
                 {
-                    touchHandled = HandleTouchInput();
+//                    touchHandled = HandleTouchInput();
                 }
                 if(!touchHandled && m_isMouseSupported)
                 {
-                    HandleMouseInput();
+//                    HandleMouseInput();
                 }
             }
 

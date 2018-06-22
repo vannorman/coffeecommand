@@ -51,7 +51,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Placenote\Editor\APIKeyCheck.cs" />
      <Compile Include="Assets\Placenote\Editor\LibraryCheck.cs" />
+     <Compile Include="Assets\Placenote\Editor\PlacenoteVersionInfo.cs" />
+     <Compile Include="Assets\Placenote\Editor\PostBuildTrigger.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\MeshCombiner\Scripts\Editor\MeshToolsMenu.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\PivotEditor\Scripts\Editor\MeshToolsMenu.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\PivotEditor\Scripts\Editor\PivotPointEditor.cs" />
@@ -137,7 +140,7 @@
  <HintPath>/Applications/Unity 2017.3/Unity 2017.3.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="Newtonsoft.Json">
- <HintPath>/Users/zannorman/Work/Vertical/CoffeeCommand/Assets/Unity Utilities/SaladLab/Json.Net.Unity3D/Plugins/Newtonsoft.Json.dll</HintPath>
+ <HintPath>/Users/zannorman/Work/Vertical/CoffeeCommand/Assets/WanzyeeStudio/ThirdParty/SaladLab/Json.Net.Unity3D/Plugins/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>/Users/zannorman/Library/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
