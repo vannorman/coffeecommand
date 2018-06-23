@@ -33,6 +33,7 @@ public class ShapeList
 
 public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 {
+	public GameObject onionPrefab;
 	[SerializeField] GameObject mMapSelectedPanel;
 	[SerializeField] GameObject mInitButtonPanel;
 	[SerializeField] GameObject mMappingButtonPanel;
@@ -41,13 +42,13 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 	[SerializeField] GameObject mListElement;
 	[SerializeField] RectTransform mListContentParent;
 	[SerializeField] ToggleGroup mToggleGroup;
-	[SerializeField] GameObject mPlaneDetectionToggle;
+//	[SerializeField] GameObject mPlaneDetectionToggle;
 	[SerializeField] Text mLabelText;
 	[SerializeField] public Material mShapeMaterial;
 	[SerializeField] PlacenoteARGeneratePlane mPNPlaneManager;
-	[SerializeField] Slider mRadiusSlider;
+//	[SerializeField] Slider mRadiusSlider;
 	[SerializeField] float mMaxRadiusSearch;
-	[SerializeField] Text mRadiusLabel;
+//	[SerializeField] Text mRadiusLabel;
 
 	private UnityARSessionNativeInterface mSession;
 	private bool mFrameUpdated = false;
@@ -74,6 +75,28 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 	private CapsuleCollider mCapColliderDummy;
 
 
+
+	#region testing / not user accessible
+	public void PlaceOneOnion(){
+		ClearOnions ();
+		PlaceOnion ();
+	}
+
+	public void PlaceOnion(){
+		GameObject onion = (GameObject)Instantiate (onionPrefab, Camera.main.transform.position + Camera.main.transform.forward * 2f, Quaternion.identity);
+	}
+	public void ClearOnions(){
+		foreach (MetalOnion mo in FindObjectsOfType<MetalOnion>()) {
+			Destroy (mo.gameObject);
+		}
+	}
+	#endregion
+
+
+	void SpawnDogs(){
+		FindObjectOfType<Dogs> ().SpawnDogs();
+	}
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -84,9 +107,9 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 		mSession = UnityARSessionNativeInterface.GetARSessionNativeInterface ();
 		UnityARSessionNativeInterface.ARFrameUpdatedEvent += ARFrameUpdated;
 		StartARKit ();
-		FeaturesVisualizer.EnablePointcloud ();
+		CoffeeCommandFeaturesVisualizer.EnablePointcloud ();
 		LibPlacenote.Instance.RegisterListener (this);
-		mRadiusSlider.value = 1.0f;
+//		mRadiusSlider.value = 1.0f;
 	}
 
 
@@ -160,7 +183,7 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 
 		mMapListPanel.SetActive (true);
 		mInitButtonPanel.SetActive (false);
-		mRadiusSlider.gameObject.SetActive (true);
+//		mRadiusSlider.gameObject.SetActive (true);
 		LibPlacenote.Instance.ListMaps ((mapList) => {
 			// render the map list!
 			foreach (LibPlacenote.MapInfo mapId in mapList) {
@@ -172,29 +195,29 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 		});
 	}
 
-	public void OnRadiusSelect ()
-	{
-		Debug.Log ("Map search:" + mRadiusSlider.value.ToString("F2"));
-		LocationInfo locationInfo = Input.location.lastData;
-
-		foreach (Transform t in mListContentParent.transform) {
-			Destroy (t.gameObject);
-		}
-
-		float radiusSearch = mRadiusSlider.value * mMaxRadiusSearch;
-		mRadiusLabel.text = "Distance Filter: " + (radiusSearch / 1000.0).ToString ("F2") + " km";
-
-		LibPlacenote.Instance.SearchMaps(locationInfo.latitude, locationInfo.longitude, radiusSearch, 
-			(mapList) => {
-				// render the map list!
-				foreach (LibPlacenote.MapInfo mapId in mapList) {
-					if (mapId.metadata.userdata != null) {
-						Debug.Log(mapId.metadata.userdata.ToString (Formatting.None));
-					}
-					AddMapToList (mapId);
-				}
-			});
-	}
+//	public void OnRadiusSelect ()
+//	{
+//		Debug.Log ("Map search:" + mRadiusSlider.value.ToString("F2"));
+//		LocationInfo locationInfo = Input.location.lastData;
+//
+//		foreach (Transform t in mListContentParent.transform) {
+//			Destroy (t.gameObject);
+//		}
+//
+//		float radiusSearch = mRadiusSlider.value * mMaxRadiusSearch;
+//		mRadiusLabel.text = "Distance Filter: " + (radiusSearch / 1000.0).ToString ("F2") + " km";
+//
+//		LibPlacenote.Instance.SearchMaps(locationInfo.latitude, locationInfo.longitude, radiusSearch, 
+//			(mapList) => {
+//				// render the map list!
+//				foreach (LibPlacenote.MapInfo mapId in mapList) {
+//					if (mapId.metadata.userdata != null) {
+//						Debug.Log(mapId.metadata.userdata.ToString (Formatting.None));
+//					}
+//					AddMapToList (mapId);
+//				}
+//			});
+//	}
 
 	public void OnCancelClick ()
 	{
@@ -208,11 +231,11 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 	{
 		mInitButtonPanel.SetActive (true);
 		mExitButton.SetActive (false);
-		mPlaneDetectionToggle.SetActive (false);
+//		mPlaneDetectionToggle.SetActive (false);
 
 		//clear all existing planes
 		mPNPlaneManager.ClearPlanes ();
-		mPlaneDetectionToggle.GetComponent<Toggle>().isOn = false;
+//		mPlaneDetectionToggle.GetComponent<Toggle>().isOn = false;
 
 		LibPlacenote.Instance.StopSession ();
 	}
@@ -233,7 +256,7 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 		// Triggered by MapLocationSelectionManager
 		mSelectedMapInfo = mapInfo;
 		mMapSelectedPanel.SetActive (true);
-		mRadiusSlider.gameObject.SetActive (false);
+//		mRadiusSlider.gameObject.SetActive (false);
 	}
 
 
@@ -255,7 +278,7 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 					mMapListPanel.SetActive (false);
 					mInitButtonPanel.SetActive (false);
 					mExitButton.SetActive (true);
-					mPlaneDetectionToggle.SetActive(true);
+//					mPlaneDetectionToggle.SetActive(true);
 
 					LibPlacenote.Instance.StartSession ();
 
@@ -319,7 +342,7 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 		mLabelText.text = "Started map.";
 		mInitButtonPanel.SetActive (false);
 		mMappingButtonPanel.SetActive (true);
-		mPlaneDetectionToggle.SetActive (true);
+//		mPlaneDetectionToggle.SetActive (true);
 		Debug.Log ("Started Session");
 		LibPlacenote.Instance.StartSession ();
 
@@ -336,12 +359,10 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 				});
 			Debug.Log ("Started Debug Report");
 		}
-
+		Invoke ("PlaceOneOnion", 2f);
+		Invoke ("SpawnDogs", 2f);
 	}
 
-	public void OnTogglePlaneDetection() {
-		ConfigureSession (true);
-	}
 
 	private void StartARKit ()
 	{
@@ -395,11 +416,11 @@ public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 				mSaveMapId = mapId;
 				mInitButtonPanel.SetActive (true);
 				mMappingButtonPanel.SetActive (false);
-				mPlaneDetectionToggle.SetActive (false);
+//				mPlaneDetectionToggle.SetActive (false);
 
 				//clear all existing planes
 				mPNPlaneManager.ClearPlanes ();
-				mPlaneDetectionToggle.GetComponent<Toggle>().isOn = false;
+//				mPlaneDetectionToggle.GetComponent<Toggle>().isOn = false;
 
 				LibPlacenote.MapMetadataSettable metadata = new LibPlacenote.MapMetadataSettable();
 				metadata.name = RandomName.Get ();

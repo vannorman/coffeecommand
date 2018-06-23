@@ -343,8 +343,16 @@ public class MetalOnion : MonoBehaviour {
 	void GetPlaneWithHighestPointScore(){
 	
 		GameObject nearest = CC.onionLocationHelper.GetNearestPlane (this.transform, 1.5f);
-		if (nearest)
-			SetTarget (nearest.transform.position);
+		if (nearest) {
+			PlaneInfo pi = nearest.GetComponent<PlaneInfo> ();
+			if (pi) {
+				SetTarget (pi.GetPlaneCenter ());
+			} else {
+				// it was a fake!
+				SetTarget(nearest.transform.position);
+			}
+		}
+//			SetTarget (nearest.GetPlaneCenter());
 		else {
 			Debug.LogError ("no nearest!");
 		}

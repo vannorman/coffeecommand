@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/_scenes/CC - Full Game.unity
+- path: Assets/Depth Mask Shader/_SCENE_.unity
   isLoaded: 1
   isActive: 1

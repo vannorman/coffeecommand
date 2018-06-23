@@ -14,7 +14,7 @@ public class DamageReceiver : MonoBehaviour {
 //	public string messageToSend;
 
 	public bool DirectionValid(Vector3 dir){
-		float angle =  Vector3.Angle (dir, transform.TransformVector (localDir));
+		float angle =  Vector3.Angle (-Camera.main.transform.forward, transform.TransformVector (localDir));
 //		Debug.Log ("direction valid?" + dir+", angle:"+angle);
 		if (angle < angleToTakeDamage) {
 			//				Debug.Log ("Bad angle, no dam");

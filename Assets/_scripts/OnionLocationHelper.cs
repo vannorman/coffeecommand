@@ -146,6 +146,8 @@ public class OnionLocationHelper : MonoBehaviour {
 
 
 
+
+
 	float planeSeekTimer = 0f;
 	float nearestPlaneSeekInterval = 0.3f;
 //	Dictionary<Transform,GameObject> cachedPlanes = new Dictionary<Transform, GameObject>();
@@ -160,7 +162,9 @@ public class OnionLocationHelper : MonoBehaviour {
 			float score = 0;
 			Vector3[] pts = CC.featuresVisualizer.CurrentGreenPoints;
 			for (int j = 0; j < pts.Length; j++) {
-				score += Mathf.Min (1, 1 / (pts [j] - planes [i].transform.position).magnitude);
+				Vector3 meshCenter = planes[i].GetPlaneCenter ();
+//				score += Mathf.Min (1, 1 / (pts [j] - planes [i].transform.position).magnitude);
+				score += Mathf.Min (1, 1 / (pts [j] - meshCenter).magnitude);
 			}
 			scoredPlanes.Add (planes [i], score);
 		}

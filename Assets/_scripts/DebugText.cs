@@ -32,6 +32,7 @@ public class DebugText : MonoBehaviour {
 	string overflow = "";
 	string seekPlanes = "";
 	void Update () {
+		return;
 		
 		t.text = ""
 //		+ brownDots + "\n"

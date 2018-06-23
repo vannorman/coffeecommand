@@ -95,6 +95,7 @@
      <Compile Include="Assets\_scripts\PlaneAnchorManager.cs" />
      <Compile Include="Assets\_scripts\PlaneInfo.cs" />
      <Compile Include="Assets\_scripts\RecordPosition.cs" />
+     <Compile Include="Assets\_scripts\Rotate.cs" />
      <Compile Include="Assets\_scripts\RotateInterval.cs" />
      <Compile Include="Assets\_scripts\SelectedMarkerFx.cs" />
      <Compile Include="Assets\_scripts\ShipDamageReceiver.cs" />
@@ -122,6 +123,7 @@
      <Compile Include="Assets\Placenote\LibPlacenote\PlacenoteListener.cs" />
      <Compile Include="Assets\Placenote\LibPlacenote\PNUtility.cs" />
      <Compile Include="Assets\ShipWeaponsLaser.cs" />
+     <Compile Include="Assets\SpiralTextureAnimation.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\Integration\IntegrationCommon.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\Integration\MeshCombinerIntegration.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\Integration\MeshDeformerIntegration.cs" />
@@ -372,6 +374,7 @@
      <None Include="Assets\Unity Utilities\Shaders\Toony-LightedOutlineScroll.shader" />
      <None Include="Assets\Wrld\3rd Party Licenses\libs\libktx.txt" />
      <None Include="Assets\Wrld\3rd Party Licenses\fonts\IPA_font.txt" />
+     <None Include="Assets\Depth Mask Shader\Materials\Ball.shader" />
      <None Include="Assets\Unity Utilities\Shaders\Toony-OutlineOnly.shader" />
      <None Include="Assets\Wrld\3rd Party Licenses\libs\mt19937ar.c.txt" />
      <None Include="Assets\Wrld\AssetData\Windows\FrankBold50_A8_icons.fnt" />
@@ -409,9 +412,11 @@
      <None Include="Assets\Placenote\Shaders\PointCloud.shader" />
      <None Include="Assets\UnityARKitPlugin\Plugins\iOS\UnityARKit\Shaders\YUVShader.shader" />
      <None Include="Assets\Wrld\3rd Party Licenses\libs\libcares.txt" />
+     <None Include="Assets\Depth Mask Shader\Materials\DepthMask.shader" />
      <None Include="Assets\Unity Utilities\Shaders\Toony-ScrollTexture.shader" />
      <None Include="Assets\Unity Utilities\Shaders\Toony-Basic _OLD.shader" />
      <None Include="Assets\Unity Utilities\Shaders\Toony-Lighted-Transparent.shader" />
+     <None Include="Assets\Depth Mask Shader\Materials\KickOutHole.shader" />
      <None Include="Assets\Wrld\AssetData\iOS\FrankBold50_A8_icons.fnt" />
      <None Include="Assets\Placenote\Shaders\VertexColorPointCloud.shader" />
      <None Include="Assets\Wrld\Shaders\UnityVCShadow.cginc" />

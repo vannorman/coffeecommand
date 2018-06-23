@@ -47,7 +47,6 @@ public class ShipDamageReceiver : MonoBehaviour {
 	void DamageOver () {
 		if (buttonDisabled) {
 			buttonDisabled.gameObject.SetActive (false);
-//			CC.shipWeapons.weaponsOnline = true;
 		}
 	}
 }
