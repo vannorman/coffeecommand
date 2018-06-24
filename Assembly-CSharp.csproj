@@ -57,7 +57,6 @@
      <Compile Include="Assets\_scripts\BounceProjectile.cs" />
      <Compile Include="Assets\_scripts\CC.cs" />
      <Compile Include="Assets\_scripts\CCFeaturesManager.cs" />
-     <Compile Include="Assets\_scripts\CCGameManager.cs" />
      <Compile Include="Assets\_scripts\Cheats.cs" />
      <Compile Include="Assets\_scripts\CoffeeCommandFeaturesVisualizer.cs" />
      <Compile Include="Assets\_scripts\CoffeeCommandSettings.cs" />
@@ -70,6 +69,7 @@
      <Compile Include="Assets\_scripts\DebugPerformance.cs" />
      <Compile Include="Assets\_scripts\DebugText.cs" />
      <Compile Include="Assets\_scripts\DestroyOnImpact.cs" />
+     <Compile Include="Assets\_scripts\DetectMapLocationClick.cs" />
      <Compile Include="Assets\_scripts\DishGroup.cs" />
      <Compile Include="Assets\_scripts\Dogs.cs" />
      <Compile Include="Assets\_scripts\DogShip.cs" />
@@ -77,11 +77,11 @@
      <Compile Include="Assets\_scripts\FireInterval.cs" />
      <Compile Include="Assets\_scripts\FPS_Counter.cs" />
      <Compile Include="Assets\_scripts\FX.cs" />
+     <Compile Include="Assets\_scripts\GameManager.cs" />
      <Compile Include="Assets\_scripts\GrowOverTime.cs" />
      <Compile Include="Assets\_scripts\JsonTest.cs" />
      <Compile Include="Assets\_scripts\LibPlacenoteHelper.cs" />
      <Compile Include="Assets\_scripts\LoadSceneButton.cs" />
-     <Compile Include="Assets\_scripts\MapLocationSelectionManager.cs" />
      <Compile Include="Assets\_scripts\MapMarkerInfo.cs" />
      <Compile Include="Assets\_scripts\MetalOnion.cs" />
      <Compile Include="Assets\_scripts\ObjectDetector.cs" />
@@ -89,9 +89,9 @@
      <Compile Include="Assets\_scripts\OnionDetector.cs" />
      <Compile Include="Assets\_scripts\OnionLocationHelper.cs" />
      <Compile Include="Assets\_scripts\ParticlePainter.cs" />
-     <Compile Include="Assets\_scripts\PhoneDataComm.cs" />
      <Compile Include="Assets\_scripts\PhoneOrientation.cs" />
      <Compile Include="Assets\_scripts\PhoneUI.cs" />
+     <Compile Include="Assets\_scripts\PlaceSelectionManager.cs" />
      <Compile Include="Assets\_scripts\PlaneAnchorManager.cs" />
      <Compile Include="Assets\_scripts\PlaneInfo.cs" />
      <Compile Include="Assets\_scripts\RecordPosition.cs" />
@@ -104,6 +104,7 @@
      <Compile Include="Assets\_scripts\SmoothFollowTarget.cs" />
      <Compile Include="Assets\_scripts\Tendril.cs" />
      <Compile Include="Assets\_scripts\UserDataManager.cs" />
+     <Compile Include="Assets\InstanceSetter.cs" />
      <Compile Include="Assets\LaserBullet.cs" />
      <Compile Include="Assets\Placenote\Examples\KeyboardMover.cs" />
      <Compile Include="Assets\Placenote\Examples\MapInfoElement.cs" />
