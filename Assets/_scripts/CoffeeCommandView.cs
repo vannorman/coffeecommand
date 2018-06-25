@@ -391,6 +391,7 @@ namespace CoffeeCommand {
 
 
 			mLabelText.text = "Saving...";
+
 			LibPlacenote.Instance.SaveMap (
 				(mapId) => {
 					LibPlacenote.Instance.StopSession ();
@@ -407,19 +408,30 @@ namespace CoffeeCommand {
 					metadata.name = RandomName.Get ();
 					mLabelText.text = "Saved Map Name: " + metadata.name;
 
-
-					metadata.userdata = UserDataManager.localDataObject;
-
-
-
 					if (useLocation) {
 						mLabelText.text = "location!";
 						metadata.location = new LibPlacenote.MapLocation();
 						metadata.location.latitude = locationInfo.latitude;
 						metadata.location.longitude = locationInfo.longitude;
 						metadata.location.altitude = locationInfo.altitude;
+						
 					} else {
 						Debug.Log("no loc");
+					}
+
+
+					// Are we updating an old map, or saving a brand new place?
+					if (UserDataManager.loadedExistingMap){
+						// Go ahead and upload this map but make it invisible
+						metadata.userdata["invisible"] = true;
+
+						// Also, modify the map ID we loaded earlier
+						LibPlacenote.Instance.SetMetadata (UserDataManager.loadedMapPlaceId, metadata);
+
+					} else {
+						// Save a brand new map normally
+						metadata.userdata = UserDataManager.localDataObject;
+//						LibPlacenote.Instance.SetMetadata (mapId, metadata);
 					}
 					LibPlacenote.Instance.SetMetadata (mapId, metadata);
 					mCurrMapDetails = metadata;
