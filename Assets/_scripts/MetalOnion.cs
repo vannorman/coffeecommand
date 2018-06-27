@@ -24,7 +24,7 @@ namespace CoffeeCommand {
 			Unwrapped
 		}
 
-		public GameObject oilDerrick;
+		public GameObject blackHole;
 		public GameObject onionGraphics;
 		public GameObject face;
 
@@ -56,34 +56,15 @@ namespace CoffeeCommand {
 			if (stateOnStart) {
 				SetState (state);
 			}
-//			DebugText.SetOnionCount(FindObjectsOfType<MetalOnion>().Length.ToString());
 
-			flag.SetColors (UserDataManager.GetPlaceOwnersFlag);
-//			if (UserDataManager.loadedExistingMap) {
-//
-//				flag.SetColors(UserDataManager.LocalData.mine.owner.flag.flagColors);
-//			} else {
-//			
-//				flag.SetColors (FlagSetup.GetRandomColors());
-//			}
-
-
-
-
-
-
-
-
-
+			flag.SetColors (UserDataManager.Flag.GetPlaceOwnerColors);
 		}
 
 		public void SetState(State newState){
-	//		Debug.Log ("state:" + newState);
 			state = newState;
-	//		DebugText.SetOnionState (state.ToString());
 			face.SetActive (false);
 			onionGraphics.SetActive (false);
-			oilDerrick.SetActive (false);
+			blackHole.SetActive (false);
 			dishGroup.gameObject.SetActive(false);
 			switch (state) {
 			case State.Floating:
@@ -91,12 +72,13 @@ namespace CoffeeCommand {
 				onionGraphics.SetActive (true);
 				break;
 			case State.Unwrapping:
-				onionGraphics.SetActive (true);
+//				onionGraphics.SetActive (true);
+				blackHole.gameObject.SetActive(true);
 				dishGroup.gameObject.SetActive (true);
 				break;
 			case State.Unwrapped: 
 				
-				oilDerrick.SetActive (true);
+				blackHole.SetActive (true);
 				transform.rotation = Quaternion.identity;
 				break;
 			default:
@@ -124,15 +106,41 @@ namespace CoffeeCommand {
 			}
 		}
 
-		public void OnDishGroupDestroyed(){
-			// Change ownership of this to the current user.
-			UserDataManager.MakeCurrentUserThePlaceOwner();
-			flag.SetColors(UserDataManager.GetLocalFlagColors);// FlagSetup.inst.GetFlagColors());
+		public void StupidCallback() {
+			CLogger.Log ("stupid ones working");
+			// the savenow (cb)=> works in editor but not build , no idea why
+			Debug.Log("cb happening");
+			CLogger.Log("cb happening.");
+			UserDataManager.User localUser = UserDataManager.LocalUser;
+			UserDataManager.ChangePlaceOwner(localUser);
+			CLogger.Log("changed owner.");
+			flag.SetColors(UserDataManager.Flag.GetLocalColors);
 			dishGroup.gameObject.SetActive (false);
 			SetState (State.Unwrapped);
+		}
+		public void OnDishGroupDestroyed(){
+			CLogger.Log("dish group destroyed.");
+//			return;
+			CoffeeCommandView.inst.SaveMapNow ((cb) => {
+				Debug.Log("cb happening:"+cb);
+				CLogger.Log("cb happening.");
+				UserDataManager.User localUser = UserDataManager.LocalUser;
+				UserDataManager.ChangePlaceOwner(localUser);
+				CLogger.Log("changed owner.");
+				flag.SetColors(UserDataManager.Flag.GetLocalColors);
+				dishGroup.gameObject.SetActive (false);
+				SetState (State.Unwrapped);
+//				return;
+			});
+//			return;
+			// Change ownership of this to the current user.
+//			CLogger.Log("dish group destroyed.");
+//			UserDataManager.Save
 			// You destroyed this onion, so set it to your colors now
 
 		}
+
+
 
 		Vector3 targetPos;
 
@@ -334,13 +342,13 @@ namespace CoffeeCommand {
 					}
 					break;
 				case MovementState.Stationary:
-					if (UserDataManager.loadedExistingMap) {
-						SetState (State.Unwrapped);
-						AddArmor ();
-						// Flag remains the colors of the previous player
-					} else {
-						SetState (State.Unwrapping);
-					}
+//					if (UserDataManager.loadedExistingMap) {
+//						SetState (State.Unwrapped);
+//						AddArmor ();
+//						// Flag remains the colors of the previous player
+//					} else {
+					SetState (State.Unwrapping);
+//					}
 
 					break;
 				default:
@@ -359,8 +367,11 @@ namespace CoffeeCommand {
 				mineTimer -= Time.deltaTime;
 				if (mineTimer < 0) {
 					mineTimer = 1;
-					FindObjectOfType<Coins> ().EarnCoin (1);
 					CoinFx ();
+					Debug.Log ("user collect mine.");
+					UserDataManager.CollectCurrentMineCoins ();
+
+//					FindObjectOfType<Coins> ().EarnCoin (1);
 				}
 				break;
 			default:

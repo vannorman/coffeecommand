@@ -13,11 +13,11 @@ namespace CoffeeCommand {
 		void Start () {
 			startPos = transform.position;
 			if (UserDataManager.loadedExistingMap) {
-				flag.SetColors (UserDataManager.GetPlaceOwnersFlag);
+				flag.SetColors (UserDataManager.Flag.GetPlaceOwnerColors);
 			} else {
-				Color[] cols = FlagSetup.GetRandomColors();
+//				Color[] cols = Utils2.GetRandomColors(3);
 //				Debug.Log("cols 0:"+cols[0]);
-				flag.SetColors (cols);
+				flag.SetColors (UserDataManager.Flag.GetNpcColors);
 			}
 		}
 
@@ -54,7 +54,7 @@ namespace CoffeeCommand {
 		}
 
 		void OnDestroy(){
-			FindObjectOfType<Coins> ().EarnCoin (coinValue);
+			UserDataManager.LocalCoins += 5;
 		}
 	}
 

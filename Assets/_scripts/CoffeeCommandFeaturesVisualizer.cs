@@ -106,8 +106,9 @@ namespace CoffeeCommand {
 		/// <summary>
 		/// Disable rendering of pointclouds collected from LibPlacenote
 		/// </summary>
-		public static void DisablePointcloud ()
+		public void DisablePointcloud ()
 		{
+			mMap.GetComponent<MeshRenderer> ().enabled = false;
 			sInstance.CancelInvoke ();
 		}
 
@@ -165,8 +166,8 @@ namespace CoffeeCommand {
 				}
 			}
 
-			DebugText.SetGreenDots (totGreen.ToString ());
-			DebugText.SetBrownDots (totBrown.ToString ());
+//			DebugText.SetGreenDots (totGreen.ToString ());
+//			DebugText.SetBrownDots (totBrown.ToString ());
 			FindObjectOfType<BatteryUpload> ().SetFillAmount ((float)totGreen / 50f);
 			// Need to update indicies too!
 			int[] indices = new int[map.Length];

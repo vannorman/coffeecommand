@@ -103,10 +103,13 @@
      <Compile Include="Assets\_scripts\Tendril.cs" />
      <Compile Include="Assets\_scripts\UserDataManager.cs" />
      <Compile Include="Assets\_scripts\WaveFlag.cs" />
+     <Compile Include="Assets\CallbackTest.cs" />
+     <Compile Include="Assets\ClearPlayerPrefsOnClick.cs" />
      <Compile Include="Assets\CLogger.cs" />
      <Compile Include="Assets\FlagSetup.cs" />
      <Compile Include="Assets\InGameFlag.cs" />
      <Compile Include="Assets\InstanceSetter.cs" />
+     <Compile Include="Assets\KillOnion.cs" />
      <Compile Include="Assets\LaserBullet.cs" />
      <Compile Include="Assets\Placenote\Examples\KeyboardMover.cs" />
      <Compile Include="Assets\Placenote\Examples\MapInfoElement.cs" />
@@ -125,6 +128,7 @@
      <Compile Include="Assets\Placenote\LibPlacenote\PlacenoteCameraManager.cs" />
      <Compile Include="Assets\Placenote\LibPlacenote\PlacenoteListener.cs" />
      <Compile Include="Assets\Placenote\LibPlacenote\PNUtility.cs" />
+     <Compile Include="Assets\SetCameraFlags.cs" />
      <Compile Include="Assets\SetTexture.cs" />
      <Compile Include="Assets\ShipWeaponsLaser.cs" />
      <Compile Include="Assets\SpiralTextureAnimation.cs" />

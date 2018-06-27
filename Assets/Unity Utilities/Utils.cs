@@ -23,6 +23,15 @@ public static class Utils2 {
 			cp.z > 0;
 	}
 
+	public static Color[] GetRandomColors (int count) {
+		Color[] randColors = new Color[count];
+		for (int i = 0; i < randColors.Length; i++) {
+			randColors[i] = Random.ColorHSV ();
+
+		}
+		return randColors;
+	}
+
 	public static float HighestY(Transform tt){
 		// Takes the transformand all children and goes through each inddividual mesh's world bounds to figure out what is the highest worldspace point occupied by any child
 		// Useful if you want to know what the highest position of a group of objects is in world space, e.g. "does this group of objects cross some surface of height Y"
