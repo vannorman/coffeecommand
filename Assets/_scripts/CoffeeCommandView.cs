@@ -41,7 +41,7 @@ namespace CoffeeCommand {
 		private UnityARCamera mARCamera;
 		private bool mARKitInit = false;
 		private List<GameObject> shapeObjList = new List<GameObject> ();
-		private LibPlacenote.MapMetadataSettable mCurrMapDetails;
+//		private LibPlacenote.MapMetadataSettable mCurrMapDetails;
 
 		private bool mReportDebug = false;
 
@@ -263,8 +263,9 @@ namespace CoffeeCommand {
 					});
 				Debug.Log ("Started Debug Report");
 			}
-			Invoke ("PlaceOneOnion", 2f);
+			Invoke ("PlaceOneOnion", 5f);
 			Invoke ("SpawnDogs", 2f);
+			Invoke ("SpawnDogs", 5f);
 		}
 
 
@@ -338,7 +339,7 @@ namespace CoffeeCommand {
 
 
 						// Go ahead and upload this map but make it invisible
-						UserDataManager.CoffeeCommandObject invisibleData = UserDataManager.InitCoffeeCommandObject();
+						UserDataManager.CoffeeCommandObject invisibleData = UserDataManager.InitCoffeeCommandObject("invisible");
 						invisibleData.invisible = true; // needlessly complex obhect .. should just be a json with a bool
 						LibPlacenote.MapMetadataSettable metadataInvisible = new LibPlacenote.MapMetadataSettable();
 						metadataInvisible.userdata = JObject.FromObject(invisibleData);
@@ -361,12 +362,15 @@ namespace CoffeeCommand {
 							
 							replacementMetadata.userdata = JObject.FromObject(UserDataManager.LocalData);
 							replacementMetadata.name = UserDataManager.LocalData.mapName;
+
 							
 							// Also, modify the map ID we loaded earlier
 							LibPlacenote.Instance.SetMetadata (UserDataManager.loadedMapPlaceId, replacementMetadata);
 							CLogger.Log("Save: 5a3 overwrite metadata with id:"+UserDataManager.loadedMapPlaceId);
-							mCurrMapDetails = replacementMetadata;
 						});
+//						mCurrMapDetails = new LibPlacenote.MapMetadataSettable();
+//						mCurrMapDetails.name = "Saved over existing, waiting for cb";
+//						mCurrMapDetails.userdata = JObject.FromObject(UserDataManager.LocalData);
 
 					} else {
 						// Brand new map
@@ -386,7 +390,7 @@ namespace CoffeeCommand {
 						UserDataManager.loadedMapPlaceId = mapId;
 
 						metadata.userdata = JObject.FromObject(UserDataManager.LocalData);
-						mCurrMapDetails = metadata;
+//						mCurrMapDetails = metadata;
 						LibPlacenote.Instance.SetMetadata (mapId, metadata);
 						CLogger.Log("saved new map w location:"+metadata.location.latitude+","+metadata.location.longitude+".");
 
@@ -398,7 +402,10 @@ namespace CoffeeCommand {
 					if (completed) {
 						CLogger.Log ("Save: 7 .. complete");
 						cbFunc();
-						mLabelText.text = "Upload Complete:" + mCurrMapDetails.name;
+						CLogger.Log("cb finished.");
+//						CLogger.Log("mcurrmapdetails:"+mCurrMapDetails.ToString());
+//						CLogger.Log("mcurrmapdetails name:"+mCurrMapDetails.name);
+						mLabelText.text = "Upload Complete:";// + mCurrMapDetails.name;
 						CLogger.Log ("Save: 8 . callback complete");
 						if (UserDataManager.loadedExistingMap){
 							ToastManager.ShowToast("Success! You took over this mine.");
@@ -409,10 +416,10 @@ namespace CoffeeCommand {
 						CLogger.Log("Callback should have been called");
 					}
 					else if (faulted) {
-						mLabelText.text = "Upload of Map Named: " + mCurrMapDetails.name + "faulted";
+						mLabelText.text = "Upload of Map Named: " ; //+ mCurrMapDetails.name + "faulted";
 					}
 					else {
-						mLabelText.text = "Uploading Map Named: " + mCurrMapDetails.name + "(" + percentage.ToString("F2") + "/1.0)";
+						mLabelText.text = "Uploading Map Named: " ; //+ mCurrMapDetails.name + "(" + percentage.ToString("F2") + "/1.0)";
 					}
 				}
 
@@ -444,22 +451,67 @@ namespace CoffeeCommand {
 
 		public GameObject harvestCoinsButton;
 		public void HarvestCoinsNow(){
+			harvestCoinsButton.SetActive (false);
+			mLabelText.text = "Harvesting - PLEASE WAIT";
 			if (!UserDataManager.loadedExistingMap) {
 				// New map gives the default num of coins
 				int ct = UserDataManager.LocalData.mine.coins.count;
+				if (ct < 5) {
+					mLabelText.text = "You're done! Go find another location.";
+					ToastManager.ShowToast ("There aren't enough coins to harvest. Come back tomorrow.");
+					return;
+				}
 				UserDataManager.LocalCoins += ct;
 				UserDataManager.LocalData.mine.coins.count = 0;
-				ToastManager.ShowToast ("You collected " + ct + " coins from a new mine!");
+				ToastManager.ShowToast ("You are collected " + ct + " coins from a new mine!");
+				harvestCoinsButton.SetActive (true);
+				mLabelText.text = "Harvesting Complete!";
 
 			} else {
 
 				UserDataManager.CollectCurrentMineCoins ( (ct) => {
-					
-					ToastManager.ShowToast ("You conquered this mine and earned " + ct + " coins!");
+					if (ct < 5){
+						mLabelText.text = "You're done! Go find another location.";
+						ToastManager.ShowToast ("There aren't enough coins to harvest. Come back tomorrow.");
+						return;
+					}
+					CLogger.Log("will try to collect "+ct+ " coins");
+					int count = ct;
+					StartCoroutine("TryCollectCoins",count);
+//					StartCoroutine(TryCollectCoins,ct);
+					ToastManager.ShowToast ("You conquered this mine and are collecting " + ct + " coins!");
 				});
 
 				// old map needs to calc the coins
 			}
+		}
+
+		IEnumerator TryCollectCoins(int count){
+			CLogger.Log ("Try collect at:" + Math.Round (Time.time));
+			bool collected = false;
+			int tries = 20;
+			while (collected == false && tries > 0) {
+				yield return new WaitForSeconds (2);
+				LibPlacenote.Instance.GetMetadata (UserDataManager.loadedMapPlaceId, (metadata) => {
+					if (!collected){
+						int secondsDelta = Mathf.RoundToInt((float)(UserDataManager.lastMetaUpdateTime - metadata.userdata.ToObject<UserDataManager.CoffeeCommandObject> ().lastUpdatedTime).TotalSeconds);
+						if (secondsDelta > 1) {
+							CLogger.Log ("Collect failed, delta:" + secondsDelta);		
+						} else {
+							CLogger.Log ("Collect succeess, delta:" + secondsDelta);
+							collected = true;
+							harvestCoinsButton.SetActive(true);
+							mLabelText.text = "Harvesting complete! Now, go find another location.";
+							UserDataManager.LocalCoins += count;
+	//						UserDataManager.
+						
+						}
+					}
+				});
+				tries --;
+
+			}
+			yield break;
 		}
 	}
 

@@ -63,6 +63,7 @@ f61c0793411f10cf5fbfa1473fef5ef2 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 d3aa541a1cb95611e170b3a410b29813 Assembly-CSharp.dll:CoffeeCommand.FlagSetup
 f9c69778548cce6b5c47394489d4cdee Assembly-CSharp.dll:.FPS_Counter
 715a3a5e1e928ce77514d4e84e265356 Assembly-CSharp.dll:UnityEngine.XR.iOS.UnityARHitTestExample
+6af74adfe12505335c37bb0ab8aa5019 Assembly-CSharp.dll:.SinPulsate
 4bcfdf5701fff25ff79477e29e5f9a9d Assembly-CSharp.dll:.FX
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Wrld.MapCamera.StreamingBehaviour
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
@@ -273,11 +274,10 @@ ceafc58e64c8e6a7998f1890398e40a9 Assembly-CSharp.dll:.Projectile
 179196ad7a4b4ea54032fb24e507ecf3 Assembly-CSharp.dll:.ARReferenceImage
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CameraTransitionAnimate
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:CoffeeCommand.CCFeaturesManager
-632facbbf7ad9884ff2a57d24ccbb9aa Assembly-CSharp.dll:CoffeeCommand.InstanceSetter
+dcdec772e5f9dfac5f2d1fe05851ae39 Assembly-CSharp.dll:CoffeeCommand.InstanceSetter
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UnityARKitLightManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SetTexture
 391d84b859f3b155fe38f54bfce79162 Assembly-CSharp.dll:.UnityPointCloudExample
 97f3f2eee235771b3d0dd28fcccb62f7 Assembly-CSharp.dll:Battlehub.MeshTools.Pivot
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UnityARCameraNearFar
 6bfe543a91625f77c304231f45ff6e71 Assembly-CSharp.dll:.ShipWeaponsLaser
-6af74adfe12505335c37bb0ab8aa5019 Assembly-CSharp.dll:.SinPulsate
