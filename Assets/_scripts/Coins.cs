@@ -19,6 +19,9 @@ namespace CoffeeCommand {
 		// Update is called once per frame
 		float t = 0;
 		void Update () {
+			GetComponent<Text> ().text = UserDataManager.LocalCoins.ToString ();
+			return;
+			Debug.Log ("coins:" + UserDataManager.LocalCoins);
 			target = UserDataManager.LocalCoins;
 
 			if (ct != target) {
@@ -27,13 +30,15 @@ namespace CoffeeCommand {
 				float interval = (target - ct) / lerpDuration;
 				if (t < interval) {
 					t = 0;
-					ct = Mathf.Min (ct + 1, target);
+					int increaseAmount = 1; //Mathf.Max(1,Mathf.RoundToInt(Mathf.Pow(Mathf.Abs(ct - target),0.7f)));
+
+					ct = Mathf.Min (ct + increaseAmount, target);
 				}
 				
 			}
 
 				
-			GetComponent<Text> ().text = ct.ToString ();
+//			GetComponent<Text> ().text = UserDataManager.LocalCoins.ToString ();
 		}
 	}
 

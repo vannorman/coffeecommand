@@ -152,56 +152,7 @@ namespace CoffeeCommand {
 		}
 
 
-	//	public void OnListMapClick ()
-	//	{
-	//		if (!LibPlacenote.Instance.Initialized()) {
-	//			Debug.Log ("SDK not yet initialized");
-	//			ToastManager.ShowToast ("SDK not yet initialized", 2f);
-	//			return;
-	//		}
-	//
-	//		foreach (Transform t in mListContentParent.transform) {
-	//			Destroy (t.gameObject);
-	//		}
-	//
-	//
-	//		mMapListPanel.SetActive (true);
-	//		mInitButtonPanel.SetActive (false);
-	////		mRadiusSlider.gameObject.SetActive (true);
-	//		LibPlacenote.Instance.ListMaps ((mapList) => {
-	//			// render the map list!
-	//			foreach (LibPlacenote.MapInfo mapId in mapList) {
-	//				if (mapId.metadata.userdata != null) {
-	//					Debug.Log(mapId.metadata.userdata.ToString (Formatting.None));
-	//				}
-	//				AddMapToList (mapId);
-	//			}
-	//		});
-	//	}
-
-	//	public void OnRadiusSelect ()
-	//	{
-	//		Debug.Log ("Map search:" + mRadiusSlider.value.ToString("F2"));
-	//		LocationInfo locationInfo = Input.location.lastData;
-	//
-	//		foreach (Transform t in mListContentParent.transform) {
-	//			Destroy (t.gameObject);
-	//		}
-	//
-	//		float radiusSearch = mRadiusSlider.value * mMaxRadiusSearch;
-	//		mRadiusLabel.text = "Distance Filter: " + (radiusSearch / 1000.0).ToString ("F2") + " km";
-	//
-	//		LibPlacenote.Instance.SearchMaps(locationInfo.latitude, locationInfo.longitude, radiusSearch, 
-	//			(mapList) => {
-	//				// render the map list!
-	//				foreach (LibPlacenote.MapInfo mapId in mapList) {
-	//					if (mapId.metadata.userdata != null) {
-	//						Debug.Log(mapId.metadata.userdata.ToString (Formatting.None));
-	//					}
-	//					AddMapToList (mapId);
-	//				}
-	//			});
-	//	}
+	
 
 		public void OnCancelClick ()
 		{
@@ -358,7 +309,7 @@ namespace CoffeeCommand {
 				ToastManager.ShowToast ("SDK not yet initialized", 2f);
 				return;
 			}
-			CLogger.Log ("Saving ..");
+			CLogger.Log ("Save: 0 begin");
 			bool useLocation = Input.location.status == LocationServiceStatus.Running;
 			LocationInfo locationInfo = Input.location.lastData;
 
@@ -374,62 +325,83 @@ namespace CoffeeCommand {
 
 			LibPlacenote.Instance.SaveMap (
 				(mapId) => {
-					CLogger.Log ("Saving .. 2");
+					
 					LibPlacenote.Instance.StopSession ();
 					mSaveMapId = mapId;
-					mInitButtonPanel.SetActive (true);
-					mMappingButtonPanel.SetActive (false);
-	//				mPlaneDetectionToggle.SetActive (false);
-
-					//clear all existing planes
+					CoffeeCommandFeaturesVisualizer.inst.DisablePointcloud();
 					mPNPlaneManager.ClearPlanes ();
-	//				mPlaneDetectionToggle.GetComponent<Toggle>().isOn = false;
-
-					LibPlacenote.MapMetadataSettable metadata = new LibPlacenote.MapMetadataSettable();
-					metadata.name = RandomName.Get ();
-					mLabelText.text = "Saved Map Name: " + metadata.name;
-
-					if (useLocation) {
-						mLabelText.text = "location!";
-						metadata.location = new LibPlacenote.MapLocation();
-						metadata.location.latitude = locationInfo.latitude;
-						metadata.location.longitude = locationInfo.longitude;
-						metadata.location.altitude = locationInfo.altitude;
-						
-					} else {
-						Debug.Log("no loc");
-					}
 
 
-					// Are we updating an old map, or saving a brand new place?
 					if (UserDataManager.loadedExistingMap){
-						CLogger.Log ("Saving .. was existed");
-						// Go ahead and upload this map but make it invisible
-						metadata.userdata["invisible"] = true;
+						CLogger.Log ("Save: 5a1 .. was existed");
 
-						// Also, modify the map ID we loaded earlier
-						LibPlacenote.Instance.SetMetadata (UserDataManager.loadedMapPlaceId, metadata);
+
+
+						// Go ahead and upload this map but make it invisible
+						UserDataManager.CoffeeCommandObject invisibleData = UserDataManager.InitCoffeeCommandObject();
+						invisibleData.invisible = true; // needlessly complex obhect .. should just be a json with a bool
+						LibPlacenote.MapMetadataSettable metadataInvisible = new LibPlacenote.MapMetadataSettable();
+						metadataInvisible.userdata = JObject.FromObject(invisibleData);
+						metadataInvisible.name = "Invisible map at "+System.DateTime.Now;
+
+						if (useLocation) {
+							mLabelText.text = "location!";
+							metadataInvisible.location = new LibPlacenote.MapLocation();
+							metadataInvisible.location.latitude = locationInfo.latitude;
+							metadataInvisible.location.longitude = locationInfo.longitude;
+							metadataInvisible.location.altitude = locationInfo.altitude;
+						} else {
+							Debug.Log("no loc");
+						}
+						CLogger.Log("Save: 5a2 new invisible map with id:"+mapId);
+						LibPlacenote.Instance.SetMetadata (mSaveMapId, metadataInvisible); // this new map is now "invisible"
+
+						// Now, update the former map
+						LibPlacenote.Instance.GetMetadata(UserDataManager.loadedMapPlaceId, (replacementMetadata)=> {
+							
+							replacementMetadata.userdata = JObject.FromObject(UserDataManager.LocalData);
+							replacementMetadata.name = UserDataManager.LocalData.mapName;
+							
+							// Also, modify the map ID we loaded earlier
+							LibPlacenote.Instance.SetMetadata (UserDataManager.loadedMapPlaceId, replacementMetadata);
+							CLogger.Log("Save: 5a3 overwrite metadata with id:"+UserDataManager.loadedMapPlaceId);
+						});
 
 					} else {
-						CLogger.Log ("Saving .. NEW");
-						// Save a brand new map normally
-						metadata.userdata = UserDataManager.localDataObject;
-//						LibPlacenote.Instance.SetMetadata (mapId, metadata);
+						// Brand new map
+						LibPlacenote.MapMetadataSettable metadata = new LibPlacenote.MapMetadataSettable();
+						metadata.name = RandomName.Get ();
+						mLabelText.text = "Saved Map Name: " + metadata.name;
+						if (useLocation) {
+							mLabelText.text = "location!";
+							CLogger.Log("using location.");
+							metadata.location = new LibPlacenote.MapLocation();
+							metadata.location.latitude = locationInfo.latitude;
+							metadata.location.longitude = locationInfo.longitude;
+							metadata.location.altitude = locationInfo.altitude;
+						} else {
+							CLogger.Log("no location?");
+						}
+						UserDataManager.loadedMapPlaceId = mapId;
+
+						metadata.userdata = JObject.FromObject(UserDataManager.LocalData);
+						mCurrMapDetails = metadata;
+						LibPlacenote.Instance.SetMetadata (mapId, metadata);
+						CLogger.Log("saved new map w location:"+metadata.location.latitude+","+metadata.location.longitude+".");
+
 					}
-					LibPlacenote.Instance.SetMetadata (mapId, metadata);
-					mCurrMapDetails = metadata;
-					CLogger.Log ("Saving .. 3");
-					UserDataManager.loadedMapPlaceId = mapId;
+
+
 				},
 				(completed, faulted, percentage) => {
 					if (completed) {
 						
-						CLogger.Log ("Saving .. complete");
-						FindObjectOfType<MetalOnion>().StupidCallback();
-						mLabelText.text = "Upload Complete:" + mCurrMapDetails.name;
-						CLogger.Log ("upload complete text?");
+						CLogger.Log ("Save: 7 .. complete");
 						cbFunc("test");
-						CLogger.Log ("callback should have been called");
+//						FindObjectOfType<MetalOnion>().StupidCallback();
+						mLabelText.text = "Upload Complete:" + mCurrMapDetails.name;
+						CLogger.Log ("Save: 8 . callback complete");
+
 						Debug.Log("Callback should have been called");
 					}
 					else if (faulted) {
@@ -439,6 +411,7 @@ namespace CoffeeCommand {
 						mLabelText.text = "Uploading Map Named: " + mCurrMapDetails.name + "(" + percentage.ToString("F2") + "/1.0)";
 					}
 				}
+
 			);
 		}
 

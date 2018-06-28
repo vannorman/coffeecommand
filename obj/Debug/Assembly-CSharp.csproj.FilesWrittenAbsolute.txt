@@ -149,3 +149,4 @@
 /Users/zannorman/Work/Vertical/CoffeeCommand/Temp/bin/Debug/UnityEditor.iOS.Extensions.Xcode.xml
 /Users/zannorman/Work/Vertical/CoffeeCommand/Temp/bin/Debug/UnityEditor.iOS.Extensions.Common.dll
 /Users/zannorman/Work/Vertical/CoffeeCommand/Temp/bin/Debug/UnityEditor.iOS.Extensions.Common.dll.mdb
+/Users/zannorman/Work/Vertical/CoffeeCommand/Temp/bin/Debug/Mono.CSharp.dll

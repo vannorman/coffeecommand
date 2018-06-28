@@ -58,6 +58,10 @@
      <Compile Include="Assets\Unity Utilities\Battlehub\MeshCombiner\Scripts\Editor\MeshToolsMenu.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\PivotEditor\Scripts\Editor\MeshToolsMenu.cs" />
      <Compile Include="Assets\Unity Utilities\Battlehub\PivotEditor\Scripts\Editor\PivotPointEditor.cs" />
+     <Compile Include="Assets\Unity Utilities\UnityShell\Editor\Scripts\AutocompleteBox.cs" />
+     <Compile Include="Assets\Unity Utilities\UnityShell\Editor\Scripts\AutocompleteProvider.cs" />
+     <Compile Include="Assets\Unity Utilities\UnityShell\Editor\Scripts\ShellEvaluator.cs" />
+     <Compile Include="Assets\Unity Utilities\UnityShell\Editor\Scripts\UnityShellEditorWindow.cs" />
      <Compile Include="Assets\UnityARKitPlugin\Plugins\iOS\UnityARKit\Editor\ARResourcesJSON.cs" />
      <Compile Include="Assets\UnityARKitPlugin\Plugins\iOS\UnityARKit\Editor\UnityARBuildPostprocessor.cs" />
      <Compile Include="Assets\Wrld\Editor\ActiveBuildTargetChangedListener.cs" />
@@ -70,6 +74,7 @@
      <Compile Include="Assets\Wrld\Editor\WillPlayInEditorListener.cs" />
      <Compile Include="Assets\Wrld\Editor\WrldStartupEditor.cs" />
      <Compile Include="Assets\Wrld\Editor\XcodeProjectUpdater.cs" />
+     <None Include="Assets\Unity Utilities\UnityShell\Editor\Docs\LicenseNotice.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity 2017.3/Unity 2017.3.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -141,6 +146,9 @@
  </Reference>
  <Reference Include="Newtonsoft.Json">
  <HintPath>/Users/zannorman/Work/Vertical/CoffeeCommand/Assets/WanzyeeStudio/ThirdParty/SaladLab/Json.Net.Unity3D/Plugins/Newtonsoft.Json.dll</HintPath>
+ </Reference>
+ <Reference Include="Mono.CSharp">
+ <HintPath>/Users/zannorman/Work/Vertical/CoffeeCommand/Assets/Unity Utilities/UnityShell/Editor/Mono.CSharp.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>/Users/zannorman/Library/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>

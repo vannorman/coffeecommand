@@ -43,7 +43,56 @@ public class EditorTools : Editor {
 	//
 
 //[
+	static Event curEv;
+	void OnSceneGui () {
+		curEv = Event.current;
+	}
+
+	[MenuItem("Edit/Editor Tools/Rand Thick _m")]
+	public static void RandThick(){
+		foreach (GameObject o in Selection.gameObjects) {
+			o.transform.localScale = new Vector3 (o.transform.localScale.x, Random.Range (0.1f, 0.5f), o.transform.localScale.z);
+		}
+	}
 		
+
+	[MenuItem("Edit/Editor Tools/Cube Grow J _j")]
+	public static void CubeGrowJ(){
+		GameObject sel = Selection.activeGameObject;
+		Vector3 dir = sel.transform.localScale.x * -sel.transform.right;
+
+		GrowCube (dir);
+	}
+
+	[MenuItem("Edit/Editor Tools/Cube Grow L _l")]
+	public static void CubeGrowL(){
+		GameObject sel = Selection.activeGameObject;
+		Vector3 dir = sel.transform.localScale.x * sel.transform.right;
+		GrowCube (dir);
+	}
+
+	[MenuItem("Edit/Editor Tools/Cube Grow I _i")]
+	public static void CubeGrowI(){
+		GameObject sel = Selection.activeGameObject;
+		Vector3 dir = sel.transform.localScale.x * sel.transform.forward;
+		GrowCube (dir);
+	}
+
+	[MenuItem("Edit/Editor Tools/Cube Grow K _k")]
+	public static void CubeGrowK(){
+		GameObject sel = Selection.activeGameObject;
+		Vector3 dir = sel.transform.localScale.x * -sel.transform.forward;
+		GrowCube (dir);
+	}
+
+
+	static void GrowCube(Vector3 dir){
+		GameObject sel = Selection.activeGameObject;
+		GameObject copy = (GameObject)Instantiate (sel, sel.transform.position + dir, sel.transform.rotation);
+		copy.name = sel.name;
+		Selection.activeGameObject = copy;
+	}
+
 
 	[MenuItem("Edit/Editor Tools/Scene Names")]
 	public static void SceneNames(){

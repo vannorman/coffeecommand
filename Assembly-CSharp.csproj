@@ -119,6 +119,7 @@
      <Compile Include="Assets\Placenote\Examples\PlacenotePlaneUtility.cs" />
      <Compile Include="Assets\Placenote\Examples\PlacenoteSampleTerrain.cs" />
      <Compile Include="Assets\Placenote\Examples\PlacenoteSampleView.cs" />
+     <Compile Include="Assets\Placenote\Examples\PlacenoteWebApi.cs" />
      <Compile Include="Assets\Placenote\Examples\RandomName.cs" />
      <Compile Include="Assets\Placenote\Examples\SimulatorSetSkybox.cs" />
      <Compile Include="Assets\Placenote\Examples\ToastManager.cs" />
@@ -506,6 +507,9 @@
  </Reference>
  <Reference Include="Newtonsoft.Json">
  <HintPath>/Users/zannorman/Work/Vertical/CoffeeCommand/Assets/WanzyeeStudio/ThirdParty/SaladLab/Json.Net.Unity3D/Plugins/Newtonsoft.Json.dll</HintPath>
+ </Reference>
+ <Reference Include="Mono.CSharp">
+ <HintPath>/Users/zannorman/Work/Vertical/CoffeeCommand/Assets/Unity Utilities/UnityShell/Editor/Mono.CSharp.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>/Users/zannorman/Library/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>

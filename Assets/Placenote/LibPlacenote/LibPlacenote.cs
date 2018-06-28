@@ -391,6 +391,7 @@ public class LibPlacenote : MonoBehaviour
 	private List<Action<MapInfo[]>> mapListCbs = new List<Action<MapInfo[]>> ();
 	private Matrix4x4? mCurrentTransform = null;
 
+
 	/// For the Unity Simulator
 
 	/// The Current Map status and current localization status that is used
@@ -1072,7 +1073,7 @@ public class LibPlacenote : MonoBehaviour
 				progressCb (false, true, 0);
 				handle.Free ();
 			} else {
-				Debug.Log ("Uploading map!");
+//				Debug.Log ("Uploading map!");
 				progressCb (false, false, (float)(statusClone.bytesTransferred) / statusClone.bytesTotal);
 			}
 		});

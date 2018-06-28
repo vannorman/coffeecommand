@@ -187,7 +187,7 @@ ee3fbbd6a5ca22984a03af6b0bef4c1e Assembly-CSharp.dll:CoffeeCommand.DishGroup
 5e484a1de47e216946fd3b1f04c6086c Assembly-CSharp.dll:.FireProjectile
 122bf73a429a86e72fd5e7b500cb6359 Assembly-CSharp.dll:.ExampleChanger
 eab8d82998ec2d1e7a271f05645a884d Assembly-CSharp.dll:UnityEngine.XR.iOS.PlacenoteARGeneratePlane
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:CoffeeCommand.CLogger
+30f1ca143404bdebc4370324c50dc859 Assembly-CSharp.dll:CoffeeCommand.CLogger
 63653f6a7204940ccf8403a3c0b93274 Assembly-CSharp.dll:.LibPlacenote
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.FPS
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:CoffeeCommand.JsonTest

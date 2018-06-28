@@ -73,11 +73,12 @@ namespace CoffeeCommand {
 				break;
 			case State.Unwrapping:
 //				onionGraphics.SetActive (true);
+				flag.transform.SetParent(blackHole.transform);
 				blackHole.gameObject.SetActive(true);
 				dishGroup.gameObject.SetActive (true);
 				break;
 			case State.Unwrapped: 
-				
+				flag.transform.SetParent(blackHole.transform);
 				blackHole.SetActive (true);
 				transform.rotation = Quaternion.identity;
 				break;
@@ -106,30 +107,28 @@ namespace CoffeeCommand {
 			}
 		}
 
-		public void StupidCallback() {
-			CLogger.Log ("stupid ones working");
-			// the savenow (cb)=> works in editor but not build , no idea why
-			Debug.Log("cb happening");
-			CLogger.Log("cb happening.");
-			UserDataManager.User localUser = UserDataManager.LocalUser;
-			UserDataManager.ChangePlaceOwner(localUser);
-			CLogger.Log("changed owner.");
-			flag.SetColors(UserDataManager.Flag.GetLocalColors);
-			dishGroup.gameObject.SetActive (false);
-			SetState (State.Unwrapped);
-		}
+//		public void StupidCallback() {
+//			CLogger.Log ("stupid cb working");
+//			// the savenow (cb)=> works in editor but not build , no idea why
+//
+//			UserDataManager.User localUser = UserDataManager.LocalUser;
+//
+//			flag.SetColors(UserDataManager.Flag.GetLocalColors);
+//			dishGroup.gameObject.SetActive (false);
+//			SetState (State.Unwrapped);
+//
+//		}
 		public void OnDishGroupDestroyed(){
 			CLogger.Log("dish group destroyed.");
-//			return;
+			UserDataManager.ChangePlaceOwner (UserDataManager.LocalUser);
 			CoffeeCommandView.inst.SaveMapNow ((cb) => {
-				Debug.Log("cb happening:"+cb);
-				CLogger.Log("cb happening.");
-				UserDataManager.User localUser = UserDataManager.LocalUser;
-				UserDataManager.ChangePlaceOwner(localUser);
-				CLogger.Log("changed owner.");
+//				Debug.Log("cb happening:"+cb);
+				CLogger.Log("cb orig happening.");
 				flag.SetColors(UserDataManager.Flag.GetLocalColors);
 				dishGroup.gameObject.SetActive (false);
 				SetState (State.Unwrapped);
+				UserDataManager.CollectCurrentMineCoins ();
+				CoinFx();
 //				return;
 			});
 //			return;
@@ -364,15 +363,15 @@ namespace CoffeeCommand {
 
 				break;
 			case State.Unwrapped:
-				mineTimer -= Time.deltaTime;
-				if (mineTimer < 0) {
-					mineTimer = 1;
-					CoinFx ();
-					Debug.Log ("user collect mine.");
-					UserDataManager.CollectCurrentMineCoins ();
-
-//					FindObjectOfType<Coins> ().EarnCoin (1);
-				}
+//				mineTimer -= Time.deltaTime;
+//				if (mineTimer < 0) {
+//					mineTimer = 1;
+//					CoinFx ();
+//					Debug.Log ("user collect mine.");
+//					UserDataManager.CollectCurrentMineCoins ();
+//
+////					FindObjectOfType<Coins> ().EarnCoin (1);
+//				}
 				break;
 			default:
 				break;
@@ -383,7 +382,7 @@ namespace CoffeeCommand {
 		}
 
 		public ParticleSystem coins;
-		void CoinFx(){
+		public void CoinFx(){
 			coins.Emit (1);
 		}
 		float mineTimer = 0f;
