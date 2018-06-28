@@ -79,7 +79,6 @@
      <Compile Include="Assets\_scripts\GameManager.cs" />
      <Compile Include="Assets\_scripts\GrowOverTime.cs" />
      <Compile Include="Assets\_scripts\JsonTest.cs" />
-     <Compile Include="Assets\_scripts\LibPlacenoteHelper.cs" />
      <Compile Include="Assets\_scripts\LoadSceneButton.cs" />
      <Compile Include="Assets\_scripts\MapMarkerInfo.cs" />
      <Compile Include="Assets\_scripts\MetalOnion.cs" />
@@ -99,6 +98,7 @@
      <Compile Include="Assets\_scripts\ShipDamageReceiver.cs" />
      <Compile Include="Assets\_scripts\ShipWeapons.cs" />
      <Compile Include="Assets\_scripts\SimulatorHideARRemote.cs" />
+     <Compile Include="Assets\_scripts\SinPulsate.cs" />
      <Compile Include="Assets\_scripts\SmoothFollowTarget.cs" />
      <Compile Include="Assets\_scripts\Tendril.cs" />
      <Compile Include="Assets\_scripts\UserDataManager.cs" />
@@ -162,6 +162,8 @@
      <Compile Include="Assets\UnityARKitPlugin\ARKitRemote\ObjectSerializationExtension.cs" />
      <Compile Include="Assets\UnityARKitPlugin\ARKitRemote\SerializableObjects.cs" />
      <Compile Include="Assets\UnityARKitPlugin\ARKitRemote\UnityRemoteVideo.cs" />
+     <Compile Include="Assets\UnityARKitPlugin\Plugins\EditorCoroutines\Scripts\EditorCoroutineExtensions.cs" />
+     <Compile Include="Assets\UnityARKitPlugin\Plugins\EditorCoroutines\Scripts\EditorCoroutines.cs" />
      <Compile Include="Assets\UnityARKitPlugin\Plugins\iOS\UnityARKit\ARReferenceImage.cs" />
      <Compile Include="Assets\UnityARKitPlugin\Plugins\iOS\UnityARKit\ARReferenceImagesSet.cs" />
      <Compile Include="Assets\UnityARKitPlugin\Plugins\iOS\UnityARKit\Helpers\AR3DOFCameraManager.cs" />
@@ -379,6 +381,7 @@
      <None Include="Assets\Wrld\3rd Party Licenses\libs\rapidjson.txt" />
      <None Include="Assets\Unity Utilities\Shaders\Toony-Basic.shader" />
      <None Include="Assets\Wrld\3rd Party Licenses\libs\libcrypto.txt" />
+     <None Include="Assets\UnityARKitPlugin\Plugins\EditorCoroutines\Readme - v1.1.0.txt" />
      <None Include="Assets\Wrld\Shaders\Highlight.shader" />
      <None Include="Assets\Unity Utilities\Shaders\Toony-LightedOutlineScroll.shader" />
      <None Include="Assets\Wrld\3rd Party Licenses\libs\libktx.txt" />

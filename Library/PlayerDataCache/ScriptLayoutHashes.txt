@@ -101,7 +101,7 @@ df98a608af983c04c8aa5672afc284db Assembly-CSharp.dll:.DeadReplacement
 2124af75d6b3afb90d3c8471b98e9f78 Assembly-CSharp.dll:.SetCameraFlags
 058f583ac03ca538fc928ba68f6bd2b7 Assembly-CSharp.dll:.DamageGiver
 7a569204f9d29c3d307c150aa038ee30 Assembly-CSharp.dll:.UnityARCameraManager
-dac81cd3429dddbee9270a54fe3510dd Assembly-CSharp.dll:CoffeeCommand.CoffeeCommandView
+34ecf0e94a8eb46cdaeb66cdbeec55b5 Assembly-CSharp.dll:CoffeeCommand.CoffeeCommandView
 6cadf2127201033372f50854ef10b678 Assembly-CSharp.dll:.PositionObjectWithPositioner
 3246e4af086807d0bfc6984a8c244168 Assembly-CSharp.dll:Wrld.MapCamera.CameraJumpBehaviour
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.BounceProjectile
@@ -246,7 +246,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:UnityEngine.XR.iOS.UnityARUserAnchorComponent
 eb4fd2b7e0cd698b07603d3e2b00ab7c Assembly-CSharp.dll:.PlacenotePlaneMeshRender
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
-ac404c8bd8af72bf9f1b3bcb0c33bd2a Assembly-CSharp.dll:.MapMarkerInfo
+6ee1c97f22a0bedb85b143c42eb5c5ba Assembly-CSharp.dll:CoffeeCommand.MapMarkerInfo
 96efa88d70b233e3f15936a32d917f9e Assembly-CSharp.dll:.DamageReceiver
 ad1ab3288e483a86629794ba673c9a54 Assembly-CSharp.dll:.SinHover
 69a63271ab0935f2215eb2ffc3ffb0f1 Assembly-CSharp.dll:.WrldMap
@@ -280,3 +280,4 @@ ceafc58e64c8e6a7998f1890398e40a9 Assembly-CSharp.dll:.Projectile
 97f3f2eee235771b3d0dd28fcccb62f7 Assembly-CSharp.dll:Battlehub.MeshTools.Pivot
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UnityARCameraNearFar
 6bfe543a91625f77c304231f45ff6e71 Assembly-CSharp.dll:.ShipWeaponsLaser
+6af74adfe12505335c37bb0ab8aa5019 Assembly-CSharp.dll:.SinPulsate

@@ -302,7 +302,7 @@ namespace CoffeeCommand {
 		}
 
 
-		public void SaveMapNow (Action<string> cbFunc)
+		public void SaveMapNow (Action cbFunc)
 		{
 			if (!LibPlacenote.Instance.Initialized()) {
 				Debug.Log ("SDK not yet initialized");
@@ -365,6 +365,7 @@ namespace CoffeeCommand {
 							// Also, modify the map ID we loaded earlier
 							LibPlacenote.Instance.SetMetadata (UserDataManager.loadedMapPlaceId, replacementMetadata);
 							CLogger.Log("Save: 5a3 overwrite metadata with id:"+UserDataManager.loadedMapPlaceId);
+							mCurrMapDetails = replacementMetadata;
 						});
 
 					} else {
@@ -390,19 +391,22 @@ namespace CoffeeCommand {
 						CLogger.Log("saved new map w location:"+metadata.location.latitude+","+metadata.location.longitude+".");
 
 					}
-
+					ToastManager.ShowToast("Save complete, wait for upload");
 
 				},
 				(completed, faulted, percentage) => {
 					if (completed) {
-						
 						CLogger.Log ("Save: 7 .. complete");
-						cbFunc("test");
-//						FindObjectOfType<MetalOnion>().StupidCallback();
+						cbFunc();
 						mLabelText.text = "Upload Complete:" + mCurrMapDetails.name;
 						CLogger.Log ("Save: 8 . callback complete");
-
-						Debug.Log("Callback should have been called");
+						if (UserDataManager.loadedExistingMap){
+							ToastManager.ShowToast("Success! You took over this mine.");
+						} else {
+							ToastManager.ShowToast("Success! You found a new mine.");
+						}
+						harvestCoinsButton.SetActive (true);
+						CLogger.Log("Callback should have been called");
 					}
 					else if (faulted) {
 						mLabelText.text = "Upload of Map Named: " + mCurrMapDetails.name + "faulted";
@@ -435,6 +439,26 @@ namespace CoffeeCommand {
 				if (shapeObjList.Count != 0) {
 //					ClearShapes ();
 				}
+			}
+		}
+
+		public GameObject harvestCoinsButton;
+		public void HarvestCoinsNow(){
+			if (!UserDataManager.loadedExistingMap) {
+				// New map gives the default num of coins
+				int ct = UserDataManager.LocalData.mine.coins.count;
+				UserDataManager.LocalCoins += ct;
+				UserDataManager.LocalData.mine.coins.count = 0;
+				ToastManager.ShowToast ("You collected " + ct + " coins from a new mine!");
+
+			} else {
+
+				UserDataManager.CollectCurrentMineCoins ( (ct) => {
+					
+					ToastManager.ShowToast ("You conquered this mine and earned " + ct + " coins!");
+				});
+
+				// old map needs to calc the coins
 			}
 		}
 	}

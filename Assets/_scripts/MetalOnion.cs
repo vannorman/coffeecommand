@@ -120,22 +120,15 @@ namespace CoffeeCommand {
 //		}
 		public void OnDishGroupDestroyed(){
 			CLogger.Log("dish group destroyed.");
+
 			UserDataManager.ChangePlaceOwner (UserDataManager.LocalUser);
-			CoffeeCommandView.inst.SaveMapNow ((cb) => {
-//				Debug.Log("cb happening:"+cb);
-				CLogger.Log("cb orig happening.");
+			CoffeeCommandView.inst.SaveMapNow ( () => {
+				CLogger.Log("callback happening.");
 				flag.SetColors(UserDataManager.Flag.GetLocalColors);
 				dishGroup.gameObject.SetActive (false);
 				SetState (State.Unwrapped);
-				UserDataManager.CollectCurrentMineCoins ();
-				CoinFx();
-//				return;
+
 			});
-//			return;
-			// Change ownership of this to the current user.
-//			CLogger.Log("dish group destroyed.");
-//			UserDataManager.Save
-			// You destroyed this onion, so set it to your colors now
 
 		}
 

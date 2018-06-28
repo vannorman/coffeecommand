@@ -314,7 +314,7 @@ public class LibPlacenote : MonoBehaviour
 	/// Class as a container for the JSON that contains information for a list of maps
 	/// </summary>
 	[System.Serializable]
-	private class MapList
+	public class MapList
 	{
 		public MapInfo[] places = null;
 	}
@@ -1294,7 +1294,7 @@ public class LibPlacenote : MonoBehaviour
 		#endif
 
 		if (lmSize == 0) {
-			Debug.Log ("Empty landmarks, probably tried to fail");
+//			Debug.Log ("Empty landmarks, probably tried to fail");
 			return null;
 		}
 
@@ -1324,7 +1324,7 @@ public class LibPlacenote : MonoBehaviour
 		#endif
 
 		if (lmSize == 0) {
-			Debug.Log ("Empty landmarks, probably tried to fail");
+//			Debug.Log ("Empty landmarks, probably tried to fail");
 			return null;
 		}
 

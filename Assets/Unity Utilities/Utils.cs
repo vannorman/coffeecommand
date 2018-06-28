@@ -23,10 +23,19 @@ public static class Utils2 {
 			cp.z > 0;
 	}
 
-	public static Color[] GetRandomColors (int count) {
+	public static Color[] GetRandomColors (int count, float minBrightness = 0.3f) {
 		Color[] randColors = new Color[count];
 		for (int i = 0; i < randColors.Length; i++) {
-			randColors[i] = Random.ColorHSV ();
+			Color c = Color.black;
+			int tries = 20;
+			while (tries > 0 && (Vector4.Magnitude (c) - 1) < minBrightness) {
+				c = Random.ColorHSV ();
+				tries--;
+			}
+
+//			Debug.Log ("c mag;" + (Vector4.Magnitude (c)-1).ToString());
+
+			randColors [i] = c;
 
 		}
 		return randColors;
