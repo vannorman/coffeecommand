@@ -111,6 +111,7 @@
      <Compile Include="Assets\InstanceSetter.cs" />
      <Compile Include="Assets\KillOnion.cs" />
      <Compile Include="Assets\LaserBullet.cs" />
+     <Compile Include="Assets\MetaDataTest.cs" />
      <Compile Include="Assets\Placenote\Examples\KeyboardMover.cs" />
      <Compile Include="Assets\Placenote\Examples\MapInfoElement.cs" />
      <Compile Include="Assets\Placenote\Examples\PlacenoteARAnchorManager.cs" />

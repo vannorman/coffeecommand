@@ -281,3 +281,4 @@ dcdec772e5f9dfac5f2d1fe05851ae39 Assembly-CSharp.dll:CoffeeCommand.InstanceSette
 97f3f2eee235771b3d0dd28fcccb62f7 Assembly-CSharp.dll:Battlehub.MeshTools.Pivot
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UnityARCameraNearFar
 6bfe543a91625f77c304231f45ff6e71 Assembly-CSharp.dll:.ShipWeaponsLaser
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MetaDataTest

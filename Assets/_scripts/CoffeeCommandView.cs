@@ -368,6 +368,11 @@ namespace CoffeeCommand {
 							LibPlacenote.Instance.SetMetadata (UserDataManager.loadedMapPlaceId, replacementMetadata);
 							CLogger.Log("Save: 5a3 overwrite metadata with id:"+UserDataManager.loadedMapPlaceId);
 						});
+						LibPlacenote.MapMetadataSettable metaTest = new LibPlacenote.MapMetadataSettable();
+						metaTest.name = "meta test";
+						metaTest.userdata = JObject.FromObject(UserDataManager.LocalData);
+						LibPlacenote.Instance.SetMetadata(UserDataManager.loadedMapPlaceId,metaTest);
+
 //						mCurrMapDetails = new LibPlacenote.MapMetadataSettable();
 //						mCurrMapDetails.name = "Saved over existing, waiting for cb";
 //						mCurrMapDetails.userdata = JObject.FromObject(UserDataManager.LocalData);
@@ -440,6 +445,7 @@ namespace CoffeeCommand {
 //				LoadShapesJSON (mSelectedMapInfo.metadata.userdata);
 			} else if (currStatus == LibPlacenote.MappingStatus.RUNNING && prevStatus == LibPlacenote.MappingStatus.WAITING) {
 				mLabelText.text = "Mapping";
+
 			} else if (currStatus == LibPlacenote.MappingStatus.LOST) {
 				mLabelText.text = "Searching for position lock";
 			} else if (currStatus == LibPlacenote.MappingStatus.WAITING) {
