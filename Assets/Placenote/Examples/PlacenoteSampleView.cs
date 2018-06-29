@@ -58,12 +58,12 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 	private bool mARKitInit = false;
 	private List<ShapeInfo> shapeInfoList = new List<ShapeInfo> ();
 	private List<GameObject> shapeObjList = new List<GameObject> ();
-	private LibPlacenote.MapMetadataSettable mCurrMapDetails;
+	public LibPlacenote.MapMetadataSettable mCurrMapDetails;
 
 	private bool mReportDebug = false;
 
 	private LibPlacenote.MapInfo mSelectedMapInfo;
-	private string mSelectedMapId {
+	public string mSelectedMapId {
 		get {
 			return mSelectedMapInfo != null ? mSelectedMapInfo.placeId : null;
 		}

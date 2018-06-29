@@ -100,6 +100,9 @@ namespace CoffeeCommand {
 		public static CoffeeCommandObject LocalData {
 			get { 
 				return localData;
+			} 
+			set { 
+				localData = value;
 			}
 		}
 
@@ -140,18 +143,20 @@ namespace CoffeeCommand {
 			public User owner;
 			public User founder;
 			public DateTime lastUpdatedTime;
-			public Color[] GetLocalFlagColors{
-				get { 
-					if (this.owner != null) {
-						return owner.flag.flagColors;
-					
-					} else {
-						return new Color[3]{ Color.black, Color.black, Color.gray };
-					}
-				}
-			}
+
 //			public bool invisible = false; // if inviisble, it is not searchable / updateable (the game doesn't care about this map -- because another map already exists in this location)
 
+		}
+
+		public static Color[] GetLocalFlagColors{
+			get { 
+				if (localData.owner != null) {
+					return localData.owner.flag.flagColors;
+
+				} else {
+					return new Color[3]{ Color.black, Color.black, Color.gray };
+				}
+			}
 		}
 
 		public enum MineStatus {
@@ -196,7 +201,7 @@ namespace CoffeeCommand {
 //			CLogger.Log ("metadata:" + metadata.userdata.ToString ());
 //			CLogger.Log ("get colors. Owner?:" + remoteObject.owner);
 //			CLogger.Log ("get colors. Owner?:" + remoteObject.owner.flag);
-			CLogger.Log ("get color of owner: 0:" + remoteObject.owner.flag.flagColors[0]);
+//			CLogger.Log ("get color of owner: 0:" + remoteObject.owner.flag.flagColors[0]);
 			return remoteObject.owner.flag.flagColors;
 
 		}
@@ -277,7 +282,7 @@ namespace CoffeeCommand {
 					if (LocalData.owner == null) {
 						return Flag.GetNpcColors;
 					} else {
-						return LocalData.GetLocalFlagColors; 
+						return GetLocalFlagColors; 
 					}
 				}
 			}
@@ -290,22 +295,21 @@ namespace CoffeeCommand {
 		}
 
 		public static void OnMapSelected(bool usedExistingMap=false, LibPlacenote.MapInfo mapInfo=null){
-			CLogger.Log ("on map sel");
+			CLogger.Log ("OnMapSel ");
 			loadedExistingMap = usedExistingMap;
 			if (loadedExistingMap) {
-				CLogger.Log ("loaded existing ..");
-				Debug.Log ("loaded existing:"+mapInfo.metadata.userdata.ToString());
-				localData = mapInfo.metadata.userdata.ToObject<CoffeeCommandObject>(); // Newtonsoft.Json.JsonConvert.DeserializeObject<CoffeeCommandObject> (prevMapInfoJs);
+				CLogger.Log ("onMapSel: loaded existing ..");
+//				Debug.Log ("loaded existing:"+mapInfo.metadata.userdata.ToString());
+				localData = mapInfo.metadata.userdata.ToObject<CoffeeCommandObject>(); 
 				localData.mapName = mapInfo.metadata.name;
 				loadedMapPlaceId = mapInfo.placeId;
-//				CLogger.Log ("OnMapSel: owner id "+localData.owner.userId);
 				CLogger.Log ("OnMapSel: place id "+loadedMapPlaceId);
-				CLogger.Log ("OnMapSel: owner id "+localData.owner.userId);
-				CLogger.Log ("OnMapSel: owner colors 1 "+localData.owner.flag.flagColors[0]);
-				CLogger.Log ("OnMapSel: owner colors 1 "+localData.owner.flag.flagColors[1]);
+//				CLogger.Log ("OnMapSel: owner id "+localData.owner.userId);
+//				CLogger.Log ("OnMapSel: owner colors 1 "+localData.owner.flag.flagColors[0]);
+//				CLogger.Log ("OnMapSel: owner colors 1 "+localData.owner.flag.flagColors[1]);
 			} else {
 				localData = InitCoffeeCommandObject ();
-				CLogger.Log ("Local data loaded. visitor count:"+localData.visitors.Count);
+				CLogger.Log ("OnMapSel: Local data loaded. visitor count:"+localData.visitors.Count);
 			}
 		}
 

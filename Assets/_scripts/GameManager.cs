@@ -18,8 +18,8 @@ namespace CoffeeCommand {
 
 
 		public void SetState(State newState){
-			CLogger.Log ("set state:" + newState);
-			Debug.Log ("newstate:" + newState);
+//			CLogger.Log ("set state:" + newState);
+//			Debug.Log ("newstate:" + newState);
 			state = newState;
 			switch (state) {
 			case State.WrldMap:

@@ -41,12 +41,12 @@ namespace CoffeeCommand {
 		private UnityARCamera mARCamera;
 		private bool mARKitInit = false;
 		private List<GameObject> shapeObjList = new List<GameObject> ();
-//		private LibPlacenote.MapMetadataSettable mCurrMapDetails;
+		public LibPlacenote.MapMetadataSettable mCurrMapDetails;
 
 		private bool mReportDebug = false;
 
-		private LibPlacenote.MapInfo mSelectedMapInfo;
-		private string mSelectedMapId {
+		public LibPlacenote.MapInfo mSelectedMapInfo;
+		public string mSelectedMapId {
 			get {
 				return mSelectedMapInfo != null ? mSelectedMapInfo.placeId : null;
 			}
@@ -368,10 +368,10 @@ namespace CoffeeCommand {
 							LibPlacenote.Instance.SetMetadata (UserDataManager.loadedMapPlaceId, replacementMetadata);
 							CLogger.Log("Save: 5a3 overwrite metadata with id:"+UserDataManager.loadedMapPlaceId);
 						});
-						LibPlacenote.MapMetadataSettable metaTest = new LibPlacenote.MapMetadataSettable();
-						metaTest.name = "meta test";
-						metaTest.userdata = JObject.FromObject(UserDataManager.LocalData);
-						LibPlacenote.Instance.SetMetadata(UserDataManager.loadedMapPlaceId,metaTest);
+//						LibPlacenote.MapMetadataSettable metaTest = new LibPlacenote.MapMetadataSettable();
+//						metaTest.name = "meta test";
+//						metaTest.userdata = JObject.FromObject(UserDataManager.LocalData);
+//						LibPlacenote.Instance.SetMetadata(UserDataManager.loadedMapPlaceId,metaTest);
 
 //						mCurrMapDetails = new LibPlacenote.MapMetadataSettable();
 //						mCurrMapDetails.name = "Saved over existing, waiting for cb";

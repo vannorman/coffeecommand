@@ -102,7 +102,7 @@ df98a608af983c04c8aa5672afc284db Assembly-CSharp.dll:.DeadReplacement
 2124af75d6b3afb90d3c8471b98e9f78 Assembly-CSharp.dll:.SetCameraFlags
 058f583ac03ca538fc928ba68f6bd2b7 Assembly-CSharp.dll:.DamageGiver
 7a569204f9d29c3d307c150aa038ee30 Assembly-CSharp.dll:.UnityARCameraManager
-34ecf0e94a8eb46cdaeb66cdbeec55b5 Assembly-CSharp.dll:CoffeeCommand.CoffeeCommandView
+b74f67105b965157676fecc18066d111 Assembly-CSharp.dll:CoffeeCommand.CoffeeCommandView
 6cadf2127201033372f50854ef10b678 Assembly-CSharp.dll:.PositionObjectWithPositioner
 3246e4af086807d0bfc6984a8c244168 Assembly-CSharp.dll:Wrld.MapCamera.CameraJumpBehaviour
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.BounceProjectile
@@ -256,7 +256,7 @@ ad1ab3288e483a86629794ba673c9a54 Assembly-CSharp.dll:.SinHover
 e2320c9dc1c48ed92ab6997123a272bb Assembly-CSharp.dll:CoffeeCommand.Coins
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UpdatingBuildingHighlightColor
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SelectedMarkerFx
-bde4449faec613c2de2fa5091ce23102 Assembly-CSharp.dll:.PlacenoteSampleView
+94855c4e124633f3c23715a1f06f4b49 Assembly-CSharp.dll:.PlacenoteSampleView
 f771b549b9c5495c813fab919a6684aa Assembly-CSharp.dll:.GrowOverTime
 c826a011dfc20d49c391f33801f3b855 Assembly-CSharp.dll:.MouseLook
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:CoffeeCommand.DebugPerformance
@@ -281,4 +281,5 @@ dcdec772e5f9dfac5f2d1fe05851ae39 Assembly-CSharp.dll:CoffeeCommand.InstanceSette
 97f3f2eee235771b3d0dd28fcccb62f7 Assembly-CSharp.dll:Battlehub.MeshTools.Pivot
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UnityARCameraNearFar
 6bfe543a91625f77c304231f45ff6e71 Assembly-CSharp.dll:.ShipWeaponsLaser
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MetaDataTest
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:CoffeeCommand.MetaDataTest
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SetMetadataTest
