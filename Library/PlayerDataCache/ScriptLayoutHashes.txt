@@ -151,6 +151,7 @@ d164dd9a3fc459c468578de547f1a101 Assembly-CSharp.dll:CoffeeCommand.Dogs
 34a27918c55124804ec108acac9916e9 Assembly-CSharp.dll:.FaceDirectionImMoving
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PrecachingMapData
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DontDestroyOnLoad
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:CoffeeCommand.MetaDataTest
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
@@ -164,6 +165,7 @@ f79c6f7e407988e1d159e44809928ec3 Assembly-CSharp.dll:.BatteryUpload
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ClearPlayerPrefsOnClick
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:UnityEngine.XR.iOS.ConnectToEditor
 c6f60b2cb40fb044afcd7c43cdf165e7 Assembly-CSharp.dll:.Tendril
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SetMetadataTest
 74e6a022eb09de938f7597426f36cada Assembly-CSharp.dll:.BuildingAltitudePicking
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CancelPrecachingMapData
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.AlwaysFaceCameraY
@@ -281,5 +283,3 @@ dcdec772e5f9dfac5f2d1fe05851ae39 Assembly-CSharp.dll:CoffeeCommand.InstanceSette
 97f3f2eee235771b3d0dd28fcccb62f7 Assembly-CSharp.dll:Battlehub.MeshTools.Pivot
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UnityARCameraNearFar
 6bfe543a91625f77c304231f45ff6e71 Assembly-CSharp.dll:.ShipWeaponsLaser
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:CoffeeCommand.MetaDataTest
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SetMetadataTest

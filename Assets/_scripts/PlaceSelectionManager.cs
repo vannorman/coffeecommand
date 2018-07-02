@@ -111,10 +111,10 @@ namespace CoffeeCommand {
 
 					UserDataManager.CoffeeCommandObject userdata = mapId.metadata.userdata.ToObject<UserDataManager.CoffeeCommandObject>();
 					if (userdata.invisible) {
-						CLogger.Log("invisible , skipping:"+mapId.metadata.name);
+//						CLogger.Log("invisible , skipping:"+mapId.metadata.name);
 						continue;
 					}
-					CLogger.Log("list got map:"+mapId.placeId);
+//					CLogger.Log("list got map:"+mapId.placeId);
 
 					GeographicTransform coordinateFrame = (GeographicTransform)Instantiate(locationPrefab.GetComponent<GeographicTransform>());
 					Api.Instance.GeographicApi.RegisterGeographicTransform(coordinateFrame);
@@ -142,7 +142,7 @@ namespace CoffeeCommand {
 //					pnt.text += "None closeby ...\n";
 				}
 //				pnt.text += "Finished map pop. \n";
-				CLogger.Log("fin map pop");
+//				CLogger.Log("fin map pop");
 			});
 
 		}

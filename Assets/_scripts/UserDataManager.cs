@@ -33,10 +33,12 @@ namespace CoffeeCommand {
 				return PlayerPrefs.GetInt ("Coins");
 			}
 			set {
+				CLogger.Log ("set local coins:" + value);
 				if (!PlayerPrefs.HasKey ("Coins")) {
+					CLogger.Log ("set local coins: Create playerprefs var");
 					PlayerPrefs.SetInt ("Coins", 0);
 				}
-				PlayerPrefs.SetInt ("Coins", PlayerPrefs.GetInt ("Coins") + value);
+				PlayerPrefs.SetInt ("Coins", value);
 			}
 		}
 
@@ -90,7 +92,7 @@ namespace CoffeeCommand {
 				return loadedMapPlaceIdP;
 			}
 			set { 
-				CLogger.Log ("set id:" + value);
+//				CLogger.Log ("set id:" + value);
 				loadedMapPlaceIdP = value;
 
 			}
@@ -112,7 +114,7 @@ namespace CoffeeCommand {
 			CoffeeCommandObject newLocalData = new CoffeeCommandObject ();
 			newLocalData.mine = new Mine ();
 			newLocalData.mine.coins = new Coins ();
-			newLocalData.mine.coins.count = 50;
+			newLocalData.mine.coins.count = 0;  // make earning inital coins a separate event
 
 			newLocalData.owner = new User ();
 //			newLocalData.mine.coins.coinGenerationRate = 1;
@@ -246,8 +248,13 @@ namespace CoffeeCommand {
 				int ct = NumCoinsAtPlace(mapData);
 				localData.mine.coins.timeLastCollected = System.DateTime.UtcNow;
 				localData.lastUpdatedTime = System.DateTime.UtcNow; // For checking against GetMetaData in loop -- will be deprecated when SetMetaData returns a callback
-				mapData.userdata = JObject.FromObject(localData); 
-				LibPlacenote.Instance.SetMetadata (loadedMapPlaceId, mapData); // This doesn't seem to work -- last time collected is NOT changed
+
+
+				LibPlacenote.MapMetadataSettable replacementMetadata = new LibPlacenote.MapMetadataSettable();
+				replacementMetadata.location = mapData.location;
+				replacementMetadata.name = mapData.name;
+				replacementMetadata.userdata = JObject.FromObject(localData); 
+				LibPlacenote.Instance.SetMetadata (loadedMapPlaceId, replacementMetadata); // This doesn't seem to work -- last time collected is NOT changed
 				CLogger.Log("harvested coins at "+System.DateTime.UtcNow+" and set last time collected to :"+localData.mine.coins.timeLastCollected); // Reports the correct "last time collected"
 				callbackCoinCt(ct);
 			});
@@ -295,21 +302,21 @@ namespace CoffeeCommand {
 		}
 
 		public static void OnMapSelected(bool usedExistingMap=false, LibPlacenote.MapInfo mapInfo=null){
-			CLogger.Log ("OnMapSel ");
+//			CLogger.Log ("OnMapSel ");
 			loadedExistingMap = usedExistingMap;
 			if (loadedExistingMap) {
-				CLogger.Log ("onMapSel: loaded existing ..");
+//				CLogger.Log ("onMapSel: loaded existing ..");
 //				Debug.Log ("loaded existing:"+mapInfo.metadata.userdata.ToString());
 				localData = mapInfo.metadata.userdata.ToObject<CoffeeCommandObject>(); 
 				localData.mapName = mapInfo.metadata.name;
 				loadedMapPlaceId = mapInfo.placeId;
-				CLogger.Log ("OnMapSel: place id "+loadedMapPlaceId);
+//				CLogger.Log ("OnMapSel: place id "+loadedMapPlaceId);
 //				CLogger.Log ("OnMapSel: owner id "+localData.owner.userId);
 //				CLogger.Log ("OnMapSel: owner colors 1 "+localData.owner.flag.flagColors[0]);
 //				CLogger.Log ("OnMapSel: owner colors 1 "+localData.owner.flag.flagColors[1]);
 			} else {
 				localData = InitCoffeeCommandObject ();
-				CLogger.Log ("OnMapSel: Local data loaded. visitor count:"+localData.visitors.Count);
+//				CLogger.Log ("OnMapSel: Local data loaded. visitor count:"+localData.visitors.Count);
 			}
 		}
 

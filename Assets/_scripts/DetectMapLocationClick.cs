@@ -44,7 +44,7 @@ namespace CoffeeCommand {
 
 						loadButton.SetActive (true);
 						createButton.SetActive (false);
-						CLogger.Log ("set map to load id;" + mmi.mapInfo.placeId);
+//						CLogger.Log ("set map to load id;" + mmi.mapInfo.placeId);
 						PlaceSelectionManager.inst.SetMapToLoad(mmi.mapInfo);
 
 

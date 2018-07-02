@@ -123,7 +123,7 @@ namespace CoffeeCommand {
 
 			UserDataManager.ChangePlaceOwner (UserDataManager.LocalUser);
 			CoffeeCommandView.inst.SaveMapNow ( () => {
-				CLogger.Log("callback happening.");
+//				CLogger.Log("callback happening.");
 				flag.SetColors(UserDataManager.Flag.GetLocalColors);
 				dishGroup.gameObject.SetActive (false);
 				SetState (State.Unwrapped);

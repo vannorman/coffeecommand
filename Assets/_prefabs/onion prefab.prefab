@@ -18487,7 +18487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitPoints: 10
   directional: 1
-  angleToTakeDamage: 120
+  angleToTakeDamage: 60
   localDir: {x: 0, y: 1, z: 0}
   objToDie: {fileID: 1784189524983808}
 --- !u!114 &114108245295347362
@@ -18553,7 +18553,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitPoints: 10
   directional: 1
-  angleToTakeDamage: 120
+  angleToTakeDamage: 60
   localDir: {x: 0, y: 1, z: 0}
   objToDie: {fileID: 1303092747415310}
 --- !u!114 &114143406623877852
@@ -19047,7 +19047,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitPoints: 10
   directional: 1
-  angleToTakeDamage: 120
+  angleToTakeDamage: 60
   localDir: {x: 0, y: 1, z: 0}
   objToDie: {fileID: 1466884282178044}
 --- !u!114 &114321579255553268
@@ -19344,7 +19344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitPoints: 10
   directional: 1
-  angleToTakeDamage: 120
+  angleToTakeDamage: 60
   localDir: {x: 0, y: 1, z: 0}
   objToDie: {fileID: 1646796276987440}
 --- !u!114 &114421746151127366
@@ -19962,7 +19962,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitPoints: 10
   directional: 1
-  angleToTakeDamage: 120
+  angleToTakeDamage: 60
   localDir: {x: 0, y: 1, z: 0}
   objToDie: {fileID: 1934223608968440}
 --- !u!114 &114628388264348232
@@ -20130,7 +20130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitPoints: 10
   directional: 1
-  angleToTakeDamage: 120
+  angleToTakeDamage: 60
   localDir: {x: 0, y: 1, z: 0}
   objToDie: {fileID: 1663567632380468}
 --- !u!114 &114696368807371656

@@ -17,7 +17,7 @@ namespace CoffeeCommand {
 		public void SetMapInfo(LibPlacenote.MapInfo mapId){
 			int numP = UserDataManager.NumUniquePlayersAtPlace(mapId.metadata);
 
-			CLogger.Log("num players:"+numP);
+//			CLogger.Log("num players:"+numP);
 			people.text = numP.ToString();
 			int numCoin = UserDataManager.NumCoinsAtPlace(mapId.metadata);
 			CLogger.Log("num coin:"+numCoin);
@@ -26,7 +26,7 @@ namespace CoffeeCommand {
 			//					CLogger.Log("cols:"+colors.Length);
 			flag.SetColors(colors);
 			mapInfo = mapId;
-			CLogger.Log ("mapid:" + mapId.placeId);
+//			CLogger.Log ("mapid:" + mapId.placeId);
 				
 		}
 

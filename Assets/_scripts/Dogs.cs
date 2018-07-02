@@ -14,6 +14,7 @@ namespace CoffeeCommand {
 		public int ct = 4;
 		public void SpawnDogs(){
 			foreach (DogShip ds in FindObjectsOfType<DogShip>()) {
+				ds.coinValue = 0;
 				Destroy (ds.gameObject);
 			}
 			transform.position = Camera.main.transform.position + Vector3.up * -0.2f; // Utils2.FlattenVector (Camera.main.transform.position) + Vector3.up * transform.position.y; // center on cam before spawn.

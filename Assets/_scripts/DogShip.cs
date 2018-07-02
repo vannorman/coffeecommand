@@ -54,7 +54,7 @@ namespace CoffeeCommand {
 		}
 
 		void OnDestroy(){
-			UserDataManager.LocalCoins += 5;
+			UserDataManager.LocalCoins += coinValue;
 		}
 	}
 

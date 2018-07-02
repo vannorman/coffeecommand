@@ -263,9 +263,9 @@ namespace CoffeeCommand {
 					});
 				Debug.Log ("Started Debug Report");
 			}
-			Invoke ("PlaceOneOnion", 5f);
-			Invoke ("SpawnDogs", 2f);
-			Invoke ("SpawnDogs", 5f);
+			Invoke ("PlaceOneOnion", 3f);
+//			Invoke ("SpawnDogs", 2f);
+			Invoke ("SpawnDogs", 3f);
 		}
 
 
@@ -310,7 +310,8 @@ namespace CoffeeCommand {
 				ToastManager.ShowToast ("SDK not yet initialized", 2f);
 				return;
 			}
-			CLogger.Log ("Save: 0 begin");
+//			CLogger.Log ("Save: 0 begin");
+
 			bool useLocation = Input.location.status == LocationServiceStatus.Running;
 			LocationInfo locationInfo = Input.location.lastData;
 
@@ -334,7 +335,7 @@ namespace CoffeeCommand {
 
 
 					if (UserDataManager.loadedExistingMap){
-						CLogger.Log ("Save: 5a1 .. was existed");
+//						CLogger.Log ("Save: 5a1 .. was existed");
 
 
 
@@ -354,11 +355,17 @@ namespace CoffeeCommand {
 						} else {
 							Debug.Log("no loc");
 						}
-						CLogger.Log("Save: 5a2 new invisible map with id:"+mapId);
+//						CLogger.Log("Save: 5a2 new invisible map with id:"+mapId);
 						LibPlacenote.Instance.SetMetadata (mSaveMapId, metadataInvisible); // this new map is now "invisible"
 
 						// Now, update the former map
-						LibPlacenote.Instance.GetMetadata(UserDataManager.loadedMapPlaceId, (replacementMetadata)=> {
+						LibPlacenote.Instance.GetMetadata(UserDataManager.loadedMapPlaceId, (metaCb)=> {
+
+							LibPlacenote.MapMetadataSettable replacementMetadata = new LibPlacenote.MapMetadataSettable();
+							replacementMetadata.location = metaCb.location;
+							replacementMetadata.name = metaCb.name;
+//							replacementMetadata.
+//							replacementMetadata.userdata = metaCb.location
 							
 							replacementMetadata.userdata = JObject.FromObject(UserDataManager.LocalData);
 							replacementMetadata.name = UserDataManager.LocalData.mapName;
@@ -366,7 +373,8 @@ namespace CoffeeCommand {
 							
 							// Also, modify the map ID we loaded earlier
 							LibPlacenote.Instance.SetMetadata (UserDataManager.loadedMapPlaceId, replacementMetadata);
-							CLogger.Log("Save: 5a3 overwrite metadata with id:"+UserDataManager.loadedMapPlaceId);
+//							UserDataManager.lastMetaUpdateTime = 
+//							CLogger.Log("Save: 5a3 overwrite metadata with id:"+UserDataManager.loadedMapPlaceId);
 						});
 //						LibPlacenote.MapMetadataSettable metaTest = new LibPlacenote.MapMetadataSettable();
 //						metaTest.name = "meta test";
@@ -411,7 +419,7 @@ namespace CoffeeCommand {
 //						CLogger.Log("mcurrmapdetails:"+mCurrMapDetails.ToString());
 //						CLogger.Log("mcurrmapdetails name:"+mCurrMapDetails.name);
 						mLabelText.text = "Upload Complete:";// + mCurrMapDetails.name;
-						CLogger.Log ("Save: 8 . callback complete");
+//						CLogger.Log ("Save: 8 . callback complete");
 						if (UserDataManager.loadedExistingMap){
 							ToastManager.ShowToast("Success! You took over this mine.");
 						} else {
@@ -497,9 +505,9 @@ namespace CoffeeCommand {
 			bool collected = false;
 			int tries = 20;
 			while (collected == false && tries > 0) {
-				yield return new WaitForSeconds (2);
 				LibPlacenote.Instance.GetMetadata (UserDataManager.loadedMapPlaceId, (metadata) => {
 					if (!collected){
+//						CLogger
 						int secondsDelta = Mathf.RoundToInt((float)(UserDataManager.lastMetaUpdateTime - metadata.userdata.ToObject<UserDataManager.CoffeeCommandObject> ().lastUpdatedTime).TotalSeconds);
 						if (secondsDelta > 1) {
 							CLogger.Log ("Collect failed, delta:" + secondsDelta);		
@@ -515,6 +523,7 @@ namespace CoffeeCommand {
 					}
 				});
 				tries --;
+				yield return new WaitForSeconds (2);
 
 			}
 			yield break;
