@@ -58,8 +58,10 @@ namespace CoffeeCommand {
 			wrldMapParent.gameObject.SetActive (true);
 
 			if (LibPlacenote.Instance.Initialized ()) {
+				CLogger.Log ("PN was init");
 				ListNearbyMaps ();
 			} else {
+				CLogger.Log ("PN NOT init, will delegate fire?");
 				onInitializedDelegate += OnPlacenoteSdkInitialized;
 			}
 
@@ -75,7 +77,7 @@ namespace CoffeeCommand {
 			ListNearbyMaps ();
 		}
 
-		float minimumSpaceSeparation = 0.03f; 
+		public float minimumSpaceSeparation = 0.04f; // km
 
 		void ListNearbyMaps(){
 			// Only runs at the start of app.
@@ -116,13 +118,6 @@ namespace CoffeeCommand {
 					}
 //					CLogger.Log("list got map:"+mapId.placeId);
 
-					GeographicTransform coordinateFrame = (GeographicTransform)Instantiate(locationPrefab.GetComponent<GeographicTransform>());
-					Api.Instance.GeographicApi.RegisterGeographicTransform(coordinateFrame);
-					LatLong pointA = LatLong.FromDegrees(lat,lng);
-					coordinateFrame.SetPosition(pointA);
-					// Are you sure it's necessary to deseralize and reserialize this object?!
-
-					coordinateFrame.GetComponent<MapMarkerInfo>().SetMapInfo(mapId);
 
 
 					var distance = MapInfoElement.Calc (Input.location.lastData.latitude, Input.location.lastData.longitude,
@@ -130,8 +125,16 @@ namespace CoffeeCommand {
 						lng);
 
 					if (distance < minimumSpaceSeparation){
+						GeographicTransform coordinateFrame = (GeographicTransform)Instantiate(locationPrefab.GetComponent<GeographicTransform>());
+						Api.Instance.GeographicApi.RegisterGeographicTransform(coordinateFrame);
+						LatLong pointA = LatLong.FromDegrees(lat,lng);
+						coordinateFrame.SetPosition(pointA);
+						// Are you sure it's necessary to deseralize and reserialize this object?!
+						
+						coordinateFrame.GetComponent<MapMarkerInfo>().SetMapInfo(mapId);
 						foundCloseMap = true;
-	//						newButton.SetActive(false);
+					} else {
+//						coordinateFrame.GetComponent<MapMarkerInfo>().NotifyLocationOutOfRange();
 					}
 
 
@@ -155,6 +158,7 @@ namespace CoffeeCommand {
 				if (LibPlacenote.Instance.Initialized ()) {
 					initializeFinished = true;
 					if (onInitializedDelegate != null) {
+						CLogger.Log ("init del fired from update.");
 						onInitializedDelegate();
 					}
 				}

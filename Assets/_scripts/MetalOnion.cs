@@ -57,7 +57,13 @@ namespace CoffeeCommand {
 				SetState (state);
 			}
 
-			flag.SetColors (UserDataManager.Flag.GetPlaceOwnerColors);
+			if (UserDataManager.loadedExistingMap) {
+				flag.SetColors (UserDataManager.Flag.GetPlaceOwnerColors);
+			} else {
+				//				Color[] cols = Utils2.GetRandomColors(3);
+				//				Debug.Log("cols 0:"+cols[0]);
+				flag.SetColors (UserDataManager.Flag.GetNpcColors);
+			}
 		}
 
 		public void SetState(State newState){
@@ -119,7 +125,7 @@ namespace CoffeeCommand {
 //
 //		}
 		public void OnDishGroupDestroyed(){
-			CLogger.Log("dish group destroyed.");
+//			CLogger.Log("dish group destroyed.");
 
 			UserDataManager.ChangePlaceOwner (UserDataManager.LocalUser);
 			CoffeeCommandView.inst.SaveMapNow ( () => {

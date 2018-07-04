@@ -106,7 +106,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4628546817680350}
   - component: {fileID: 114864432524111086}
-  - component: {fileID: 114543799970214984}
   m_Layer: 0
   m_Name: Map Avatar PRefab
   m_TagString: Untagged
@@ -385,29 +384,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114543799970214984
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1276243882175782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcc70adc6a5a44a90adf00635d274988, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mapInfo:
-    placeId: 
-    metadata:
-      name: 
-      location:
-        latitude: 0
-        longitude: 0
-        altitude: 0
-      created: 0
-  people: {fileID: 0}
-  coins: {fileID: 0}
-  fx: {fileID: 1118896332890344}
 --- !u!114 &114700904366249632
 MonoBehaviour:
   m_ObjectHideFlags: 1

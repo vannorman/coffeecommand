@@ -12,7 +12,12 @@ namespace CoffeeCommand {
 		public Text coins;
 		public InGameFlag flag;
 		public GameObject fx;
+		public GameObject outOfRangeFx;
 
+		public bool outOfRange = false;
+		public void NotifyLocationOutOfRange(){
+			outOfRange = true;
+		}
 
 		public void SetMapInfo(LibPlacenote.MapInfo mapId){
 			int numP = UserDataManager.NumUniquePlayersAtPlace(mapId.metadata);

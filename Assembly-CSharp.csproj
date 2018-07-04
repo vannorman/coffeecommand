@@ -130,6 +130,7 @@
      <Compile Include="Assets\Placenote\LibPlacenote\PlacenoteCameraManager.cs" />
      <Compile Include="Assets\Placenote\LibPlacenote\PlacenoteListener.cs" />
      <Compile Include="Assets\Placenote\LibPlacenote\PNUtility.cs" />
+     <Compile Include="Assets\RestartApp.cs" />
      <Compile Include="Assets\SetCameraFlags.cs" />
      <Compile Include="Assets\SetMetadataTest.cs" />
      <Compile Include="Assets\SetTexture.cs" />

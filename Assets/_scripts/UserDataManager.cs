@@ -33,9 +33,9 @@ namespace CoffeeCommand {
 				return PlayerPrefs.GetInt ("Coins");
 			}
 			set {
-				CLogger.Log ("set local coins:" + value);
+//				CLogger.Log ("set local coins:" + value);
 				if (!PlayerPrefs.HasKey ("Coins")) {
-					CLogger.Log ("set local coins: Create playerprefs var");
+//					CLogger.Log ("set local coins: Create playerprefs var");
 					PlayerPrefs.SetInt ("Coins", 0);
 				}
 				PlayerPrefs.SetInt ("Coins", value);
@@ -110,7 +110,7 @@ namespace CoffeeCommand {
 
 //
 		public static CoffeeCommandObject InitCoffeeCommandObject(string debug = "init"){
-			CLogger.Log (debug+" local data started.");
+//			CLogger.Log (debug+" local data started.");
 			CoffeeCommandObject newLocalData = new CoffeeCommandObject ();
 			newLocalData.mine = new Mine ();
 			newLocalData.mine.coins = new Coins ();
@@ -125,7 +125,7 @@ namespace CoffeeCommand {
 			v.user = u;
 			v.dateTime = System.DateTime.UtcNow;
 			newLocalData.visitors.Add (v);
-			CLogger.Log (debug +" local data finished.");
+//			CLogger.Log (debug +" local data finished.");
 			return newLocalData;
 		}
 
@@ -153,9 +153,13 @@ namespace CoffeeCommand {
 		public static Color[] GetLocalFlagColors{
 			get { 
 				if (localData.owner != null) {
+//					CLogger.Log ("local owner not null, color 0:" + localData.owner.flag.flagColors);
+
 					return localData.owner.flag.flagColors;
 
 				} else {
+//					CLogger.Log ("local owner null");
+
 					return new Color[3]{ Color.black, Color.black, Color.gray };
 				}
 			}
@@ -229,7 +233,7 @@ namespace CoffeeCommand {
 
 		public static void CollectCurrentMineCoins (Action<int> callbackCoinCt) {
 //			Debug.Log ("collect.");	
-			CLogger.Log ("harvst .. coins at "+Mathf.Round(Time.time));
+//			CLogger.Log ("harvst .. coins at "+Mathf.Round(Time.time));
 			if (loadedMapPlaceId == null) {
 				Debug.Log ("can't, null");
 //				Debug.Log ("null.");
@@ -239,7 +243,7 @@ namespace CoffeeCommand {
 
 			// Update locally stored place coins based on server (because maybe someone else already mined them)
 			LibPlacenote.Instance.GetMetadata(loadedMapPlaceId, (mapData) => {
-				CLogger.Log ("harvst .. old meta for "+loadedMapPlaceId);
+//				CLogger.Log ("harvst .. old meta for "+loadedMapPlaceId);
 				localData = mapData.userdata.ToObject<CoffeeCommandObject>();
 				if (localData.owner.userId != LocalUser.userId){
 					ToastManager.ShowToast("Error, someone else took over this place already!");

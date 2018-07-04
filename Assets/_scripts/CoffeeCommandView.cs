@@ -17,7 +17,7 @@ namespace CoffeeCommand {
 	public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 	{
 		public static CoffeeCommandView inst;
-
+		public GameObject restartButton;
 		public GameObject onionPrefab;
 		[SerializeField] GameObject mMapSelectedPanel;
 		[SerializeField] GameObject mInitButtonPanel;
@@ -413,26 +413,21 @@ namespace CoffeeCommand {
 				},
 				(completed, faulted, percentage) => {
 					if (completed) {
-						CLogger.Log ("Save: 7 .. complete");
 						cbFunc();
-						CLogger.Log("cb finished.");
-//						CLogger.Log("mcurrmapdetails:"+mCurrMapDetails.ToString());
-//						CLogger.Log("mcurrmapdetails name:"+mCurrMapDetails.name);
+
 						mLabelText.text = "Upload Complete:";// + mCurrMapDetails.name;
-//						CLogger.Log ("Save: 8 . callback complete");
 						if (UserDataManager.loadedExistingMap){
 							ToastManager.ShowToast("Success! You took over this mine.");
 						} else {
 							ToastManager.ShowToast("Success! You found a new mine.");
 						}
 						harvestCoinsButton.SetActive (true);
-						CLogger.Log("Callback should have been called");
 					}
 					else if (faulted) {
-						mLabelText.text = "Upload of Map Named: " ; //+ mCurrMapDetails.name + "faulted";
+						mLabelText.text = "Upload faulted." ; //+ mCurrMapDetails.name + "faulted";
 					}
 					else {
-						mLabelText.text = "Uploading Map Named: " ; //+ mCurrMapDetails.name + "(" + percentage.ToString("F2") + "/1.0)";
+						mLabelText.text = "Taking over this mine!" + "(" + percentage.ToString("F2") + "/1.0)";
 					}
 				}
 
@@ -463,6 +458,8 @@ namespace CoffeeCommand {
 			}
 		}
 
+		int currentCoinsToHarvest  = -1;
+
 		public GameObject harvestCoinsButton;
 		public void HarvestCoinsNow(){
 			harvestCoinsButton.SetActive (false);
@@ -472,6 +469,7 @@ namespace CoffeeCommand {
 				int ct = UserDataManager.LocalData.mine.coins.count;
 				if (ct < 5) {
 					mLabelText.text = "You're done! Go find another location.";
+					restartButton.SetActive (true);
 					ToastManager.ShowToast ("There aren't enough coins to harvest. Come back tomorrow.");
 					return;
 				}
@@ -486,11 +484,13 @@ namespace CoffeeCommand {
 				UserDataManager.CollectCurrentMineCoins ( (ct) => {
 					if (ct < 5){
 						mLabelText.text = "You're done! Go find another location.";
-						ToastManager.ShowToast ("There aren't enough coins to harvest. Come back tomorrow.");
+						restartButton.SetActive (true);
+						ToastManager.ShowToast ("There aren't enough coins to harvest. Come back later.");
 						return;
 					}
-					CLogger.Log("will try to collect "+ct+ " coins");
+//					CLogger.Log("will try to collect "+ct+ " coins");
 					int count = ct;
+					currentCoinsToHarvest = ct;
 					StartCoroutine("TryCollectCoins",count);
 //					StartCoroutine(TryCollectCoins,ct);
 					ToastManager.ShowToast ("You conquered this mine and are collecting " + ct + " coins!");
@@ -501,7 +501,7 @@ namespace CoffeeCommand {
 		}
 
 		IEnumerator TryCollectCoins(int count){
-			CLogger.Log ("Try collect at:" + Math.Round (Time.time));
+//			CLogger.Log ("Try collect at:" + Math.Round (Time.time));
 			bool collected = false;
 			int tries = 20;
 			while (collected == false && tries > 0) {
@@ -512,7 +512,7 @@ namespace CoffeeCommand {
 						if (secondsDelta > 1) {
 							CLogger.Log ("Collect failed, delta:" + secondsDelta);		
 						} else {
-							CLogger.Log ("Collect succeess, delta:" + secondsDelta);
+//							CLogger.Log ("Collect succeess, delta:" + secondsDelta);
 							collected = true;
 							harvestCoinsButton.SetActive(true);
 							mLabelText.text = "Harvesting complete! Now, go find another location.";
