@@ -133,6 +133,9 @@ namespace CoffeeCommand {
 				flag.SetColors(UserDataManager.Flag.GetLocalColors);
 				dishGroup.gameObject.SetActive (false);
 				SetState (State.Unwrapped);
+				foreach(DogShip ds in FindObjectsOfType<DogShip>()){
+					ds.flag.SetColors(UserDataManager.Flag.GetLocalColors);
+				}
 
 			});
 

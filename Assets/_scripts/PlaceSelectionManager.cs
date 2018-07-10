@@ -17,6 +17,7 @@ namespace CoffeeCommand {
 		public Text loadingMap;
 		public Transform wrldMapParent;
 		bool waitingForLocation = true;
+		public GameObject loadButton;
 
 		LibPlacenote.MapInfo mapToLoad;
 
@@ -26,9 +27,6 @@ namespace CoffeeCommand {
 		public GameObject locationPrefab;
 //		Text pnt; 
 		void Start () {
-
-//
-//			debugGroup.SetActive (false);
 			Input.location.Start ();
 		}
 
@@ -59,7 +57,7 @@ namespace CoffeeCommand {
 
 			if (LibPlacenote.Instance.Initialized ()) {
 				CLogger.Log ("PN was init");
-				ListNearbyMaps ();
+				ListNearbyPlaces ("pn init, from onlocation running");
 			} else {
 				CLogger.Log ("PN NOT init, will delegate fire?");
 				onInitializedDelegate += OnPlacenoteSdkInitialized;
@@ -74,16 +72,30 @@ namespace CoffeeCommand {
 
 		void OnPlacenoteSdkInitialized(){
 			onInitializedDelegate -= OnPlacenoteSdkInitialized;
-			ListNearbyMaps ();
+			ListNearbyPlaces ("pn sdk init");
 		}
 
 		public float minimumSpaceSeparation = 0.04f; // km
+		public float visibleDistance = 2;
 
-		void ListNearbyMaps(){
+
+		void ClearMap (){
+			foreach (GeographicTransform gt in FindObjectsOfType<GeographicTransform>()) {
+				Api.Instance.GeographicApi.UnregisterGeographicTransform (gt);
+				Destroy (gt.gameObject);
+			}
+		}
+		public void ListNearbyPlaces(string source="default"){
+			CLogger.Log ("Listing nearby maps ... source:"+source);
+			loadButton.SetActive (false);
+			createNewMapButton.SetActive (false);
+
+			ClearMap ();
 			// Only runs at the start of app.
 
 //			debugGroup.SetActive (true);
-			loadingMap.gameObject.SetActive (false);
+			loadingMap.gameObject.SetActive (true);
+			CLogger.Log ("List 2:");
 //			pnt.text += "Listing nearby maps.\n";
 			if (!LibPlacenote.Instance.Initialized()) {
 //				pnt.text += "Oops sdk not ready..\n";
@@ -98,15 +110,19 @@ namespace CoffeeCommand {
 			Api.Instance.GeographicApi.RegisterGeographicTransform(mapAvatarCF);
 			LatLong mapAvatarPosition = LatLong.FromDegrees(Input.location.lastData.latitude ,Input.location.lastData.longitude);
 			mapAvatarCF.SetPosition(mapAvatarPosition);
+			ListMapsCheck ();
 
-
-
-	//		LibPlacenote.Instance.ListMaps(  (mapList) => {
 			LibPlacenote.Instance. SearchMaps (Input.location.lastData.latitude, Input.location.lastData.longitude, radius, (mapList) => {
-//				pnt.text += "Your location:"+ Input.location.lastData.latitude.ToString("#.000")+","+Input.location.lastData.longitude.ToString("#.000")+"\n";
-//				pnt.text += "Search finished! Maps: "+mapList.Length+"\n";
+				
+				loadingMap.gameObject.SetActive (false);
+
 				bool foundCloseMap = false; // if this remains false we allow "new" button to show
 				foreach (LibPlacenote.MapInfo mapId in mapList) {
+					
+					if (mapId.metadata == null || mapId.metadata.location == null || mapId.metadata.userdata == null){
+						CLogger.Log("meta, loc, or user  null for "+mapId.placeId);
+						continue;
+					}
 
 					float lat = mapId.metadata.location.latitude;
 					float lng = mapId.metadata.location.longitude;
@@ -116,6 +132,7 @@ namespace CoffeeCommand {
 //						CLogger.Log("invisible , skipping:"+mapId.metadata.name);
 						continue;
 					}
+
 //					CLogger.Log("list got map:"+mapId.placeId);
 
 
@@ -130,17 +147,23 @@ namespace CoffeeCommand {
 						LatLong pointA = LatLong.FromDegrees(lat,lng);
 						coordinateFrame.SetPosition(pointA);
 						// Are you sure it's necessary to deseralize and reserialize this object?!
-						
 						coordinateFrame.GetComponent<MapMarkerInfo>().SetMapInfo(mapId);
+						coordinateFrame.GetComponent<MapMarkerInfo>().SetStatus(MapMarkerInfo.Status.Selectable);
 						foundCloseMap = true;
-					} else {
-//						coordinateFrame.GetComponent<MapMarkerInfo>().NotifyLocationOutOfRange();
+
+					} else  if (distance < visibleDistance ) {
+						GeographicTransform coordinateFrame = (GeographicTransform)Instantiate(locationPrefab.GetComponent<GeographicTransform>());
+						Api.Instance.GeographicApi.RegisterGeographicTransform(coordinateFrame);
+						LatLong pointA = LatLong.FromDegrees(lat,lng);
+						coordinateFrame.SetPosition(pointA);
+						coordinateFrame.GetComponent<MapMarkerInfo>().SetMapInfo(mapId);
+						coordinateFrame.GetComponent<MapMarkerInfo>().SetStatus(MapMarkerInfo.Status.OutOfRange);
 					}
-
-
-
+//					CLogger.Log ("List 6f:");
 				}
+				CLogger.Log ("List 7:");
 				if (foundCloseMap == false) {
+					CLogger.Log ("List 8:");
 					createNewMapButton.SetActive(true);
 //					pnt.text += "None closeby ...\n";
 				}
@@ -197,12 +220,24 @@ namespace CoffeeCommand {
 			CoffeeCommandView.inst.LoadSelectedMap ();
 		}
 
-		public void CreateNewPlace(){
-//			CoffeeCommandView.inst.StartNewMap ();
 
-		}
 
-		public void LoadPlace(){
+		public void ListMapsCheck(){
+			CLogger.Log ("List maps check:");
+			CLogger.Log ("LibPlacenote status:" + LibPlacenote.Instance.GetStatus ());
+
+			LibPlacenote.Instance.ListMaps ((mapList) => {
+				CLogger.Log ("List 1a:");
+				// render the map list!
+				foreach (LibPlacenote.MapInfo mapId in mapList) {
+					CLogger.Log ("List 1b:");
+					if (mapId.metadata.userdata != null) {
+						Debug.Log("list map succeed. id:"+mapId.placeId);
+					}
+
+				}
+			});
+			CLogger.Log ("List 2:");
 		}
 	}
 

@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 222365405414354626}
   - component: {fileID: 114468900622914732}
   m_Layer: 0
-  m_Name: Image
+  m_Name: marker background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -741,7 +741,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.7205882, b: 0.0049695335, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -767,6 +767,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc70adc6a5a44a90adf00635d274988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  markerBackground: {fileID: 114468900622914732}
+  status: 0
   mapInfo:
     placeId: 
     metadata:

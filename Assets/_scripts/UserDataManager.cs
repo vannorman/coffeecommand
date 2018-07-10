@@ -55,12 +55,12 @@ namespace CoffeeCommand {
 		}
 
 		public static void ChangePlaceOwner(User newOwner){
-			CLogger.Log ("new owner:" + newOwner.userId);
-			CLogger.Log ("local data:" + localData.ToString ());
-			CLogger.Log ("local data owner:" + localData.owner.userId.ToString ());
+//			CLogger.Log ("new owner:" + newOwner.userId);
+//			CLogger.Log ("local data:" + localData.ToString ());
+//			CLogger.Log ("local data owner:" + localData.owner.userId.ToString ());
 //			CLogger.Log ("new owner:" + localData.owner.userId.ToString ());
 			localData.owner = newOwner;	
-			CLogger.Log ("settings new owner:" + newOwner.userId);
+//			CLogger.Log ("settings new owner:" + newOwner.userId);
 //			UpdateLocalUserDataOnServer ();
 		}
 
@@ -114,7 +114,7 @@ namespace CoffeeCommand {
 			CoffeeCommandObject newLocalData = new CoffeeCommandObject ();
 			newLocalData.mine = new Mine ();
 			newLocalData.mine.coins = new Coins ();
-			newLocalData.mine.coins.count = 0;  // make earning inital coins a separate event
+			newLocalData.mine.coins.count = 50;  // make earning inital coins a separate event
 
 			newLocalData.owner = new User ();
 //			newLocalData.mine.coins.coinGenerationRate = 1;

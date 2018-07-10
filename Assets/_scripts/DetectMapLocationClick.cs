@@ -11,8 +11,8 @@ namespace CoffeeCommand {
 
 
 		public CoffeeCommandView coffeeCommandView;
-	//	UnityEngine.UI.Text db;
-		public GameObject loadButton;
+	
+
 		public GameObject createButton;
 
 		float timeout = 0;
@@ -25,6 +25,7 @@ namespace CoffeeCommand {
 
 		void DetectMapSelection() {
 			if (Input.touchCount > 0) {
+//				CLogger.Log ("touches: " + Input.touchCount);
 				Ray ray = Camera.main.ScreenPointToRay (Input.GetTouch(0).position);
 				foreach (RaycastHit hit in Physics.RaycastAll(ray)) {
 	//				pnt += "hit:" + hit.collider.name + "\n";
@@ -45,15 +46,19 @@ namespace CoffeeCommand {
 
 							else {
 								CLogger.Log ("mmi2 setT 1:" + mmi2.name);
-								if (mmi.outOfRange) {
+								switch (mmi.status) {
+								case MapMarkerInfo.Status.OutOfRange:
 									CLogger.Log ("mmi2 out of range 1:" + mmi2.name);
 									mmi2.outOfRangeFx.SetActive (true);
 									CLogger.Log ("this marker out of range.");
-								} else {
+									break;
+								case MapMarkerInfo.Status.Selectable:
 									CLogger.Log ("mmi2 not out of range 1:" + mmi2.name);
 									PlaceSelectionManager.inst.SetMapToLoad(mmi.mapInfo);
 									mmi2.fx.SetActive (true);
-									loadButton.SetActive (true);
+									PlaceSelectionManager.inst.loadButton.SetActive (true);
+									break;
+
 
 								}
 							}

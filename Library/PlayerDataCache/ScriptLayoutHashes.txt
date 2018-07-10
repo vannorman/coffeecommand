@@ -102,7 +102,7 @@ df98a608af983c04c8aa5672afc284db Assembly-CSharp.dll:.DeadReplacement
 2124af75d6b3afb90d3c8471b98e9f78 Assembly-CSharp.dll:.SetCameraFlags
 058f583ac03ca538fc928ba68f6bd2b7 Assembly-CSharp.dll:.DamageGiver
 7a569204f9d29c3d307c150aa038ee30 Assembly-CSharp.dll:.UnityARCameraManager
-e14526c07d75319718a50127fc126ea0 Assembly-CSharp.dll:CoffeeCommand.CoffeeCommandView
+20e6dd2d5bac87bcf46f0b2266c37ca4 Assembly-CSharp.dll:CoffeeCommand.CoffeeCommandView
 6cadf2127201033372f50854ef10b678 Assembly-CSharp.dll:.PositionObjectWithPositioner
 3246e4af086807d0bfc6984a8c244168 Assembly-CSharp.dll:Wrld.MapCamera.CameraJumpBehaviour
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.BounceProjectile
@@ -138,7 +138,7 @@ ff32d7930e63bc1a497b08532d306e6d Assembly-CSharp.dll:.PhoneUI
 63811fbf131a6d81b076f8571f735143 Assembly-CSharp.dll:.ParticlePainter
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MovingBetweenFloors
-ab1f2b75ed3c1117d5412ff6d78e60cd Assembly-CSharp.dll:CoffeeCommand.DetectMapLocationClick
+8e994fc42473764eae8e8c5bceb9c011 Assembly-CSharp.dll:CoffeeCommand.DetectMapLocationClick
 69f3afb2830835c2fce96ccf9ce5c4b6 Assembly-CSharp.dll:.FlyObjectOverMap
 43b30c650c2039cd6ded7783d5cc87d7 Assembly-CSharp.dll:.DestroyOnImpact
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Cheats
@@ -221,7 +221,7 @@ e255cc5d1c8c41af01ab258a4410cf1c Assembly-CSharp.dll:.SimulatorHideARRemote
 672c7ec9a1afb24a8c52bed490318aa3 Assembly-CSharp.dll:CoffeeCommand.CoffeeCommandFeaturesVisualizer
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PhoneOrientation
 507673dfe690aad97d3cfe9cdf66004b Assembly-CSharp.dll:.SmoothFollowTarget
-fbd02ce9b0fe20ed6a5dbea7feffa3c0 Assembly-CSharp.dll:CoffeeCommand.PlaceSelectionManager
+a6c9466c122d5b414f885c728d416b38 Assembly-CSharp.dll:CoffeeCommand.PlaceSelectionManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.KillOnion
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.OnionDamagGiver
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Wrld.Resources.IndoorMaps.InstancedIndoorMapRenderable
@@ -249,10 +249,11 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:UnityEngine.XR.iOS.UnityARUserAnchorComponent
 eb4fd2b7e0cd698b07603d3e2b00ab7c Assembly-CSharp.dll:.PlacenotePlaneMeshRender
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
-34969852afe52ec76a3caa067db9e324 Assembly-CSharp.dll:CoffeeCommand.MapMarkerInfo
+de165d5551a208389269f22e74938e7e Assembly-CSharp.dll:CoffeeCommand.MapMarkerInfo
 96efa88d70b233e3f15936a32d917f9e Assembly-CSharp.dll:.DamageReceiver
 ad1ab3288e483a86629794ba673c9a54 Assembly-CSharp.dll:.SinHover
 69a63271ab0935f2215eb2ffc3ffb0f1 Assembly-CSharp.dll:.WrldMap
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.RestartApp
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PickingIndoors
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.WaveFlag
 e2320c9dc1c48ed92ab6997123a272bb Assembly-CSharp.dll:CoffeeCommand.Coins
@@ -283,4 +284,4 @@ dcdec772e5f9dfac5f2d1fe05851ae39 Assembly-CSharp.dll:CoffeeCommand.InstanceSette
 97f3f2eee235771b3d0dd28fcccb62f7 Assembly-CSharp.dll:Battlehub.MeshTools.Pivot
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UnityARCameraNearFar
 6bfe543a91625f77c304231f45ff6e71 Assembly-CSharp.dll:.ShipWeaponsLaser
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.RestartApp
+67a050821c1d4ac348a7d1826dc6d288 Assembly-CSharp.dll:.DisableN

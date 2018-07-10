@@ -11,13 +11,16 @@ namespace CoffeeCommand {
 
 		public static CLogger inst;
 
+		public void Clear(){
+			lines.Clear ();
+			inst.t.text = "";
+		}
 
-
+		static int maxLines = 20;
 		static List<string> lines = new List<string> ();
 		public static void Log(string s){
 			Debug.Log ("CLOG:" + s);
 			inst.t.text = "";
-			int maxLines = 10;
 			lines.Add (s);
 //			Debug.Log("max:"+10+", count;"+lines.Count);
 			while (lines.Count > maxLines) {
@@ -34,7 +37,7 @@ namespace CoffeeCommand {
 		public static void Log2(string s){
 			Debug.Log ("CLOG2:" + s);
 			inst.t2.text = "";
-			int maxLines = 10;
+
 			lines2.Add (s);
 			//			Debug.Log("max:"+10+", count;"+lines.Count);
 			while (lines2.Count > maxLines) {

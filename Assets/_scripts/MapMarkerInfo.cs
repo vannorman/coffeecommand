@@ -6,7 +6,23 @@ using UnityEngine.UI;
 
 namespace CoffeeCommand {
 	public class MapMarkerInfo : MonoBehaviour {
+		public enum Status {
+			Selectable,
+			OutOfRange
+		}
 
+		public void SetStatus(Status newStatus){
+			status = newStatus;
+			switch (status) {
+			case Status.OutOfRange: 
+				markerBackground.color = Color.gray;
+				break;
+			}
+		}
+
+		public Image markerBackground;
+
+		public Status status = Status.Selectable;
 		public LibPlacenote.MapInfo mapInfo;
 		public Text people;
 		public Text coins;
@@ -15,14 +31,15 @@ namespace CoffeeCommand {
 		public GameObject outOfRangeFx;
 
 		public bool outOfRange = false;
-		public void NotifyLocationOutOfRange(){
-			outOfRange = true;
-		}
-
+//		public void LocationIs(){
+//			outOfRange = true;
+//		}
+//
 		public void SetMapInfo(LibPlacenote.MapInfo mapId){
 			int numP = UserDataManager.NumUniquePlayersAtPlace(mapId.metadata);
 
 //			CLogger.Log("num players:"+numP);
+//			Wrld.MapGameObjectScene.geogr
 			people.text = numP.ToString();
 			int numCoin = UserDataManager.NumCoinsAtPlace(mapId.metadata);
 			CLogger.Log("num coin:"+numCoin);

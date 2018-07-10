@@ -34,5 +34,16 @@ namespace CoffeeCommand {
 			}
 		}
 
+		public void SetStateMap(){
+			CLogger.Log ("Set state map");
+			wrldParent.SetActive (true);
+			SetState (State.WrldMap);
+			StartCoroutine ("ListAfterSeconds", 0.1f);
+		}
+		IEnumerator ListAfterSeconds(float s){
+			yield return new WaitForSeconds (s);
+			PlaceSelectionManager.inst.ListNearbyPlaces ("restart");
+		}
+
 	}
 }

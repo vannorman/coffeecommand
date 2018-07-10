@@ -186,7 +186,7 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 		float radiusSearch = mRadiusSlider.value * mMaxRadiusSearch;
 		mRadiusLabel.text = "Distance Filter: " + (radiusSearch / 1000.0).ToString ("F2") + " km";
 
-		LibPlacenote.Instance.SearchMaps(locationInfo.latitude, locationInfo.longitude, radiusSearch, 
+		LibPlacenote.Instance.SearchMaps(locationInfo.latitude, locationInfo.longitude, radiusSearch,
 			(mapList) => {
 			// render the map list!
 			foreach (LibPlacenote.MapInfo mapId in mapList) {

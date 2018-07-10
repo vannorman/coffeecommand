@@ -19,7 +19,7 @@ namespace CoffeeCommand {
 		// Update is called once per frame
 		float t = 0;
 		void Update () {
-			GetComponent<Text> ().text = UserDataManager.LocalCoins.ToString ();
+			GetComponent<TextMesh> ().text = UserDataManager.LocalCoins.ToString ();
 			return;
 //			Debug.Log ("coins:" + UserDataManager.LocalCoins);
 //			target = UserDataManager.LocalCoins;

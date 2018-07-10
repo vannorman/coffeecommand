@@ -16,6 +16,24 @@ namespace CoffeeCommand {
 
 	public class CoffeeCommandView : MonoBehaviour, PlacenoteListener
 	{
+
+		// TODO: Refactor state changes instead of activating/dactivagint buttons and setting user visible text in random functions
+
+		public enum State {
+			Inactive,
+			Mapping,
+			Uploading,
+			FinishedUploading,
+			Haresting,
+			FinishedHarvesting,
+			Restarting
+
+		}
+		public State state = State.Inactive;
+
+		// SetState on each state change (not implemented yet -- July 9 2018
+
+
 		public static CoffeeCommandView inst;
 		public GameObject restartButton;
 		public GameObject onionPrefab;
@@ -323,7 +341,7 @@ namespace CoffeeCommand {
 			// Save an "invisible" map to keep the mesh
 
 
-			mLabelText.text = "Saving...";
+			mLabelText.text = "Wormhole started .. ";
 
 			LibPlacenote.Instance.SaveMap (
 				(mapId) => {
@@ -347,7 +365,7 @@ namespace CoffeeCommand {
 						metadataInvisible.name = "Invisible map at "+System.DateTime.Now;
 
 						if (useLocation) {
-							mLabelText.text = "location!";
+//							mLabelText.text = "location!";
 							metadataInvisible.location = new LibPlacenote.MapLocation();
 							metadataInvisible.location.latitude = locationInfo.latitude;
 							metadataInvisible.location.longitude = locationInfo.longitude;
@@ -376,23 +394,16 @@ namespace CoffeeCommand {
 //							UserDataManager.lastMetaUpdateTime = 
 //							CLogger.Log("Save: 5a3 overwrite metadata with id:"+UserDataManager.loadedMapPlaceId);
 						});
-//						LibPlacenote.MapMetadataSettable metaTest = new LibPlacenote.MapMetadataSettable();
-//						metaTest.name = "meta test";
-//						metaTest.userdata = JObject.FromObject(UserDataManager.LocalData);
-//						LibPlacenote.Instance.SetMetadata(UserDataManager.loadedMapPlaceId,metaTest);
 
-//						mCurrMapDetails = new LibPlacenote.MapMetadataSettable();
-//						mCurrMapDetails.name = "Saved over existing, waiting for cb";
-//						mCurrMapDetails.userdata = JObject.FromObject(UserDataManager.LocalData);
 
 					} else {
 						// Brand new map
 						LibPlacenote.MapMetadataSettable metadata = new LibPlacenote.MapMetadataSettable();
 						metadata.name = RandomName.Get ();
-						mLabelText.text = "Saved Map Name: " + metadata.name;
+						mLabelText.text = "Wormhole ripped, establishing future wormhole link ..: " + metadata.name;
 						if (useLocation) {
-							mLabelText.text = "location!";
-							CLogger.Log("using location.");
+							
+
 							metadata.location = new LibPlacenote.MapLocation();
 							metadata.location.latitude = locationInfo.latitude;
 							metadata.location.longitude = locationInfo.longitude;
@@ -408,18 +419,18 @@ namespace CoffeeCommand {
 						CLogger.Log("saved new map w location:"+metadata.location.latitude+","+metadata.location.longitude+".");
 
 					}
-					ToastManager.ShowToast("Save complete, wait for upload");
+//					ToastManager.ShowToast("Save complete, wait for upload");
 
 				},
 				(completed, faulted, percentage) => {
 					if (completed) {
 						cbFunc();
 
-						mLabelText.text = "Upload Complete:";// + mCurrMapDetails.name;
 						if (UserDataManager.loadedExistingMap){
-							ToastManager.ShowToast("Success! You took over this mine.");
+							mLabelText.text = "You took over this wormhole! You can now harvest MeshCoin from the future.";// + mCurrMapDetails.name;
+//							ToastManager.ShowToast("Success! You took over this mine.");
 						} else {
-							ToastManager.ShowToast("Success! You found a new mine.");
+							mLabelText.text = "You established a wormhole! You can now harvest MeshCoin from the future.";// + mCurrMapDetails.name;
 						}
 						harvestCoinsButton.SetActive (true);
 					}
@@ -427,7 +438,7 @@ namespace CoffeeCommand {
 						mLabelText.text = "Upload faulted." ; //+ mCurrMapDetails.name + "faulted";
 					}
 					else {
-						mLabelText.text = "Taking over this mine!" + "(" + percentage.ToString("F2") + "/1.0)";
+						mLabelText.text = "Establishing wormhole to the future!" + "(" + percentage.ToString("F2") + "/1.0)";
 					}
 				}
 
@@ -448,9 +459,8 @@ namespace CoffeeCommand {
 //				LoadShapesJSON (mSelectedMapInfo.metadata.userdata);
 			} else if (currStatus == LibPlacenote.MappingStatus.RUNNING && prevStatus == LibPlacenote.MappingStatus.WAITING) {
 				mLabelText.text = "Mapping";
-
 			} else if (currStatus == LibPlacenote.MappingStatus.LOST) {
-				mLabelText.text = "Searching for position lock";
+//				mLabelText.text = "Searching for position lock";
 			} else if (currStatus == LibPlacenote.MappingStatus.WAITING) {
 				if (shapeObjList.Count != 0) {
 //					ClearShapes ();
@@ -468,24 +478,22 @@ namespace CoffeeCommand {
 				// New map gives the default num of coins
 				int ct = UserDataManager.LocalData.mine.coins.count;
 				if (ct < 5) {
-					mLabelText.text = "You're done! Go find another location.";
+					mLabelText.text = "This wormhole mine doesn't have enough coins to harvest now. Come back later.";
 					restartButton.SetActive (true);
-					ToastManager.ShowToast ("There aren't enough coins to harvest. Come back tomorrow.");
+//					ToastManager.ShowToast ("There aren't enough coins to harvest. Come back tomorrow.");
 					return;
 				}
 				UserDataManager.LocalCoins += ct;
 				UserDataManager.LocalData.mine.coins.count = 0;
-				ToastManager.ShowToast ("You are collected " + ct + " coins from a new mine!");
-				harvestCoinsButton.SetActive (true);
-				mLabelText.text = "Harvesting Complete!";
+				mLabelText.text = "You harvested "+ct+" MeshCoin from the future!";
 
 			} else {
 
 				UserDataManager.CollectCurrentMineCoins ( (ct) => {
 					if (ct < 5){
-						mLabelText.text = "You're done! Go find another location.";
+						mLabelText.text = "This wormhole mine doesn't have enough coins to harvest now. Come back later.";
 						restartButton.SetActive (true);
-						ToastManager.ShowToast ("There aren't enough coins to harvest. Come back later.");
+//						ToastManager.ShowToast ("There aren't enough coins to harvest. Come back later.");
 						return;
 					}
 //					CLogger.Log("will try to collect "+ct+ " coins");
@@ -493,7 +501,8 @@ namespace CoffeeCommand {
 					currentCoinsToHarvest = ct;
 					StartCoroutine("TryCollectCoins",count);
 //					StartCoroutine(TryCollectCoins,ct);
-					ToastManager.ShowToast ("You conquered this mine and are collecting " + ct + " coins!");
+					mLabelText.text = "You are harvesting "+ct+" MeshCoin from this wormhole. Please wait!";
+//					ToastManager.ShowToast ("You conquered this mine and are collecting " + ct + " coins!");
 				});
 
 				// old map needs to calc the coins
@@ -505,19 +514,20 @@ namespace CoffeeCommand {
 			bool collected = false;
 			int tries = 20;
 			while (collected == false && tries > 0) {
+				CLogger.Log ("Trying to collect! tries left:" + tries);
 				LibPlacenote.Instance.GetMetadata (UserDataManager.loadedMapPlaceId, (metadata) => {
 					if (!collected){
-//						CLogger
+
 						int secondsDelta = Mathf.RoundToInt((float)(UserDataManager.lastMetaUpdateTime - metadata.userdata.ToObject<UserDataManager.CoffeeCommandObject> ().lastUpdatedTime).TotalSeconds);
 						if (secondsDelta > 1) {
 							CLogger.Log ("Collect failed, delta:" + secondsDelta);		
 						} else {
-//							CLogger.Log ("Collect succeess, delta:" + secondsDelta);
+
 							collected = true;
-							harvestCoinsButton.SetActive(true);
-							mLabelText.text = "Harvesting complete! Now, go find another location.";
+							restartButton.SetActive(true);
+							mLabelText.text = "You harvested "+count+" MeshCoin from the future!";
 							UserDataManager.LocalCoins += count;
-	//						UserDataManager.
+
 						
 						}
 					}

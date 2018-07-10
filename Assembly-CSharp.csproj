@@ -106,6 +106,7 @@
      <Compile Include="Assets\CallbackTest.cs" />
      <Compile Include="Assets\ClearPlayerPrefsOnClick.cs" />
      <Compile Include="Assets\CLogger.cs" />
+     <Compile Include="Assets\DisableN.cs" />
      <Compile Include="Assets\FlagSetup.cs" />
      <Compile Include="Assets\InGameFlag.cs" />
      <Compile Include="Assets\InstanceSetter.cs" />
@@ -513,9 +514,6 @@
  </Reference>
  <Reference Include="Newtonsoft.Json">
  <HintPath>/Users/zannorman/Work/Vertical/CoffeeCommand/Assets/WanzyeeStudio/ThirdParty/SaladLab/Json.Net.Unity3D/Plugins/Newtonsoft.Json.dll</HintPath>
- </Reference>
- <Reference Include="Mono.CSharp">
- <HintPath>/Users/zannorman/Work/Vertical/CoffeeCommand/Assets/Unity Utilities/UnityShell/Editor/Mono.CSharp.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>/Users/zannorman/Library/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
