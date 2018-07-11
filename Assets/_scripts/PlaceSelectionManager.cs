@@ -110,7 +110,7 @@ namespace CoffeeCommand {
 			Api.Instance.GeographicApi.RegisterGeographicTransform(mapAvatarCF);
 			LatLong mapAvatarPosition = LatLong.FromDegrees(Input.location.lastData.latitude ,Input.location.lastData.longitude);
 			mapAvatarCF.SetPosition(mapAvatarPosition);
-			ListMapsCheck ();
+			//ListMapsCheck ();
 
 			LibPlacenote.Instance. SearchMaps (Input.location.lastData.latitude, Input.location.lastData.longitude, radius, (mapList) => {
 				
@@ -222,23 +222,23 @@ namespace CoffeeCommand {
 
 
 
-		public void ListMapsCheck(){
-			CLogger.Log ("List maps check:");
-			CLogger.Log ("LibPlacenote status:" + LibPlacenote.Instance.GetStatus ());
+		//public void ListMapsCheck(){
+		//	//CLogger.Log ("List maps check:");
+		//	//CLogger.Log ("LibPlacenote status:" + LibPlacenote.Instance.GetStatus ());
 
-			LibPlacenote.Instance.ListMaps ((mapList) => {
-				CLogger.Log ("List 1a:");
-				// render the map list!
-				foreach (LibPlacenote.MapInfo mapId in mapList) {
-					CLogger.Log ("List 1b:");
-					if (mapId.metadata.userdata != null) {
-						Debug.Log("list map succeed. id:"+mapId.placeId);
-					}
+		//	LibPlacenote.Instance.ListMaps ((mapList) => {
+		//		CLogger.Log ("List 1a:");
+		//		// render the map list!
+		//		foreach (LibPlacenote.MapInfo mapId in mapList) {
+		//			//CLogger.Log ("List 1b:");
+		//			if (mapId.metadata.userdata != null) {
+		//				//Debug.Log("list map succeed. id:"+mapId.placeId);
+		//			}
 
-				}
-			});
-			CLogger.Log ("List 2:");
-		}
+		//		}
+		//	});
+		//	//CLogger.Log ("List 2:");
+		//}
 	}
 
 }

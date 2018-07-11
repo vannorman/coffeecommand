@@ -214,6 +214,7 @@ namespace CoffeeCommand {
 			}
 
 			mLabelText.text = "Loading Map ID: " + mSelectedMapId;
+            CLogger.Log("loading, libplacenote status:" + LibPlacenote.Instance.GetStatus());
 			LibPlacenote.Instance.LoadMap (mSelectedMapId,
 				(completed, faulted, percentage) => {
 					if (completed) {

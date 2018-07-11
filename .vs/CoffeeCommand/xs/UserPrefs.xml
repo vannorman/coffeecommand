@@ -1,0 +1,26 @@
+﻿<Properties StartupConfiguration="{C5247CDB-4AFC-0EEF-FF70-7C5C1E3956F2}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Placenote/Editor/APIKeyCheck.cs">
+    <Files>
+      <File FileName="Assets/Wrld/API/WrldMap.cs" Line="62" Column="51" />
+      <File FileName="Assets/_scripts/CoffeeCommandView.cs" Line="416" Column="71" />
+      <File FileName="Assets/_scripts/PlaceSelectionManager.cs" Line="10" Column="47" />
+      <File FileName="Assets/Wrld/Scripts/Input/Mouse/UnityMouseInputProcessor.cs" Line="12" Column="23" />
+      <File FileName="Assets/_scripts/GameManager.cs" Line="39" Column="29" />
+      <File FileName="Assets/_scripts/MapMarkerInfo.cs" Line="42" Column="35" />
+      <File FileName="Assets/_scripts/JsonTest.cs" Line="117" Column="41" />
+      <File FileName="Assets/_scripts/Coins.cs" Line="22" Column="25" />
+      <File FileName="Assets/_scripts/DetectMapLocationClick.cs" Line="30" Column="58" />
+      <File FileName="Assets/CLogger.cs" Line="19" Column="10" />
+      <File FileName="Assets/DisableN.cs" Line="15" Column="8" />
+      <File FileName="Assets/_scripts/UserDataManager.cs" Line="117" Column="37" />
+      <File FileName="Assets/Placenote/Editor/APIKeyCheck.cs" Line="64" Column="5" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.CoffeeCommand PreferredExecutionTarget="Unity.Editor" />
+  <MultiItemStartupConfigurations />
+</Properties>
